@@ -151,6 +151,15 @@ build AcornEngine\CMakeFiles\AcornEngine.dir\AcornEngine.cpp.obj: CXX_COMPILER__
   TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
   TARGET_PDB = AcornEngine\AcornEngine.pdb
 
+build AcornEngine\CMakeFiles\AcornEngine.dir\Shader.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\Shader.cpp || cmake_object_order_depends_target_AcornEngine
+  DEFINES = -DGLEW_STATIC
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
+  OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
+  TARGET_PDB = AcornEngine\AcornEngine.pdb
+
 build AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj: C_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\src\glad.c || cmake_object_order_depends_target_AcornEngine
   DEFINES = -DGLEW_STATIC
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
@@ -168,7 +177,7 @@ build AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj: C_COMPI
 #############################################
 # Link the executable AcornEngine\AcornEngine.exe
 
-build AcornEngine\AcornEngine.exe: CXX_EXECUTABLE_LINKER__AcornEngine_Debug AcornEngine\CMakeFiles\AcornEngine.dir\AcornEngine.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj | lib\GLFW\src\glfw3.lib myLib.lib || lib\GLFW\src\glfw3.lib myLib.lib
+build AcornEngine\AcornEngine.exe: CXX_EXECUTABLE_LINKER__AcornEngine_Debug AcornEngine\CMakeFiles\AcornEngine.dir\AcornEngine.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\Shader.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj | lib\GLFW\src\glfw3.lib myLib.lib || lib\GLFW\src\glfw3.lib myLib.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = lib\GLFW\src\glfw3.lib  myLib.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

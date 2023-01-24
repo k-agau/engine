@@ -1,3 +1,0 @@
-C:/Users/zachs/vandy-c/swp/AcornEngine/AcornEngine/out/build/x64-Debug/CMakeFiles/AcornEngine.dir
-C:/Users/zachs/vandy-c/swp/AcornEngine/AcornEngine/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/zachs/vandy-c/swp/AcornEngine/AcornEngine/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
