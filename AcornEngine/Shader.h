@@ -13,7 +13,7 @@ class Shader
 {
 public:
     // the program ID
-    unsigned int ID;
+    unsigned int ID, rvertex, rfrag;
 
     //uses default paths
     Shader();
@@ -26,10 +26,12 @@ public:
     void setBool(const std::string& name, bool value) const;
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
+    void createGLShaders(const char* vertexPath, const char* fragmentPath);
 
 private:
-    const char* ACORN_VERTEX_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\vertex_shader.vert";
-    const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\fragment_shader.frag";
+    const char* ACORN_VERTEX_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\vertex_shader.glsl";
+    const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\fragment_shader.glsl";
+    void checkCompileErrors(unsigned int shader, std::string type);
 };
 
 #endif
