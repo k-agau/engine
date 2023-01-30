@@ -1,5 +1,6 @@
 add_subdirectory("GLFW")
 add_subdirectory("GLAD")
-
+add_subdirectory("GLM")
 target_include_directories(AcornEngine PUBLIC "GLAD/include/glad")
+target_include_directories(AcornEngine PUBLIC "glm")
 target_sources(myLib PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/GLAD/src/glad.c")
