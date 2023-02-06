@@ -1,14 +1,15 @@
-﻿# CMakeList.txt : CMake project for AcornEngine, include source and define
-# project specific logic here.
-#
+﻿
+#Add includes
+include_directories("./include")
 
-# Add source to this project's executable.
-add_executable (AcornEngine "AcornEngine.cpp" "AcornEngine.h" "Shader.cpp" "Shader.h")
+# Add source
+add_library(Core STATIC)
+add_subdirectory("./src")
 
+add_executable (${CMAKE_PROJECT_NAME})
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET AcornEngine PROPERTY CXX_STANDARD 20)
+  set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 endif()
 
-target_link_libraries(AcornEngine glfw ${GLFW_LIBRARIES} myLib)
-
-# TODO: Add tests and install targets if needed.
+#glfw target by package's camke
+target_link_libraries(${CMAKE_PROJECT_NAME} glfw Core)
