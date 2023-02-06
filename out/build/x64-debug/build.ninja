@@ -40,41 +40,6 @@ include CMakeFiles\rules.ninja
 # Logical path to working directory; prefix for absolute paths.
 
 cmake_ninja_workdir = C$:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target myLib
-
-
-#############################################
-# Order-only phony target for myLib
-
-build cmake_object_order_depends_target_myLib: phony || CMakeFiles\myLib.dir
-
-build CMakeFiles\myLib.dir\lib\GLAD\src\glad.c.obj: C_COMPILER__myLib_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\src\glad.c || cmake_object_order_depends_target_myLib
-  DEFINES = -DGLEW_STATIC
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\myLib.dir
-  OBJECT_FILE_DIR = CMakeFiles\myLib.dir\lib\GLAD\src
-  TARGET_COMPILE_PDB = CMakeFiles\myLib.dir\myLib.pdb
-  TARGET_PDB = myLib.pdb
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target myLib
-
-
-#############################################
-# Link the static library myLib.lib
-
-build myLib.lib: C_STATIC_LIBRARY_LINKER__myLib_Debug CMakeFiles\myLib.dir\lib\GLAD\src\glad.c.obj
-  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
-  LINK_FLAGS = /machine:x64
-  OBJECT_DIR = CMakeFiles\myLib.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\myLib.dir\myLib.pdb
-  TARGET_FILE = myLib.lib
-  TARGET_PDB = myLib.pdb
-
 
 #############################################
 # Utility command for edit_cache
@@ -134,36 +99,148 @@ build install\local: phony CMakeFiles\install\local.util
 # =============================================================================
 
 # =============================================================================
+# Object build statements for STATIC_LIBRARY target Core
+
+
+#############################################
+# Order-only phony target for Core
+
+build cmake_object_order_depends_target_Core: phony || AcornEngine\CMakeFiles\Core.dir
+
+build AcornEngine\CMakeFiles\Core.dir\src\Camera.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Camera.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\src\AcornEngine.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\AcornEngine.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\src\Shader.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Shader.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\src\Event.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Event.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\src\InputHandler.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\InputHandler.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\src\WindowManager.cpp.obj: CXX_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\WindowManager.cpp || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+build AcornEngine\CMakeFiles\Core.dir\__\lib\GLAD\src\glad.c.obj: C_COMPILER__Core_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\src\glad.c || cmake_object_order_depends_target_Core
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\Core.dir\__\lib\GLAD\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_PDB = AcornEngine\Core.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Core
+
+
+#############################################
+# Link the static library AcornEngine\Core.lib
+
+build AcornEngine\Core.lib: CXX_STATIC_LIBRARY_LINKER__Core_Debug AcornEngine\CMakeFiles\Core.dir\src\Camera.cpp.obj AcornEngine\CMakeFiles\Core.dir\src\AcornEngine.cpp.obj AcornEngine\CMakeFiles\Core.dir\src\Shader.cpp.obj AcornEngine\CMakeFiles\Core.dir\src\Event.cpp.obj AcornEngine\CMakeFiles\Core.dir\src\InputHandler.cpp.obj AcornEngine\CMakeFiles\Core.dir\src\WindowManager.cpp.obj AcornEngine\CMakeFiles\Core.dir\__\lib\GLAD\src\glad.c.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = AcornEngine\CMakeFiles\Core.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\Core.dir\Core.pdb
+  TARGET_FILE = AcornEngine\Core.lib
+  TARGET_PDB = AcornEngine\Core.pdb
+
+# =============================================================================
 # Object build statements for EXECUTABLE target AcornEngine
 
 
 #############################################
 # Order-only phony target for AcornEngine
 
-build cmake_object_order_depends_target_AcornEngine: phony || cmake_object_order_depends_target_glfw cmake_object_order_depends_target_myLib
+build cmake_object_order_depends_target_AcornEngine: phony || cmake_object_order_depends_target_Core cmake_object_order_depends_target_glfw
 
-build AcornEngine\CMakeFiles\AcornEngine.dir\AcornEngine.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\AcornEngine.cpp || cmake_object_order_depends_target_AcornEngine
-  DEFINES = -DGLEW_STATIC
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\Camera.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Camera.cpp || cmake_object_order_depends_target_AcornEngine
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
-  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
   OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
-  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
   TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
   TARGET_PDB = AcornEngine\AcornEngine.pdb
 
-build AcornEngine\CMakeFiles\AcornEngine.dir\Shader.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\Shader.cpp || cmake_object_order_depends_target_AcornEngine
-  DEFINES = -DGLEW_STATIC
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\AcornEngine.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\AcornEngine.cpp || cmake_object_order_depends_target_AcornEngine
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
-  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
   OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
-  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
+  TARGET_PDB = AcornEngine\AcornEngine.pdb
+
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\Shader.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Shader.cpp || cmake_object_order_depends_target_AcornEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
+  TARGET_PDB = AcornEngine\AcornEngine.pdb
+
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\Event.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\Event.cpp || cmake_object_order_depends_target_AcornEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
+  TARGET_PDB = AcornEngine\AcornEngine.pdb
+
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\InputHandler.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\InputHandler.cpp || cmake_object_order_depends_target_AcornEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
+  TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
+  TARGET_PDB = AcornEngine\AcornEngine.pdb
+
+build AcornEngine\CMakeFiles\AcornEngine.dir\src\WindowManager.cpp.obj: CXX_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\WindowManager.cpp || cmake_object_order_depends_target_AcornEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
+  OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
+  OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\src
   TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
   TARGET_PDB = AcornEngine\AcornEngine.pdb
 
 build AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj: C_COMPILER__AcornEngine_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\src\glad.c || cmake_object_order_depends_target_AcornEngine
-  DEFINES = -DGLEW_STATIC
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
+  INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\.\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\include\glad -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include\GLFW
   OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
   OBJECT_FILE_DIR = AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src
   TARGET_COMPILE_PDB = AcornEngine\CMakeFiles\AcornEngine.dir\
@@ -177,10 +254,10 @@ build AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj: C_COMPI
 #############################################
 # Link the executable AcornEngine\AcornEngine.exe
 
-build AcornEngine\AcornEngine.exe: CXX_EXECUTABLE_LINKER__AcornEngine_Debug AcornEngine\CMakeFiles\AcornEngine.dir\AcornEngine.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\Shader.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj | lib\GLFW\src\glfw3.lib myLib.lib || lib\GLFW\src\glfw3.lib myLib.lib
+build AcornEngine\AcornEngine.exe: CXX_EXECUTABLE_LINKER__AcornEngine_Debug AcornEngine\CMakeFiles\AcornEngine.dir\src\Camera.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\src\AcornEngine.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\src\Shader.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\src\Event.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\src\InputHandler.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\src\WindowManager.cpp.obj AcornEngine\CMakeFiles\AcornEngine.dir\__\lib\GLAD\src\glad.c.obj | lib\GLFW\src\glfw3.lib AcornEngine\Core.lib || AcornEngine\Core.lib lib\GLFW\src\glfw3.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = lib\GLFW\src\glfw3.lib  myLib.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = lib\GLFW\src\glfw3.lib  AcornEngine\Core.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = AcornEngine\CMakeFiles\AcornEngine.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -241,6 +318,64 @@ build AcornEngine\CMakeFiles\install\local.util: CUSTOM_COMMAND AcornEngine\all
   restat = 1
 
 build AcornEngine\install\local: phony AcornEngine\CMakeFiles\install\local.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/zachs/vandy-c/swp/AcornEngine/AcornEngine/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build AcornEngine\src\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\AcornEngine\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build AcornEngine\src\edit_cache: phony AcornEngine\src\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build AcornEngine\src\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\AcornEngine\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\zachs\vandy-c\swp\AcornEngine -BC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build AcornEngine\src\rebuild_cache: phony AcornEngine\src\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build AcornEngine\src\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build AcornEngine\src\CMakeFiles\install.util: CUSTOM_COMMAND AcornEngine\src\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\AcornEngine\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build AcornEngine\src\install: phony AcornEngine\src\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build AcornEngine\src\CMakeFiles\install\local.util: CUSTOM_COMMAND AcornEngine\src\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\AcornEngine\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build AcornEngine\src\install\local: phony AcornEngine\src\CMakeFiles\install\local.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -392,7 +527,7 @@ build lib\GLFW\src\update_mappings: phony lib\GLFW\src\CMakeFiles\update_mapping
 build cmake_object_order_depends_target_glfw: phony || lib\GLFW\src\CMakeFiles\glfw.dir
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -401,7 +536,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug C$:
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\init.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -410,7 +545,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug C$:\Us
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\input.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -419,7 +554,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug C$:\U
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\monitor.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -428,7 +563,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug C$:
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\vulkan.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -437,7 +572,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug C$:\
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\window.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -446,7 +581,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug C$:\
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_init.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -455,7 +590,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Debug 
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_joystick.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -464,7 +599,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw_De
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_monitor.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -473,7 +608,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_Deb
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_time.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -482,7 +617,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Debug 
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_thread.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -491,7 +626,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_Debu
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\win32_window.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -500,7 +635,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_Debu
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\wgl_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -509,7 +644,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_Debug
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\egl_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -518,7 +653,7 @@ build lib\GLFW\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_Debug
   TARGET_PDB = lib\GLFW\src\glfw3.pdb
 
 build lib\GLFW\src\CMakeFiles\glfw.dir\osmesa_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\osmesa_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DGLEW_STATIC -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src -IC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\GLFW\src
   OBJECT_DIR = lib\GLFW\src\CMakeFiles\glfw.dir
@@ -620,7 +755,7 @@ build lib\GLFW\src\CMakeFiles\update_mappings | ${cmake_ninja_workdir}lib\GLFW\s
 build cmake_object_order_depends_target_boing: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\boing.dir\boing.c.obj: C_COMPILER__boing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\boing.c || cmake_object_order_depends_target_boing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\boing.dir
@@ -629,7 +764,7 @@ build lib\GLFW\examples\CMakeFiles\boing.dir\boing.c.obj: C_COMPILER__boing_Debu
   TARGET_PDB = lib\GLFW\examples\boing.pdb
 
 build lib\GLFW\examples\CMakeFiles\boing.dir\glfw.rc.res: RC_COMPILER__boing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_boing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\boing.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -639,7 +774,7 @@ build lib\GLFW\examples\CMakeFiles\boing.dir\glfw.rc.res: RC_COMPILER__boing_Deb
   TARGET_PDB = lib\GLFW\examples\boing.pdb
 
 build lib\GLFW\examples\CMakeFiles\boing.dir\__\deps\glad_gl.c.obj: C_COMPILER__boing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_boing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\boing.dir
@@ -677,7 +812,7 @@ build lib\GLFW\examples\boing.exe: C_EXECUTABLE_LINKER__boing_Debug lib\GLFW\exa
 build cmake_object_order_depends_target_gears: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\gears.dir\gears.c.obj: C_COMPILER__gears_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\gears.c || cmake_object_order_depends_target_gears
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\gears.dir
@@ -686,7 +821,7 @@ build lib\GLFW\examples\CMakeFiles\gears.dir\gears.c.obj: C_COMPILER__gears_Debu
   TARGET_PDB = lib\GLFW\examples\gears.pdb
 
 build lib\GLFW\examples\CMakeFiles\gears.dir\glfw.rc.res: RC_COMPILER__gears_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_gears
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\gears.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -696,7 +831,7 @@ build lib\GLFW\examples\CMakeFiles\gears.dir\glfw.rc.res: RC_COMPILER__gears_Deb
   TARGET_PDB = lib\GLFW\examples\gears.pdb
 
 build lib\GLFW\examples\CMakeFiles\gears.dir\__\deps\glad_gl.c.obj: C_COMPILER__gears_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_gears
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\gears.dir
@@ -734,7 +869,7 @@ build lib\GLFW\examples\gears.exe: C_EXECUTABLE_LINKER__gears_Debug lib\GLFW\exa
 build cmake_object_order_depends_target_heightmap: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\heightmap.dir\heightmap.c.obj: C_COMPILER__heightmap_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\heightmap.c || cmake_object_order_depends_target_heightmap
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\heightmap.dir
@@ -743,7 +878,7 @@ build lib\GLFW\examples\CMakeFiles\heightmap.dir\heightmap.c.obj: C_COMPILER__he
   TARGET_PDB = lib\GLFW\examples\heightmap.pdb
 
 build lib\GLFW\examples\CMakeFiles\heightmap.dir\glfw.rc.res: RC_COMPILER__heightmap_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_heightmap
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\heightmap.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -753,7 +888,7 @@ build lib\GLFW\examples\CMakeFiles\heightmap.dir\glfw.rc.res: RC_COMPILER__heigh
   TARGET_PDB = lib\GLFW\examples\heightmap.pdb
 
 build lib\GLFW\examples\CMakeFiles\heightmap.dir\__\deps\glad_gl.c.obj: C_COMPILER__heightmap_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_heightmap
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\heightmap.dir
@@ -791,7 +926,7 @@ build lib\GLFW\examples\heightmap.exe: C_EXECUTABLE_LINKER__heightmap_Debug lib\
 build cmake_object_order_depends_target_offscreen: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\offscreen.dir\offscreen.c.obj: C_COMPILER__offscreen_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\offscreen.c || cmake_object_order_depends_target_offscreen
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\offscreen.dir
@@ -800,7 +935,7 @@ build lib\GLFW\examples\CMakeFiles\offscreen.dir\offscreen.c.obj: C_COMPILER__of
   TARGET_PDB = lib\GLFW\examples\offscreen.pdb
 
 build lib\GLFW\examples\CMakeFiles\offscreen.dir\glfw.rc.res: RC_COMPILER__offscreen_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_offscreen
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\offscreen.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -810,7 +945,7 @@ build lib\GLFW\examples\CMakeFiles\offscreen.dir\glfw.rc.res: RC_COMPILER__offsc
   TARGET_PDB = lib\GLFW\examples\offscreen.pdb
 
 build lib\GLFW\examples\CMakeFiles\offscreen.dir\__\deps\glad_gl.c.obj: C_COMPILER__offscreen_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_offscreen
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\offscreen.dir
@@ -848,7 +983,7 @@ build lib\GLFW\examples\offscreen.exe: C_EXECUTABLE_LINKER__offscreen_Debug lib\
 build cmake_object_order_depends_target_particles: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\particles.dir\particles.c.obj: C_COMPILER__particles_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\particles.c || cmake_object_order_depends_target_particles
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\particles.dir
@@ -857,7 +992,7 @@ build lib\GLFW\examples\CMakeFiles\particles.dir\particles.c.obj: C_COMPILER__pa
   TARGET_PDB = lib\GLFW\examples\particles.pdb
 
 build lib\GLFW\examples\CMakeFiles\particles.dir\glfw.rc.res: RC_COMPILER__particles_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_particles
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\particles.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -867,7 +1002,7 @@ build lib\GLFW\examples\CMakeFiles\particles.dir\glfw.rc.res: RC_COMPILER__parti
   TARGET_PDB = lib\GLFW\examples\particles.pdb
 
 build lib\GLFW\examples\CMakeFiles\particles.dir\__\deps\tinycthread.c.obj: C_COMPILER__particles_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\tinycthread.c || cmake_object_order_depends_target_particles
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\particles.dir
@@ -876,7 +1011,7 @@ build lib\GLFW\examples\CMakeFiles\particles.dir\__\deps\tinycthread.c.obj: C_CO
   TARGET_PDB = lib\GLFW\examples\particles.pdb
 
 build lib\GLFW\examples\CMakeFiles\particles.dir\__\deps\getopt.c.obj: C_COMPILER__particles_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_particles
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\particles.dir
@@ -885,7 +1020,7 @@ build lib\GLFW\examples\CMakeFiles\particles.dir\__\deps\getopt.c.obj: C_COMPILE
   TARGET_PDB = lib\GLFW\examples\particles.pdb
 
 build lib\GLFW\examples\CMakeFiles\particles.dir\__\deps\glad_gl.c.obj: C_COMPILER__particles_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_particles
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\particles.dir
@@ -923,7 +1058,7 @@ build lib\GLFW\examples\particles.exe: C_EXECUTABLE_LINKER__particles_Debug lib\
 build cmake_object_order_depends_target_sharing: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\sharing.dir\sharing.c.obj: C_COMPILER__sharing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\sharing.c || cmake_object_order_depends_target_sharing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\sharing.dir
@@ -932,7 +1067,7 @@ build lib\GLFW\examples\CMakeFiles\sharing.dir\sharing.c.obj: C_COMPILER__sharin
   TARGET_PDB = lib\GLFW\examples\sharing.pdb
 
 build lib\GLFW\examples\CMakeFiles\sharing.dir\glfw.rc.res: RC_COMPILER__sharing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_sharing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\sharing.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -942,7 +1077,7 @@ build lib\GLFW\examples\CMakeFiles\sharing.dir\glfw.rc.res: RC_COMPILER__sharing
   TARGET_PDB = lib\GLFW\examples\sharing.pdb
 
 build lib\GLFW\examples\CMakeFiles\sharing.dir\__\deps\glad_gl.c.obj: C_COMPILER__sharing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_sharing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\sharing.dir
@@ -980,7 +1115,7 @@ build lib\GLFW\examples\sharing.exe: C_EXECUTABLE_LINKER__sharing_Debug lib\GLFW
 build cmake_object_order_depends_target_simple: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\simple.dir\simple.c.obj: C_COMPILER__simple_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\simple.c || cmake_object_order_depends_target_simple
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\simple.dir
@@ -989,7 +1124,7 @@ build lib\GLFW\examples\CMakeFiles\simple.dir\simple.c.obj: C_COMPILER__simple_D
   TARGET_PDB = lib\GLFW\examples\simple.pdb
 
 build lib\GLFW\examples\CMakeFiles\simple.dir\glfw.rc.res: RC_COMPILER__simple_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_simple
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\simple.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -999,7 +1134,7 @@ build lib\GLFW\examples\CMakeFiles\simple.dir\glfw.rc.res: RC_COMPILER__simple_D
   TARGET_PDB = lib\GLFW\examples\simple.pdb
 
 build lib\GLFW\examples\CMakeFiles\simple.dir\__\deps\glad_gl.c.obj: C_COMPILER__simple_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_simple
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\simple.dir
@@ -1037,7 +1172,7 @@ build lib\GLFW\examples\simple.exe: C_EXECUTABLE_LINKER__simple_Debug lib\GLFW\e
 build cmake_object_order_depends_target_splitview: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\splitview.dir\splitview.c.obj: C_COMPILER__splitview_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\splitview.c || cmake_object_order_depends_target_splitview
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\splitview.dir
@@ -1046,7 +1181,7 @@ build lib\GLFW\examples\CMakeFiles\splitview.dir\splitview.c.obj: C_COMPILER__sp
   TARGET_PDB = lib\GLFW\examples\splitview.pdb
 
 build lib\GLFW\examples\CMakeFiles\splitview.dir\glfw.rc.res: RC_COMPILER__splitview_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_splitview
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\splitview.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -1056,7 +1191,7 @@ build lib\GLFW\examples\CMakeFiles\splitview.dir\glfw.rc.res: RC_COMPILER__split
   TARGET_PDB = lib\GLFW\examples\splitview.pdb
 
 build lib\GLFW\examples\CMakeFiles\splitview.dir\__\deps\glad_gl.c.obj: C_COMPILER__splitview_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_splitview
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\splitview.dir
@@ -1094,7 +1229,7 @@ build lib\GLFW\examples\splitview.exe: C_EXECUTABLE_LINKER__splitview_Debug lib\
 build cmake_object_order_depends_target_wave: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\examples\CMakeFiles\wave.dir\wave.c.obj: C_COMPILER__wave_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\wave.c || cmake_object_order_depends_target_wave
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\wave.dir
@@ -1103,7 +1238,7 @@ build lib\GLFW\examples\CMakeFiles\wave.dir\wave.c.obj: C_COMPILER__wave_Debug C
   TARGET_PDB = lib\GLFW\examples\wave.pdb
 
 build lib\GLFW\examples\CMakeFiles\wave.dir\glfw.rc.res: RC_COMPILER__wave_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\glfw.rc || cmake_object_order_depends_target_wave
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = lib\GLFW\examples\CMakeFiles\wave.dir\glfw.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
   INCLUDES = -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -I C:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
@@ -1113,7 +1248,7 @@ build lib\GLFW\examples\CMakeFiles\wave.dir\glfw.rc.res: RC_COMPILER__wave_Debug
   TARGET_PDB = lib\GLFW\examples\wave.pdb
 
 build lib\GLFW\examples\CMakeFiles\wave.dir\__\deps\glad_gl.c.obj: C_COMPILER__wave_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_wave
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\examples\CMakeFiles\wave.dir
@@ -1209,7 +1344,7 @@ build lib\GLFW\examples\install\local: phony lib\GLFW\examples\CMakeFiles\instal
 build cmake_object_order_depends_target_clipboard: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\clipboard.dir\clipboard.c.obj: C_COMPILER__clipboard_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\clipboard.c || cmake_object_order_depends_target_clipboard
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\clipboard.dir
@@ -1218,7 +1353,7 @@ build lib\GLFW\tests\CMakeFiles\clipboard.dir\clipboard.c.obj: C_COMPILER__clipb
   TARGET_PDB = lib\GLFW\tests\clipboard.pdb
 
 build lib\GLFW\tests\CMakeFiles\clipboard.dir\__\deps\getopt.c.obj: C_COMPILER__clipboard_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_clipboard
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\clipboard.dir
@@ -1227,7 +1362,7 @@ build lib\GLFW\tests\CMakeFiles\clipboard.dir\__\deps\getopt.c.obj: C_COMPILER__
   TARGET_PDB = lib\GLFW\tests\clipboard.pdb
 
 build lib\GLFW\tests\CMakeFiles\clipboard.dir\__\deps\glad_gl.c.obj: C_COMPILER__clipboard_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_clipboard
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\clipboard.dir
@@ -1265,7 +1400,7 @@ build lib\GLFW\tests\clipboard.exe: C_EXECUTABLE_LINKER__clipboard_Debug lib\GLF
 build cmake_object_order_depends_target_events: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\events.dir\events.c.obj: C_COMPILER__events_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\events.c || cmake_object_order_depends_target_events
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\events.dir
@@ -1274,7 +1409,7 @@ build lib\GLFW\tests\CMakeFiles\events.dir\events.c.obj: C_COMPILER__events_Debu
   TARGET_PDB = lib\GLFW\tests\events.pdb
 
 build lib\GLFW\tests\CMakeFiles\events.dir\__\deps\getopt.c.obj: C_COMPILER__events_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_events
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\events.dir
@@ -1283,7 +1418,7 @@ build lib\GLFW\tests\CMakeFiles\events.dir\__\deps\getopt.c.obj: C_COMPILER__eve
   TARGET_PDB = lib\GLFW\tests\events.pdb
 
 build lib\GLFW\tests\CMakeFiles\events.dir\__\deps\glad_gl.c.obj: C_COMPILER__events_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_events
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\events.dir
@@ -1321,7 +1456,7 @@ build lib\GLFW\tests\events.exe: C_EXECUTABLE_LINKER__events_Debug lib\GLFW\test
 build cmake_object_order_depends_target_msaa: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\msaa.dir\msaa.c.obj: C_COMPILER__msaa_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\msaa.c || cmake_object_order_depends_target_msaa
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\msaa.dir
@@ -1330,7 +1465,7 @@ build lib\GLFW\tests\CMakeFiles\msaa.dir\msaa.c.obj: C_COMPILER__msaa_Debug C$:\
   TARGET_PDB = lib\GLFW\tests\msaa.pdb
 
 build lib\GLFW\tests\CMakeFiles\msaa.dir\__\deps\getopt.c.obj: C_COMPILER__msaa_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_msaa
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\msaa.dir
@@ -1339,7 +1474,7 @@ build lib\GLFW\tests\CMakeFiles\msaa.dir\__\deps\getopt.c.obj: C_COMPILER__msaa_
   TARGET_PDB = lib\GLFW\tests\msaa.pdb
 
 build lib\GLFW\tests\CMakeFiles\msaa.dir\__\deps\glad_gl.c.obj: C_COMPILER__msaa_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_msaa
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\msaa.dir
@@ -1377,7 +1512,7 @@ build lib\GLFW\tests\msaa.exe: C_EXECUTABLE_LINKER__msaa_Debug lib\GLFW\tests\CM
 build cmake_object_order_depends_target_glfwinfo: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\glfwinfo.c.obj: C_COMPILER__glfwinfo_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\glfwinfo.c || cmake_object_order_depends_target_glfwinfo
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\glfwinfo.dir
@@ -1386,7 +1521,7 @@ build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\glfwinfo.c.obj: C_COMPILER__glfwinf
   TARGET_PDB = lib\GLFW\tests\glfwinfo.pdb
 
 build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\__\deps\getopt.c.obj: C_COMPILER__glfwinfo_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_glfwinfo
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\glfwinfo.dir
@@ -1395,7 +1530,7 @@ build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\__\deps\getopt.c.obj: C_COMPILER__g
   TARGET_PDB = lib\GLFW\tests\glfwinfo.pdb
 
 build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\__\deps\glad_gl.c.obj: C_COMPILER__glfwinfo_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_glfwinfo
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\glfwinfo.dir
@@ -1404,7 +1539,7 @@ build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\__\deps\glad_gl.c.obj: C_COMPILER__
   TARGET_PDB = lib\GLFW\tests\glfwinfo.pdb
 
 build lib\GLFW\tests\CMakeFiles\glfwinfo.dir\__\deps\glad_vulkan.c.obj: C_COMPILER__glfwinfo_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_vulkan.c || cmake_object_order_depends_target_glfwinfo
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\glfwinfo.dir
@@ -1442,7 +1577,7 @@ build lib\GLFW\tests\glfwinfo.exe: C_EXECUTABLE_LINKER__glfwinfo_Debug lib\GLFW\
 build cmake_object_order_depends_target_iconify: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\iconify.dir\iconify.c.obj: C_COMPILER__iconify_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\iconify.c || cmake_object_order_depends_target_iconify
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\iconify.dir
@@ -1451,7 +1586,7 @@ build lib\GLFW\tests\CMakeFiles\iconify.dir\iconify.c.obj: C_COMPILER__iconify_D
   TARGET_PDB = lib\GLFW\tests\iconify.pdb
 
 build lib\GLFW\tests\CMakeFiles\iconify.dir\__\deps\getopt.c.obj: C_COMPILER__iconify_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_iconify
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\iconify.dir
@@ -1460,7 +1595,7 @@ build lib\GLFW\tests\CMakeFiles\iconify.dir\__\deps\getopt.c.obj: C_COMPILER__ic
   TARGET_PDB = lib\GLFW\tests\iconify.pdb
 
 build lib\GLFW\tests\CMakeFiles\iconify.dir\__\deps\glad_gl.c.obj: C_COMPILER__iconify_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_iconify
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\iconify.dir
@@ -1498,7 +1633,7 @@ build lib\GLFW\tests\iconify.exe: C_EXECUTABLE_LINKER__iconify_Debug lib\GLFW\te
 build cmake_object_order_depends_target_monitors: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\monitors.dir\monitors.c.obj: C_COMPILER__monitors_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\monitors.c || cmake_object_order_depends_target_monitors
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\monitors.dir
@@ -1507,7 +1642,7 @@ build lib\GLFW\tests\CMakeFiles\monitors.dir\monitors.c.obj: C_COMPILER__monitor
   TARGET_PDB = lib\GLFW\tests\monitors.pdb
 
 build lib\GLFW\tests\CMakeFiles\monitors.dir\__\deps\getopt.c.obj: C_COMPILER__monitors_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_monitors
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\monitors.dir
@@ -1516,7 +1651,7 @@ build lib\GLFW\tests\CMakeFiles\monitors.dir\__\deps\getopt.c.obj: C_COMPILER__m
   TARGET_PDB = lib\GLFW\tests\monitors.pdb
 
 build lib\GLFW\tests\CMakeFiles\monitors.dir\__\deps\glad_gl.c.obj: C_COMPILER__monitors_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_monitors
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\monitors.dir
@@ -1554,7 +1689,7 @@ build lib\GLFW\tests\monitors.exe: C_EXECUTABLE_LINKER__monitors_Debug lib\GLFW\
 build cmake_object_order_depends_target_reopen: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\reopen.dir\reopen.c.obj: C_COMPILER__reopen_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\reopen.c || cmake_object_order_depends_target_reopen
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\reopen.dir
@@ -1563,7 +1698,7 @@ build lib\GLFW\tests\CMakeFiles\reopen.dir\reopen.c.obj: C_COMPILER__reopen_Debu
   TARGET_PDB = lib\GLFW\tests\reopen.pdb
 
 build lib\GLFW\tests\CMakeFiles\reopen.dir\__\deps\glad_gl.c.obj: C_COMPILER__reopen_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_reopen
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\reopen.dir
@@ -1601,7 +1736,7 @@ build lib\GLFW\tests\reopen.exe: C_EXECUTABLE_LINKER__reopen_Debug lib\GLFW\test
 build cmake_object_order_depends_target_cursor: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\cursor.dir\cursor.c.obj: C_COMPILER__cursor_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\cursor.c || cmake_object_order_depends_target_cursor
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\cursor.dir
@@ -1610,7 +1745,7 @@ build lib\GLFW\tests\CMakeFiles\cursor.dir\cursor.c.obj: C_COMPILER__cursor_Debu
   TARGET_PDB = lib\GLFW\tests\cursor.pdb
 
 build lib\GLFW\tests\CMakeFiles\cursor.dir\__\deps\glad_gl.c.obj: C_COMPILER__cursor_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_cursor
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\cursor.dir
@@ -1648,7 +1783,7 @@ build lib\GLFW\tests\cursor.exe: C_EXECUTABLE_LINKER__cursor_Debug lib\GLFW\test
 build cmake_object_order_depends_target_empty: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\empty.dir\empty.c.obj: C_COMPILER__empty_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\empty.c || cmake_object_order_depends_target_empty
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\empty.dir
@@ -1657,7 +1792,7 @@ build lib\GLFW\tests\CMakeFiles\empty.dir\empty.c.obj: C_COMPILER__empty_Debug C
   TARGET_PDB = lib\GLFW\tests\empty.pdb
 
 build lib\GLFW\tests\CMakeFiles\empty.dir\__\deps\tinycthread.c.obj: C_COMPILER__empty_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\tinycthread.c || cmake_object_order_depends_target_empty
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\empty.dir
@@ -1666,7 +1801,7 @@ build lib\GLFW\tests\CMakeFiles\empty.dir\__\deps\tinycthread.c.obj: C_COMPILER_
   TARGET_PDB = lib\GLFW\tests\empty.pdb
 
 build lib\GLFW\tests\CMakeFiles\empty.dir\__\deps\glad_gl.c.obj: C_COMPILER__empty_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_empty
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\empty.dir
@@ -1704,7 +1839,7 @@ build lib\GLFW\tests\empty.exe: C_EXECUTABLE_LINKER__empty_Debug lib\GLFW\tests\
 build cmake_object_order_depends_target_gamma: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\gamma.dir\gamma.c.obj: C_COMPILER__gamma_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\gamma.c || cmake_object_order_depends_target_gamma
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\gamma.dir
@@ -1713,7 +1848,7 @@ build lib\GLFW\tests\CMakeFiles\gamma.dir\gamma.c.obj: C_COMPILER__gamma_Debug C
   TARGET_PDB = lib\GLFW\tests\gamma.pdb
 
 build lib\GLFW\tests\CMakeFiles\gamma.dir\__\deps\glad_gl.c.obj: C_COMPILER__gamma_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_gamma
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\gamma.dir
@@ -1751,7 +1886,7 @@ build lib\GLFW\tests\gamma.exe: C_EXECUTABLE_LINKER__gamma_Debug lib\GLFW\tests\
 build cmake_object_order_depends_target_icon: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\icon.dir\icon.c.obj: C_COMPILER__icon_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\icon.c || cmake_object_order_depends_target_icon
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\icon.dir
@@ -1760,7 +1895,7 @@ build lib\GLFW\tests\CMakeFiles\icon.dir\icon.c.obj: C_COMPILER__icon_Debug C$:\
   TARGET_PDB = lib\GLFW\tests\icon.pdb
 
 build lib\GLFW\tests\CMakeFiles\icon.dir\__\deps\glad_gl.c.obj: C_COMPILER__icon_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_icon
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\icon.dir
@@ -1798,7 +1933,7 @@ build lib\GLFW\tests\icon.exe: C_EXECUTABLE_LINKER__icon_Debug lib\GLFW\tests\CM
 build cmake_object_order_depends_target_inputlag: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\inputlag.dir\inputlag.c.obj: C_COMPILER__inputlag_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\inputlag.c || cmake_object_order_depends_target_inputlag
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\inputlag.dir
@@ -1807,7 +1942,7 @@ build lib\GLFW\tests\CMakeFiles\inputlag.dir\inputlag.c.obj: C_COMPILER__inputla
   TARGET_PDB = lib\GLFW\tests\inputlag.pdb
 
 build lib\GLFW\tests\CMakeFiles\inputlag.dir\__\deps\getopt.c.obj: C_COMPILER__inputlag_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_inputlag
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\inputlag.dir
@@ -1816,7 +1951,7 @@ build lib\GLFW\tests\CMakeFiles\inputlag.dir\__\deps\getopt.c.obj: C_COMPILER__i
   TARGET_PDB = lib\GLFW\tests\inputlag.pdb
 
 build lib\GLFW\tests\CMakeFiles\inputlag.dir\__\deps\glad_gl.c.obj: C_COMPILER__inputlag_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_inputlag
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\inputlag.dir
@@ -1854,7 +1989,7 @@ build lib\GLFW\tests\inputlag.exe: C_EXECUTABLE_LINKER__inputlag_Debug lib\GLFW\
 build cmake_object_order_depends_target_joysticks: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\joysticks.dir\joysticks.c.obj: C_COMPILER__joysticks_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\joysticks.c || cmake_object_order_depends_target_joysticks
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\joysticks.dir
@@ -1863,7 +1998,7 @@ build lib\GLFW\tests\CMakeFiles\joysticks.dir\joysticks.c.obj: C_COMPILER__joyst
   TARGET_PDB = lib\GLFW\tests\joysticks.pdb
 
 build lib\GLFW\tests\CMakeFiles\joysticks.dir\__\deps\glad_gl.c.obj: C_COMPILER__joysticks_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_joysticks
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\joysticks.dir
@@ -1901,7 +2036,7 @@ build lib\GLFW\tests\joysticks.exe: C_EXECUTABLE_LINKER__joysticks_Debug lib\GLF
 build cmake_object_order_depends_target_opacity: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\opacity.dir\opacity.c.obj: C_COMPILER__opacity_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\opacity.c || cmake_object_order_depends_target_opacity
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\opacity.dir
@@ -1910,7 +2045,7 @@ build lib\GLFW\tests\CMakeFiles\opacity.dir\opacity.c.obj: C_COMPILER__opacity_D
   TARGET_PDB = lib\GLFW\tests\opacity.pdb
 
 build lib\GLFW\tests\CMakeFiles\opacity.dir\__\deps\glad_gl.c.obj: C_COMPILER__opacity_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_opacity
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\opacity.dir
@@ -1948,7 +2083,7 @@ build lib\GLFW\tests\opacity.exe: C_EXECUTABLE_LINKER__opacity_Debug lib\GLFW\te
 build cmake_object_order_depends_target_tearing: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\tearing.dir\tearing.c.obj: C_COMPILER__tearing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\tearing.c || cmake_object_order_depends_target_tearing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\tearing.dir
@@ -1957,7 +2092,7 @@ build lib\GLFW\tests\CMakeFiles\tearing.dir\tearing.c.obj: C_COMPILER__tearing_D
   TARGET_PDB = lib\GLFW\tests\tearing.pdb
 
 build lib\GLFW\tests\CMakeFiles\tearing.dir\__\deps\glad_gl.c.obj: C_COMPILER__tearing_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_tearing
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\tearing.dir
@@ -1995,7 +2130,7 @@ build lib\GLFW\tests\tearing.exe: C_EXECUTABLE_LINKER__tearing_Debug lib\GLFW\te
 build cmake_object_order_depends_target_threads: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\threads.dir\threads.c.obj: C_COMPILER__threads_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\threads.c || cmake_object_order_depends_target_threads
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\threads.dir
@@ -2004,7 +2139,7 @@ build lib\GLFW\tests\CMakeFiles\threads.dir\threads.c.obj: C_COMPILER__threads_D
   TARGET_PDB = lib\GLFW\tests\threads.pdb
 
 build lib\GLFW\tests\CMakeFiles\threads.dir\__\deps\tinycthread.c.obj: C_COMPILER__threads_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\tinycthread.c || cmake_object_order_depends_target_threads
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\threads.dir
@@ -2013,7 +2148,7 @@ build lib\GLFW\tests\CMakeFiles\threads.dir\__\deps\tinycthread.c.obj: C_COMPILE
   TARGET_PDB = lib\GLFW\tests\threads.pdb
 
 build lib\GLFW\tests\CMakeFiles\threads.dir\__\deps\glad_gl.c.obj: C_COMPILER__threads_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_threads
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\threads.dir
@@ -2051,7 +2186,7 @@ build lib\GLFW\tests\threads.exe: C_EXECUTABLE_LINKER__threads_Debug lib\GLFW\te
 build cmake_object_order_depends_target_timeout: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\timeout.dir\timeout.c.obj: C_COMPILER__timeout_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\timeout.c || cmake_object_order_depends_target_timeout
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\timeout.dir
@@ -2060,7 +2195,7 @@ build lib\GLFW\tests\CMakeFiles\timeout.dir\timeout.c.obj: C_COMPILER__timeout_D
   TARGET_PDB = lib\GLFW\tests\timeout.pdb
 
 build lib\GLFW\tests\CMakeFiles\timeout.dir\__\deps\glad_gl.c.obj: C_COMPILER__timeout_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_timeout
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\timeout.dir
@@ -2098,7 +2233,7 @@ build lib\GLFW\tests\timeout.exe: C_EXECUTABLE_LINKER__timeout_Debug lib\GLFW\te
 build cmake_object_order_depends_target_title: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\title.dir\title.c.obj: C_COMPILER__title_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\title.c || cmake_object_order_depends_target_title
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\title.dir
@@ -2107,7 +2242,7 @@ build lib\GLFW\tests\CMakeFiles\title.dir\title.c.obj: C_COMPILER__title_Debug C
   TARGET_PDB = lib\GLFW\tests\title.pdb
 
 build lib\GLFW\tests\CMakeFiles\title.dir\__\deps\glad_gl.c.obj: C_COMPILER__title_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_title
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\title.dir
@@ -2145,7 +2280,7 @@ build lib\GLFW\tests\title.exe: C_EXECUTABLE_LINKER__title_Debug lib\GLFW\tests\
 build cmake_object_order_depends_target_triangle-vulkan: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\triangle-vulkan.dir\triangle-vulkan.c.obj: C_COMPILER__triangle-vulkan_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\triangle-vulkan.c || cmake_object_order_depends_target_triangle-vulkan
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\triangle-vulkan.dir
@@ -2154,7 +2289,7 @@ build lib\GLFW\tests\CMakeFiles\triangle-vulkan.dir\triangle-vulkan.c.obj: C_COM
   TARGET_PDB = lib\GLFW\tests\triangle-vulkan.pdb
 
 build lib\GLFW\tests\CMakeFiles\triangle-vulkan.dir\__\deps\glad_vulkan.c.obj: C_COMPILER__triangle-vulkan_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_vulkan.c || cmake_object_order_depends_target_triangle-vulkan
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\triangle-vulkan.dir
@@ -2192,7 +2327,7 @@ build lib\GLFW\tests\triangle-vulkan.exe: C_EXECUTABLE_LINKER__triangle-vulkan_D
 build cmake_object_order_depends_target_windows: phony || cmake_object_order_depends_target_glfw
 
 build lib\GLFW\tests\CMakeFiles\windows.dir\windows.c.obj: C_COMPILER__windows_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\windows.c || cmake_object_order_depends_target_windows
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\windows.dir
@@ -2201,7 +2336,7 @@ build lib\GLFW\tests\CMakeFiles\windows.dir\windows.c.obj: C_COMPILER__windows_D
   TARGET_PDB = lib\GLFW\tests\windows.pdb
 
 build lib\GLFW\tests\CMakeFiles\windows.dir\__\deps\getopt.c.obj: C_COMPILER__windows_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\getopt.c || cmake_object_order_depends_target_windows
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\windows.dir
@@ -2210,7 +2345,7 @@ build lib\GLFW\tests\CMakeFiles\windows.dir\__\deps\getopt.c.obj: C_COMPILER__wi
   TARGET_PDB = lib\GLFW\tests\windows.pdb
 
 build lib\GLFW\tests\CMakeFiles\windows.dir\__\deps\glad_gl.c.obj: C_COMPILER__windows_Debug C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps\glad_gl.c || cmake_object_order_depends_target_windows
-  DEFINES = -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\deps -IC:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\include
   OBJECT_DIR = lib\GLFW\tests\CMakeFiles\windows.dir
@@ -2350,11 +2485,131 @@ build lib\GLAD\CMakeFiles\install\local.util: CUSTOM_COMMAND lib\GLAD\all
 build lib\GLAD\install\local: phony lib\GLAD\CMakeFiles\install\local.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/zachs/vandy-c/swp/AcornEngine/lib/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build lib\glm\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build lib\glm\edit_cache: phony lib\glm\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build lib\glm\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\zachs\vandy-c\swp\AcornEngine -BC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build lib\glm\rebuild_cache: phony lib\glm\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build lib\glm\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build lib\glm\CMakeFiles\install.util: CUSTOM_COMMAND lib\glm\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build lib\glm\install: phony lib\glm\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build lib\glm\CMakeFiles\install\local.util: CUSTOM_COMMAND lib\glm\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build lib\glm\install\local: phony lib\glm\CMakeFiles\install\local.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/zachs/vandy-c/swp/AcornEngine/lib/GLM/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build lib\glm\glm\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build lib\glm\glm\edit_cache: phony lib\glm\glm\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build lib\glm\glm\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\zachs\vandy-c\swp\AcornEngine -BC:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build lib\glm\glm\rebuild_cache: phony lib\glm\glm\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build lib\glm\glm\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build lib\glm\glm\CMakeFiles\install.util: CUSTOM_COMMAND lib\glm\glm\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build lib\glm\glm\install: phony lib\glm\glm\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build lib\glm\glm\CMakeFiles\install\local.util: CUSTOM_COMMAND lib\glm\glm\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\zachs\vandy-c\swp\AcornEngine\out\build\x64-debug\lib\glm\glm && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build lib\glm\glm\install\local: phony lib\glm\glm\CMakeFiles\install\local.util
+
+# =============================================================================
 # Target aliases.
 
 build AcornEngine: phony AcornEngine\AcornEngine.exe
 
 build AcornEngine.exe: phony AcornEngine\AcornEngine.exe
+
+build Core: phony AcornEngine\Core.lib
+
+build Core.lib: phony AcornEngine\Core.lib
 
 build boing: phony lib\GLFW\examples\boing.exe
 
@@ -2419,8 +2674,6 @@ build monitors.exe: phony lib\GLFW\tests\monitors.exe
 build msaa: phony lib\GLFW\tests\msaa.exe
 
 build msaa.exe: phony lib\GLFW\tests\msaa.exe
-
-build myLib: phony myLib.lib
 
 build offscreen: phony lib\GLFW\examples\offscreen.exe
 
@@ -2490,21 +2743,28 @@ build windows.exe: phony lib\GLFW\tests\windows.exe
 #############################################
 # Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug
 
-build all: phony myLib.lib AcornEngine\all lib\all
+build all: phony AcornEngine\all lib\all
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/AcornEngine
 
-build AcornEngine\all: phony AcornEngine\AcornEngine.exe
+build AcornEngine\all: phony AcornEngine\Core.lib AcornEngine\AcornEngine.exe AcornEngine\src\all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/AcornEngine/src
+
+build AcornEngine\src\all: phony
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib
 
-build lib\all: phony lib\GLFW\all lib\GLAD\all
+build lib\all: phony lib\GLFW\all lib\GLAD\all lib\glm\all
 
 # =============================================================================
 
@@ -2542,20 +2802,34 @@ build lib\GLFW\src\all: phony lib\GLFW\src\glfw3.lib
 build lib\GLFW\tests\all: phony lib\GLFW\tests\clipboard.exe lib\GLFW\tests\events.exe lib\GLFW\tests\msaa.exe lib\GLFW\tests\glfwinfo.exe lib\GLFW\tests\iconify.exe lib\GLFW\tests\monitors.exe lib\GLFW\tests\reopen.exe lib\GLFW\tests\cursor.exe lib\GLFW\tests\empty.exe lib\GLFW\tests\gamma.exe lib\GLFW\tests\icon.exe lib\GLFW\tests\inputlag.exe lib\GLFW\tests\joysticks.exe lib\GLFW\tests\opacity.exe lib\GLFW\tests\tearing.exe lib\GLFW\tests\threads.exe lib\GLFW\tests\timeout.exe lib\GLFW\tests\title.exe lib\GLFW\tests\triangle-vulkan.exe lib\GLFW\tests\windows.exe
 
 # =============================================================================
+
+#############################################
+# Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib/glm
+
+build lib\glm\all: phony lib\glm\glm\all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib/glm/glm
+
+build lib\glm\glm\all: phony
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindDoxygen.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\cmake_uninstall.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3.pc.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3Config.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw_config.h.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\CMakeLists.txt CMakeCache.txt CMakeFiles\3.24.202208181-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindDoxygen.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\cmake_uninstall.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3.pc.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3Config.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw_config.h.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM\glm\CMakeLists.txt CMakeCache.txt CMakeFiles\3.24.202208181-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindDoxygen.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\cmake_uninstall.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3.pc.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3Config.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw_config.h.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\CMakeLists.txt CMakeCache.txt CMakeFiles\3.24.202208181-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeSystem.cmake: phony
+build C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindDoxygen.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\AcornEngine\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLAD\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\cmake_uninstall.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\examples\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3.pc.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw3Config.cmake.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\src\glfw_config.h.in C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLFW\tests\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM\CMakeLists.txt C$:\Users\zachs\vandy-c\swp\AcornEngine\lib\GLM\glm\CMakeLists.txt CMakeCache.txt CMakeFiles\3.24.202208181-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.24.202208181-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

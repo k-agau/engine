@@ -36,6 +36,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib/GLFW/cmake_install.cmake")
   include("C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib/GLAD/cmake_install.cmake")
+  include("C:/Users/zachs/vandy-c/swp/AcornEngine/out/build/x64-debug/lib/glm/cmake_install.cmake")
 
 endif()
 
