@@ -549,10 +549,10 @@ static void detectEWMH(void)
         getAtomIfSupported(supportedAtoms, atomCount, "_NET_WM_STATE_DEMANDS_ATTENTION");
     _glfw.x11.NET_WM_FULLSCREEN_MONITORS =
         getAtomIfSupported(supportedAtoms, atomCount, "_NET_WM_FULLSCREEN_MONITORS");
-    _glfw.x11.NET_WM_WINDOW_TYPE =
-        getAtomIfSupported(supportedAtoms, atomCount, "_NET_WM_WINDOW_TYPE");
-    _glfw.x11.NET_WM_WINDOW_TYPE_NORMAL =
-        getAtomIfSupported(supportedAtoms, atomCount, "_NET_WM_WINDOW_TYPE_NORMAL");
+    _glfw.x11.NET_WwindowManger_TYPE =
+        getAtomIfSupported(supportedAtoms, atomCount, "_NET_WwindowManger_TYPE");
+    _glfw.x11.NET_WwindowManger_TYPE_NORMAL =
+        getAtomIfSupported(supportedAtoms, atomCount, "_NET_WwindowManger_TYPE_NORMAL");
     _glfw.x11.NET_WORKAREA =
         getAtomIfSupported(supportedAtoms, atomCount, "_NET_WORKAREA");
     _glfw.x11.NET_CURRENT_DESKTOP =
@@ -896,8 +896,8 @@ static GLFWbool initExtensions(void)
         XInternAtom(_glfw.x11.display, "_NET_WM_ICON_NAME", False);
     _glfw.x11.NET_WM_BYPASS_COMPOSITOR =
         XInternAtom(_glfw.x11.display, "_NET_WM_BYPASS_COMPOSITOR", False);
-    _glfw.x11.NET_WM_WINDOW_OPACITY =
-        XInternAtom(_glfw.x11.display, "_NET_WM_WINDOW_OPACITY", False);
+    _glfw.x11.NET_WwindowManger_OPACITY =
+        XInternAtom(_glfw.x11.display, "_NET_WwindowManger_OPACITY", False);
     _glfw.x11.MOTIF_WM_HINTS =
         XInternAtom(_glfw.x11.display, "_MOTIF_WM_HINTS", False);
 

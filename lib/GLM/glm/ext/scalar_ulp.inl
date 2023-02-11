@@ -193,7 +193,7 @@ namespace glm
 	{
 #		if GLM_HAS_CXX11_STL
 			return std::nextafter(x, std::numeric_limits<float>::max());
-#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS)))
+#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORwindowMangerS)))
 			return detail::nextafterf(x, FLT_MAX);
 #		elif(GLM_PLATFORM & GLM_PLATFORM_ANDROID)
 			return __builtin_nextafterf(x, FLT_MAX);
@@ -207,7 +207,7 @@ namespace glm
 	{
 #		if GLM_HAS_CXX11_STL
 			return std::nextafter(x, std::numeric_limits<double>::max());
-#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS)))
+#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORwindowMangerS)))
 			return detail::nextafter(x, std::numeric_limits<double>::max());
 #		elif(GLM_PLATFORM & GLM_PLATFORM_ANDROID)
 			return __builtin_nextafter(x, DBL_MAX);
@@ -232,7 +232,7 @@ namespace glm
 	{
 #		if GLM_HAS_CXX11_STL
 			return std::nextafter(x, std::numeric_limits<float>::min());
-#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS)))
+#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORwindowMangerS)))
 			return detail::nextafterf(x, FLT_MIN);
 #		elif(GLM_PLATFORM & GLM_PLATFORM_ANDROID)
 			return __builtin_nextafterf(x, FLT_MIN);
@@ -245,7 +245,7 @@ namespace glm
 	{
 #		if GLM_HAS_CXX11_STL
 			return std::nextafter(x, std::numeric_limits<double>::min());
-#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS)))
+#		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORwindowMangerS)))
 			return _nextafter(x, DBL_MIN);
 #		elif(GLM_PLATFORM & GLM_PLATFORM_ANDROID)
 			return __builtin_nextafter(x, DBL_MIN);

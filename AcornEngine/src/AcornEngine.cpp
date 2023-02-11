@@ -4,6 +4,7 @@
 #include "AcornEngine.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "WindowManager.h"
 #include <glad.h>
 #include <glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
@@ -16,42 +17,14 @@ bool WIREFRAME = 0;
 
 	float deltaTime = 0.0f;	// time between current frame and last frame
 	float lastFrame = 0.0f;
-	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	
 	void processInput(GLFWwindow* window, float Object[], Camera& myC);
 
 	int main()
 	{
+		WindowManager* windowManger = new WindowManager();
 
-		/*GLFW INIT AND CONFIG*/
-		glfwInit();
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-		GLFWwindow* window = glfwCreateWindow(800, 600, "AcornEngine.exe", NULL, NULL);
-
-		if (window == NULL)
-		{
-			cout << "Failed to create GLFW window" << endl;
-			glfwTerminate();
-			return -1;
-		}
-
-		glfwMakeContextCurrent(window);
-		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			std::cout << "Failed to initialize OpenGL context" << std::endl;
-			return 0;
-		}
-
-		printf("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
-
+		windowManger->init(600,800);
 
 		float triangle[] = {
 				-1.0, -1.0,  1.0,
@@ -74,7 +47,7 @@ bool WIREFRAME = 0;
 				1.0,  1.0, -1.0,
 				-1.0,  1.0, -1.0
 		};
-		unsigned int indices[] = {  // note that we start from 0!
+		unsigned int indices[] = {  // note t]]]]hat we start from 0!
 			// front
 			0, 1, 2,
 			2, 3, 0,
@@ -134,13 +107,13 @@ bool WIREFRAME = 0;
 		glm::mat4 projection;
 		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(windowManger->getHandle()))
 		{
 			float currentFrame = static_cast<float>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
-			processInput(window, triangle, myCamera);
+			processInput(windowManger->getHandle(), triangle, myCamera);
 
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -172,7 +145,7 @@ bool WIREFRAME = 0;
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 
-			glfwSwapBuffers(window);
+			glfwSwapBuffers(windowManger->getHandle());
 			glfwPollEvents();
 		}
 
@@ -180,7 +153,7 @@ bool WIREFRAME = 0;
 		glDeleteBuffers(1, &VBO);
 		myShader.~Shader();
 
-		glfwTerminate();
+		windowManger->shutdown();
 		return 0;
 	}
 
@@ -247,11 +220,4 @@ bool WIREFRAME = 0;
 
 		}
 
-	}
-
-	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-	{
-		// make sure the viewport matches the new window dimensions; note that width and 
-		// height will be significantly larger than specified on retina displays.
-		glViewport(0, 0, width, height);
 	}
