@@ -1,4 +1,6 @@
-#include "LayerStack.h"
+#include "Layers/LayerStack.h"
+
+#include <algorithm>
 
 LayerStack::LayerStack(): layerTop(layers.begin())
 {
@@ -16,7 +18,7 @@ void LayerStack::pushLayer(Layer* layer)
 
 void LayerStack::pushOverlay(Layer* overlay)
 {
-	layers.emplace_back(overlay)
+	layers.emplace_back(overlay);
 }
 
 void LayerStack::popLayer(Layer* layer)

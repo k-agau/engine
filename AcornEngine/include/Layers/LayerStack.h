@@ -9,7 +9,7 @@ private:
 	std::vector<Layer*>::iterator layerTop;
 public:
 	LayerStack();
-	~LayerStack();
+	virtual ~LayerStack();
 
 	void pushLayer(Layer* layer);
 	void pushOverlay(Layer* overlay);

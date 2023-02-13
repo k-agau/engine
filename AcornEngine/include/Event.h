@@ -1,7 +1,7 @@
 
 class Event {
-
-	enum EventTypes{
+public:
+	enum EventType{
 
 		WindowClose,
 		WindowResize
@@ -17,7 +17,7 @@ class Event {
 	virtual int GetCategoryFlags() const = 0;
 	virtual std::string ToString() const { return GetName(); }
 
-	bool IsInCategory(EventCategory category)
+	bool IsInCategory(EventType category)
 	{
 		return GetCategoryFlags() & category;
 	}

@@ -1,3 +1,6 @@
+#include <string>
+#include "Event.h"
+
 class Layer
 {
 protected:
