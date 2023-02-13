@@ -27,7 +27,7 @@
 
 #include <dlfcn.h>
 
-#define _GLFW_PLATFORM_WINDOW_STATE _GLFWwindowNull null
+#define _GLFW_PLATFORwindowManger_STATE _GLFWwindowNull null
 
 #define _GLFW_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
 #define _GLFW_PLATFORM_MONITOR_STATE         struct { int dummyMonitor; }

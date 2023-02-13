@@ -168,7 +168,7 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR)(Vk
 #define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->x11.handle)
 #define _GLFW_EGL_NATIVE_DISPLAY ((EGLNativeDisplayType) _glfw.x11.display)
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowX11  x11
+#define _GLFW_PLATFORwindowManger_STATE         _GLFWwindowX11  x11
 #define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryX11 x11
 #define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorX11 x11
 #define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorX11  x11
@@ -253,8 +253,8 @@ typedef struct _GLFWlibraryX11
     Atom            NET_WM_ICON;
     Atom            NET_WM_PID;
     Atom            NET_WM_PING;
-    Atom            NET_WM_WINDOW_TYPE;
-    Atom            NET_WM_WINDOW_TYPE_NORMAL;
+    Atom            NET_WwindowManger_TYPE;
+    Atom            NET_WwindowManger_TYPE_NORMAL;
     Atom            NET_WM_STATE;
     Atom            NET_WM_STATE_ABOVE;
     Atom            NET_WM_STATE_FULLSCREEN;
@@ -263,7 +263,7 @@ typedef struct _GLFWlibraryX11
     Atom            NET_WM_STATE_DEMANDS_ATTENTION;
     Atom            NET_WM_BYPASS_COMPOSITOR;
     Atom            NET_WM_FULLSCREEN_MONITORS;
-    Atom            NET_WM_WINDOW_OPACITY;
+    Atom            NET_WwindowManger_OPACITY;
     Atom            NET_WM_CM_Sx;
     Atom            NET_WORKAREA;
     Atom            NET_CURRENT_DESKTOP;

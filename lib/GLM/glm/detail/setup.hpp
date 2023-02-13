@@ -154,7 +154,7 @@
 #	define GLM_HAS_CXX11_STL ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && (\
 		((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC48)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC12)) || \
-		((GLM_PLATFORM != GLM_PLATFORM_WINDOWS) && (GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL15))))
+		((GLM_PLATFORM != GLM_PLATFORwindowMangerS) && (GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL15))))
 #endif
 
 // N1720
@@ -338,7 +338,7 @@
 
 //
 #if defined(GLM_FORCE_INTRINSICS)
-#	define GLM_HAS_BITSCAN_WINDOWS ((GLM_PLATFORM & GLM_PLATFORM_WINDOWS) && (\
+#	define GLM_HAS_BITSCAN_WINDOWS ((GLM_PLATFORM & GLM_PLATFORwindowMangerS) && (\
 		((GLM_COMPILER & GLM_COMPILER_INTEL)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC14) && (GLM_ARCH & GLM_ARCH_X86_BIT))))
 #else
@@ -508,7 +508,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 // Qualifiers
 
-#if (GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS))
+#if (GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORwindowMangerS))
 #	define GLM_DEPRECATED __declspec(deprecated)
 #	define GLM_ALIGNED_TYPEDEF(type, name, alignment) typedef __declspec(align(alignment)) type name
 #elif GLM_COMPILER & (GLM_COMPILER_GCC | GLM_COMPILER_CLANG | GLM_COMPILER_INTEL)
@@ -1049,7 +1049,7 @@ namespace detail
 #		pragma message("GLM: Apple platform detected")
 #	elif(GLM_PLATFORM & GLM_PLATFORM_WINCE)
 #		pragma message("GLM: WinCE platform detected")
-#	elif(GLM_PLATFORM & GLM_PLATFORM_WINDOWS)
+#	elif(GLM_PLATFORM & GLM_PLATFORwindowMangerS)
 #		pragma message("GLM: Windows platform detected")
 #	elif(GLM_PLATFORM & GLM_PLATFORM_CHROME_NACL)
 #		pragma message("GLM: Native Client detected")

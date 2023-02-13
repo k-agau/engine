@@ -571,7 +571,7 @@ namespace findMSB
 
 			return int(_tzcnt_u32(Value));
 		}
-#	endif//GLM_ARCH & GLM_ARCH_AVX && GLM_PLATFORM & GLM_PLATFORM_WINDOWS
+#	endif//GLM_ARCH & GLM_ARCH_AVX && GLM_PLATFORM & GLM_PLATFORwindowMangerS
 
 	template<typename genIUType>
 	static int findMSB_095(genIUType Value)
@@ -761,7 +761,7 @@ namespace findMSB
 
 #		if GLM_ARCH & GLM_ARCH_AVX && GLM_COMPILER & GLM_COMPILER_VC
 			std::printf("findMSB - avx tzcnt: %d clocks\n", static_cast<int>(Timestamps7 - Timestamps6));
-#		endif//GLM_ARCH & GLM_ARCH_AVX && GLM_PLATFORM & GLM_PLATFORM_WINDOWS
+#		endif//GLM_ARCH & GLM_ARCH_AVX && GLM_PLATFORM & GLM_PLATFORwindowMangerS
 
 		return Error;
 	}

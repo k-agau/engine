@@ -4,7 +4,7 @@
 // Platform
 
 #define GLM_PLATFORM_UNKNOWN		0x00000000
-#define GLM_PLATFORM_WINDOWS		0x00010000
+#define GLM_PLATFORwindowMangerS		0x00010000
 #define GLM_PLATFORM_LINUX			0x00020000
 #define GLM_PLATFORM_APPLE			0x00040000
 //#define GLM_PLATFORM_IOS			0x00080000
@@ -26,7 +26,7 @@
 #elif defined(WINCE)
 #	define GLM_PLATFORM GLM_PLATFORM_WINCE
 #elif defined(_WIN32)
-#	define GLM_PLATFORM GLM_PLATFORM_WINDOWS
+#	define GLM_PLATFORM GLM_PLATFORwindowMangerS
 #elif defined(__native_client__)
 #	define GLM_PLATFORM GLM_PLATFORM_CHROME_NACL
 #elif defined(__ANDROID__)
