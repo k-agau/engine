@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 #include "Camera.h"
-#include "WindowManager.h"
+#include "AcornApp.h"
 #include <glad.h>
 #include <glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
@@ -20,9 +20,8 @@ void processInput(GLFWwindow* window, float Object[], Camera& myC);
 
 int main()
 {
-	WindowManager* windowManger = new WindowManager();
+	AcornApp* App = new AcornApp();
 
-	windowManger->init(600, 800);
 
 	float triangle[] = {
 			-1.0, -1.0,  1.0,
@@ -105,13 +104,13 @@ int main()
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-	while (!glfwWindowShouldClose(windowManger->getHandle()))
+	while (!glfwWindowShouldClose(App->GetWindow()))
 	{
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		processInput(windowManger->getHandle(), triangle, myCamera);
+		processInput(App->GetWindow(), triangle, myCamera);
 
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -143,7 +142,7 @@ int main()
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 
-		glfwSwapBuffers(windowManger->getHandle());
+		glfwSwapBuffers(App->GetWindow());
 		glfwPollEvents();
 	}
 
@@ -151,7 +150,7 @@ int main()
 	glDeleteBuffers(1, &VBO);
 	myShader.~Shader();
 
-	windowManger->shutdown();
+	App->Shutdown();
 	return 0;
 }
 
