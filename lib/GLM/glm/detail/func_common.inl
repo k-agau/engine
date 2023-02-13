@@ -594,7 +594,7 @@ namespace detail
 #			elif GLM_COMPILER & GLM_COMPILER_VC
 				return _isnan(x) != 0;
 #			elif GLM_COMPILER & GLM_COMPILER_INTEL
-#				if GLM_PLATFORM & GLM_PLATFORM_WINDOWS
+#				if GLM_PLATFORM & GLM_PLATFORwindowMangerS
 					return _isnan(x) != 0;
 #				else
 					return ::isnan(x) != 0;
@@ -631,7 +631,7 @@ namespace detail
 #			if GLM_HAS_CXX11_STL
 				return std::isinf(x);
 #			elif GLM_COMPILER & (GLM_COMPILER_INTEL | GLM_COMPILER_VC)
-#				if(GLM_PLATFORM & GLM_PLATFORM_WINDOWS)
+#				if(GLM_PLATFORM & GLM_PLATFORwindowMangerS)
 					return _fpclass(x) == _FPCLASS_NINF || _fpclass(x) == _FPCLASS_PINF;
 #				else
 					return ::isinf(x);

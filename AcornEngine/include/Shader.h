@@ -26,12 +26,12 @@ public:
     void setBool(const std::string& name, bool value) const;
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
-    void createGLShaders(const char* vertexPath, const char* fragmentPath);
 
 private:
     const char* ACORN_FRAGMENT_SHADER_PATH = "../Shaders/fragment_shader.glsl";
     const char* ACORN_VERTEX_SHADER_PATH = "../Shaders/vertex_shader.glsl";
     void checkCompileErrors(unsigned int shader, std::string type);
+    void createGLShaders(const char* vertexPath, const char* fragmentPath);
 };
 
 #endif

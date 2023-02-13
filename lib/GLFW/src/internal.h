@@ -417,7 +417,7 @@ struct _GLFWwindow
     } callbacks;
 
     // This is defined in the window API's platform.h
-    _GLFW_PLATFORM_WINDOW_STATE;
+    _GLFW_PLATFORwindowManger_STATE;
 };
 
 // Monitor structure
