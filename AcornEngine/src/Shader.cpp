@@ -1,19 +1,8 @@
 #include "Shader.h"
 
-#include <filesystem>
-
-namespace fs = std::filesystem;
-
 Shader::Shader()
 {
-   // auto p = std::filesystem::current_path();
-
- /*   fs::current_path p = fs::current_path();
-    p = p.parent_path()*/;
-
-    //ACORN_FRAGMENT_SHADER_PATH = 
-    //ACORN_VERTEX_SHADER_PATH =
-	createGLShaders(ACORN_VERTEX_SHADER_PATH, ACORN_FRAGMENT_SHADER_PATH);
+   createGLShaders(ACORN_VERTEX_SHADER_PATH, ACORN_FRAGMENT_SHADER_PATH);
 }
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)

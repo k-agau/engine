@@ -2,7 +2,7 @@
 #include <glfw3.h>
 #include "WindowManager.h"
 #include "Renderer.h"
-
+#include "Logs/Logger.h"
 
 class AcornApp {
 
@@ -23,5 +23,6 @@ private:
 	static AcornApp* instance;
 	WindowManager* windowManager;
 	Renderer* renderer;
+	Logger logger;
 
 };

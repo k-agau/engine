@@ -1,4 +1,8 @@
+#ifndef EVENT_H
+#define EVENT_H
+
 #include "KeyCodes.h"
+
 class Event {
 
 public:
@@ -28,3 +32,5 @@ protected:
 	EventType eventType;
 
 };
+
+#endif // EVENT_H

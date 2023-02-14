@@ -1,3 +1,6 @@
+#ifndef LAYER_H
+#define LAYER_H
+
 #include <string>
 #include "Events/Event.h"
 
@@ -14,3 +17,5 @@ public:
 	virtual void onUpdate() = 0;
 	virtual void onEvent(Event &event) = 0;
 };
+
+#endif // LAYER_H

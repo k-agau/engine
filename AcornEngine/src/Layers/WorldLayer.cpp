@@ -1,14 +1,8 @@
 #include "Layers/WorldLayer.h"
 
-WorldLayer* WorldLayer::inst = nullptr;
-
-WorldLayer* WorldLayer::instance()
+WorldLayer::WorldLayer()
 {
-	if (WorldLayer::inst == nullptr)
-	{
-		WorldLayer::inst = new WorldLayer;
-	}
-	return inst;
+
 }
 
 WorldLayer::~WorldLayer()
