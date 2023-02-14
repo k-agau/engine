@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #pragma once
 
 	using KeyCode = uint16_t;

@@ -1,3 +1,7 @@
+#include "Events/Event.h"
+#include <cstdint>
+#include <string>
+
 class Entity
 {
 protected:
@@ -8,9 +12,11 @@ protected:
 	uint8_t y;
 	uint8_t z;
 public:
-	Entity();
-	virtual ~Entity() {};
+	Entity(uint8_t _type, std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z);
+	virtual ~Entity();
 
-	void onCreate() = 0;
-	void onDelete() = 0;
+	virtual void onCreate() = 0;
+	virtual void onDelete() = 0;
+	virtual void onUpdate() = 0;
+	virtual void onEvent(Event& event) = 0;
 };

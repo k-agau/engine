@@ -28,8 +28,8 @@ public:
     void setFloat(const std::string& name, float value) const;
 
 private:
-    const char* ACORN_FRAGMENT_SHADER_PATH = "../Shaders/fragment_shader.glsl";
-    const char* ACORN_VERTEX_SHADER_PATH = "../Shaders/vertex_shader.glsl";
+    char* ACORN_FRAGMENT_SHADER_PATH = nullptr; //"../Shaders/fragment_shader.glsl";
+    char* ACORN_VERTEX_SHADER_PATH = nullptr; // "../Shaders/vertex_shader.glsl";
     void checkCompileErrors(unsigned int shader, std::string type);
     void createGLShaders(const char* vertexPath, const char* fragmentPath);
 };

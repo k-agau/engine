@@ -22,7 +22,7 @@ public:
 
 	virtual EventType GetEventType() { return eventType; }
 	virtual void SetEventType(EventType e) { eventType = e; }
-	virtual void ToString() const { std::cout<<"DEFAULT_EVENT_TEXT"; }
+	virtual void ToString() const {  }
 
 protected:
 	EventType eventType;
