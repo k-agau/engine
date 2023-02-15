@@ -1,17 +1,5 @@
 #include "AcornApp.h"
 
-//AcornApp* AcornApp::inst = nullptr;
-//
-//AcornApp* AcornApp::instance()
-//{
-//	if (AcornApp::inst == nullptr)
-//	{
-//		inst = new AcornApp();
-//	}
-//
-//	return inst;
-//}
-
 AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr)
 {
 	windowManager = WindowManager::instance();
@@ -37,14 +25,12 @@ void AcornApp::render() {
 		glfwSwapBuffers(GetWindow());
 		glfwPollEvents();
 	}
-
 }
 
 GLFWwindow* AcornApp::GetWindow() {
 
 	if (windowManager)
 		return windowManager->getHandle();
-
 }
 
 void AcornApp::Shutdown() {
@@ -55,5 +41,4 @@ void AcornApp::Shutdown() {
 bool AcornApp::WindowIsOpen() {
 
 	return !glfwWindowShouldClose(GetWindow());
-
 }

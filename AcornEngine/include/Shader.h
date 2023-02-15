@@ -29,7 +29,7 @@ public:
 
 private:
     const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\ksilv\\Github\\engine\\AcornEngine\\Shaders\\fragment_shader.glsl";
-    const char* ACORN_VERTEX_SHADER_PATH = "C : \\Users\\ksilv\\Github\\engine\\AcornEngine\\Shaders\\vertex_shader.glsl";
+    const char* ACORN_VERTEX_SHADER_PATH = "C:\\Users\\ksilv\\Github\\engine\\AcornEngine\\Shaders\\vertex_shader.glsl";
     void checkCompileErrors(unsigned int shader, std::string type);
     void createGLShaders(const char* vertexPath, const char* fragmentPath);
 };

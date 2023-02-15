@@ -18,6 +18,9 @@ public:
 	void pushOverlay(Layer* overlay);
 	void popLayer(Layer* layer);
 	void popOverlay(Layer* overlay);
+
+	void onUpdate();
+	void onEvent(Event& event);
 };
 
 #endif // LAYER_STACK_H

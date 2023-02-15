@@ -39,3 +39,19 @@ void LayerStack::popOverlay(Layer* overlay)
 		layers.erase(it);
 	}
 }
+
+void LayerStack::onUpdate()
+{
+	for (auto layer : layers)
+	{
+		layer->onUpdate();
+	}
+}
+
+void LayerStack::onEvent(Event& event)
+{
+	for (auto it = layers.rbegin(); it != layers.rend() && !event.Handled; --it)
+	{
+		(*it)->onEvent(event);
+	}
+}
