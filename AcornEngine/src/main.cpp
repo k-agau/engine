@@ -3,17 +3,7 @@
 int main()
 {
 	AcornApp* App = new AcornApp();
-
-	App->init();
-
-	while (App->WindowIsOpen())
-	{
-
-		App->render();
-
-	}
-
-	App->Shutdown();
+	App->run();
 	return 0;
 }
 /*

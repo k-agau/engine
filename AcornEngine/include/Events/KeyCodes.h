@@ -1,3 +1,6 @@
+#ifndef KEY_CODES_H
+#define KEY_CODES_H
+
 #include <cstdint>
 
 #pragma once
@@ -141,3 +144,5 @@
 			Menu = 348
 		};
 	}
+
+#endif // KEY_CODES_H

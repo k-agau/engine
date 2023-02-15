@@ -1,20 +1,17 @@
 #include "WindowManager.h"
 
-WindowManager* WindowManager::instance = nullptr;
+WindowManager* WindowManager::inst = nullptr;
 
-WindowManager::WindowManager() : window(nullptr)
+WindowManager* WindowManager::instance()
 {
-	if (instance == nullptr) {
-		instance = this;
-		return;
+	if (WindowManager::inst == nullptr) {
+		WindowManager::inst = new WindowManager;
 	}
-
-	std::cout << "WindowManager Singleton has already been declared.";
+	return inst;
 }
 
 WindowManager::~WindowManager()
 {
-	if (instance == this) { instance = nullptr; }
 }
 
 bool WindowManager::init(int const width, int const height)
@@ -84,7 +81,7 @@ bool WindowManager::init(int const width, int const height)
 	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			MouseMoveEvent newEvent((float)xPos, (float)yPos);
-			newEvent.ToString();
+	newEvent.ToString();
 
 		});
 	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods)
@@ -93,21 +90,22 @@ bool WindowManager::init(int const width, int const height)
 			switch (action)
 			{
 			case GLFW_PRESS:
-				{
-					MouseButtonPressedEvent newEvent(button);
-					newEvent.ToString();
-					break;
-				}
+			{
+				MouseButtonPressedEvent newEvent(button);
+				newEvent.ToString();
+				break;
+			}
 			case GLFW_RELEASE:
-				{
-					MouseButtonReleasedEvent newEvent(button);
-					newEvent.ToString();
-					break;
-				}
+			{
+				MouseButtonReleasedEvent newEvent(button);
+				newEvent.ToString();
+				break;
+			}
 			}
 
 		});
 }
+
 
 void WindowManager::shutdown()
 {

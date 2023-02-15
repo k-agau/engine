@@ -1,15 +1,12 @@
 #include "Renderer.h"
 
-Renderer* Renderer::instance = nullptr;
+Renderer* Renderer::inst = nullptr;
 
-Renderer::Renderer() {
-
-	if (instance == nullptr) {
-
-		instance = this;
-
+Renderer* Renderer::instance() {
+	if (Renderer::inst == nullptr) {
+		Renderer::inst = new Renderer();
 	}
-
+	return inst;
 }
 
 void Renderer::init() {
@@ -27,8 +24,6 @@ void Renderer::init() {
 }
 
 void Renderer::initGeom() {
-
-
 	//DEFINITION OF A CUBE
 	float cube[] = {
 		-1.0, -1.0,  1.0,
