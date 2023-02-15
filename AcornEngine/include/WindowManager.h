@@ -1,3 +1,6 @@
+#ifndef WINDOW_MANAGER_H
+#define WINDOW_MANAGER_H
+
 #include <glad.h>
 #include <glfw3.h>
 #include <iostream>
@@ -7,22 +10,15 @@
 class WindowManager {
 
 public:
-
-	WindowManager();
+	static WindowManager* instance();
 	~WindowManager();
-
-	//Don't 
-	WindowManager(const WindowManager&) = delete;
-	WindowManager& operator= (const WindowManager&) = delete;
-
-
 	bool init(int const width, int const height);
 	void shutdown();
-
 	GLFWwindow* getHandle();
-
 private:
-
-	static WindowManager* instance; 
+	WindowManager() = default;
+	static WindowManager* inst;
 	GLFWwindow* window;
 };
+
+#endif // WINDOW_MANAGER_H

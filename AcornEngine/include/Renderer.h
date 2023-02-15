@@ -4,12 +4,8 @@
 #include <glm/gtc/type_ptr.hpp>
 
 class Renderer {
-
-
 public:
-
-	Renderer();
-
+	static Renderer* instance();
 	void init();
 	void Update();
 	void Shutdown();
@@ -17,14 +13,10 @@ public:
 	unsigned int VBO, VAO;
 
 private:
-
-	static Renderer* instance;
-
+	Renderer() = default;
+	static Renderer* inst;
 	Shader* shaderManager;
 	Camera* rCamera;
 	glm::mat4 M, V, P;
-
-
 	void initGeom();
-
 };

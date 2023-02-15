@@ -1,31 +1,39 @@
 #include "AcornApp.h"
 
-AcornApp* AcornApp::instance = nullptr;
+//AcornApp* AcornApp::inst = nullptr;
+//
+//AcornApp* AcornApp::instance()
+//{
+//	if (AcornApp::inst == nullptr)
+//	{
+//		inst = new AcornApp();
+//	}
+//
+//	return inst;
+//}
 
-AcornApp::AcornApp() {
-
-	if (instance == nullptr) {
-
-		instance = this;
-
-	}
-
-}
-
-void AcornApp::init() {
-
-	windowManager = new WindowManager();
+AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr)
+{
+	windowManager = WindowManager::instance();
 	windowManager->init(600, 800);
 
-	renderer = new Renderer();
+	renderer = Renderer::instance();
 	renderer->init();
+}
 
+void AcornApp::run()
+{
+	while (WindowIsOpen())
+	{
+		render();
+	}
+
+	Shutdown();
 }
 
 void AcornApp::render() {
-
-	if (instance && instance == this && renderer) {
-		this->renderer->Update();
+	if (renderer) {
+		renderer->Update();
 		glfwSwapBuffers(GetWindow());
 		glfwPollEvents();
 	}
@@ -34,18 +42,14 @@ void AcornApp::render() {
 
 GLFWwindow* AcornApp::GetWindow() {
 
-	if (instance && instance == this && windowManager) 
+	if (windowManager)
 		return windowManager->getHandle();
 
 }
 
 void AcornApp::Shutdown() {
-
-	if (instance && instance == this) {
-		renderer->Shutdown();
-		windowManager->shutdown();
-	}
-
+	renderer->Shutdown();
+	windowManager->shutdown();
 }
 
 bool AcornApp::WindowIsOpen() {

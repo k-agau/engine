@@ -5,24 +5,15 @@
 #include "Logs/Logger.h"
 
 class AcornApp {
-
-
 public:
-
 	AcornApp();
-
-	void init();
+	void run();
 	void render();
 	void Shutdown();
 	GLFWwindow* GetWindow();
-
 	bool WindowIsOpen();
-
 private:
-
-	static AcornApp* instance;
 	WindowManager* windowManager;
 	Renderer* renderer;
 	Logger logger;
-
 };
