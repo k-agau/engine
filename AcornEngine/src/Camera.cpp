@@ -1,5 +1,8 @@
 #include "Camera.h"
 #include <iostream>
+
+double deltaTime = 0.0;
+
 Camera::Camera()
 {
 	Position = START_POS;
@@ -41,9 +44,53 @@ glm::vec3 Camera::GetRight()
 	return Right;
 }
 
+void Camera::MoveForward() 
+{
+	updatePosition(Position + getSpeed() * Front);
+}
+
+void Camera::MoveBackward()
+{
+	updatePosition(Position - getSpeed() * Front);
+}
+void Camera::MoveRight()
+{
+	updatePosition(Position + glm::normalize(glm::cross(Front, Up)) * getSpeed());
+}
+
+void Camera::MoveLeft()
+{
+	updatePosition(Position - glm::normalize(glm::cross(Front, Up)) * getSpeed());
+}
+
+float Camera::getSpeed() const {
+	
+	return cameraSpeed * deltaTime;
+
+}
+
 glm::mat4 Camera::LookAt(glm::vec3 targetPosition)
 {
 	return glm::lookAt(Position, targetPosition, UP_VECTOR);
 }
+
+
+//float cameraSpeed = 2.5 * deltaTime;
+//
+//if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+//	myC.updatePosition(myC.GetPosition() + cameraSpeed * myC.GetFront());
+//}
+//if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+//	myC.updatePosition(myC.GetPosition() -
+//		glm::normalize(
+//			glm::cross(myC.GetFront(), myC.GetUp())) * cameraSpeed);
+//}
+//if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+//	myC.updatePosition(myC.GetPosition() - cameraSpeed * myC.GetFront());
+//}
+//if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+//	myC.updatePosition(myC.GetPosition() +
+//		myC.GetRight() * cameraSpeed);
+
 
 

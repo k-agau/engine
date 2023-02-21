@@ -32,7 +32,7 @@ bool WindowManager::init(int const width, int const height)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		return -1;
+		return false;
 	}
 
 	glfwMakeContextCurrent(window);
@@ -45,29 +45,32 @@ bool WindowManager::init(int const width, int const height)
 
 	std::printf("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
 
+	glfwSetWindowUserPointer(window, static_cast<void*>(this));
+
 	/*DEFINE GLFW CALLBACKS*/
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
+			auto self = static_cast<WindowManager*>(glfwGetWindowUserPointer(window));
 			switch (action) {
 
 			case GLFW_PRESS:
 			{
 				KeyPressedEvent newEvent(key, false);
-				newEvent.ToString();
-				//send to layer stack
+				self->callback(newEvent);
+				break;
 			}
 			case GLFW_RELEASE:
 			{
 				KeyReleasedEvent newEvent(key);
-				newEvent.ToString();
-				//send to layer stack
+				self->callback(newEvent);
+				break;
 			}
 			case GLFW_REPEAT:
 			{
 				KeyPressedEvent newEvent(key, true);
-				newEvent.ToString();
-				//send to layer stack
+				self->callback(newEvent);
+				break;
 			}
 
 			}
@@ -80,31 +83,36 @@ bool WindowManager::init(int const width, int const height)
 
 	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xPos, double yPos)
 		{
+			auto self = static_cast<WindowManager*>(glfwGetWindowUserPointer(window));
+
 			MouseMoveEvent newEvent((float)xPos, (float)yPos);
-	newEvent.ToString();
+			self->callback(newEvent);
 
 		});
 	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods)
 		{
+
+			auto self = static_cast<WindowManager*>(glfwGetWindowUserPointer(window));
 
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
 				MouseButtonPressedEvent newEvent(button);
-				newEvent.ToString();
+				self->callback(newEvent);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
 				MouseButtonReleasedEvent newEvent(button);
-				newEvent.ToString();
+				self->callback(newEvent);
 				break;
 			}
 			}
 
 		});
 }
+
 
 
 void WindowManager::shutdown()

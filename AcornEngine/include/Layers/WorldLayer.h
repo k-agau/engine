@@ -2,17 +2,21 @@
 #define WORLD_LAYER_H
 
 #include "Layer.h"
+#include "../Entity/EntityManager.h"
 #include <vector>
 
 class WorldLayer : public Layer
 {
 public:
-	WorldLayer();
+	WorldLayer(EntityManager* m);
 	~WorldLayer();
 	void onAttach() override;
 	void onDetach() override;
 	void onUpdate() override;
-	void onEvent(Event& event) override;
+	bool onEvent(Event& event) override;
+
+private:
+	EntityManager* manager;
 };
 
 #endif // WORLD_LAYER_H

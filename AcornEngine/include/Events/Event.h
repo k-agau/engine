@@ -2,23 +2,26 @@
 #define EVENT_H
 
 #include "KeyCodes.h"
+#include "MouseCodes.h"
+#include <iostream>
+
+enum EventType {
+
+	None,
+	WindowClose,
+	WindowResize,
+	KeyEvent,
+	KeyPressed,
+	KeyReleased,
+	MousePressed,
+	MouseReleased,
+	MouseMoved
+};
 
 class Event {
 
 public:
 
-	enum EventType{
-
-		None,
-		WindowClose,
-		WindowResize,
-		KeyEvent,
-		KeyPressed,
-		KeyReleased,
-		MousePressed,
-		MouseReleased,
-		MouseMoved
-	};
 
 	virtual ~Event() = default;
 

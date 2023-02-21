@@ -88,6 +88,8 @@ void Shader::createGLShaders(const char* vertexPath, const char* fragmentPath)
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+
+    /*Import shader code*/
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type)

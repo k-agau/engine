@@ -1,3 +1,6 @@
+#ifndef KEY_EVENT_H
+#define KEY_EVENT_H
+
 #include "Event.h"
 
 class KeyEvent : public Event {
@@ -51,3 +54,4 @@ public:
 		std::cout << "KeyReleasedEvent: " << EventKeyCode << std::endl;
 	}
 };
+#endif // KEY_HEADER_H

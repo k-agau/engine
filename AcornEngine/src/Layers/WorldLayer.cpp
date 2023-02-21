@@ -1,6 +1,6 @@
 #include "Layers/WorldLayer.h"
 
-WorldLayer::WorldLayer()
+WorldLayer::WorldLayer(EntityManager* m) : manager(m)
 {
 
 }
@@ -25,7 +25,8 @@ void WorldLayer::onUpdate()
 
 }
 
-void WorldLayer::onEvent(Event& event)
+bool WorldLayer::onEvent(Event& event)
 {
-
+	manager->updateWorld(Entity_Type::CAMERA, event);
+	return true;
 }
