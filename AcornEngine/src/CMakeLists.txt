@@ -17,5 +17,4 @@ target_sources(Core PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/Entity/EntityManager.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Logs/Logger.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Logs/Log.cpp"
-
 )
