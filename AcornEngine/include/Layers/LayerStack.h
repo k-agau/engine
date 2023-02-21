@@ -4,6 +4,9 @@
 #include <vector>
 
 #include "Layer.h"
+#include "WorldLayer.h"
+#include <functional>
+#include <iostream>
 
 class LayerStack
 {
@@ -11,7 +14,7 @@ private:
 	std::vector<Layer*> layers;
 	std::vector<Layer*>::iterator layerTop;
 public:
-	LayerStack();
+	LayerStack(EntityManager* m);
 	virtual ~LayerStack();
 
 	void pushLayer(Layer* layer);
@@ -19,8 +22,9 @@ public:
 	void popLayer(Layer* layer);
 	void popOverlay(Layer* overlay);
 
-	void onUpdate();
-	void onEvent(Event& event);
+	void createWorldLayer(EntityManager* m);
+
+	std::function<void(Event&)> distributeEvent();
 };
 
 #endif // LAYER_STACK_H

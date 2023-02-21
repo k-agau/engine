@@ -1,3 +1,4 @@
+#include "AcornData.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include <glfw3.h>
@@ -31,6 +32,11 @@ public:
 
 	glm::vec3 GetRight();
 
+	void MoveForward();
+	void MoveBackward();
+	void MoveRight();
+	void MoveLeft();
+
 	glm::mat4 LookAt(glm::vec3 targetPosition);
 
 	//GetView();
@@ -41,7 +47,8 @@ private:
 	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
 	const float d_YAW = -90.0f;
 	const float d_PITCH = 0.0f;
-	const float d_SPEED = 2.5f;
+	const float cameraSpeed = 100.0f;
+	float getSpeed() const;
 
 
 	//Used to produce orthogonal vector (e.g. rightVector).

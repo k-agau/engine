@@ -1,4 +1,7 @@
-#include "MouseCodes.h"
+#ifndef MOUSE_EVENT_H
+#define MOUSE_EVENT_H
+
+#include "Event.h"
 
 class MouseMoveEvent : public Event {
 
@@ -62,3 +65,4 @@ public:
 	}
 
 };
+#endif // MOUSE_EVENT_H

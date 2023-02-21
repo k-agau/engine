@@ -2,6 +2,7 @@
 #define ENTITY_FACTORY_H
 
 #include "Entity/Entity.h"
+#include "Cube.h"
 
 class EntityFactory
 {
@@ -10,7 +11,7 @@ private:
 public:
 	EntityFactory() = default;
 	~EntityFactory() = default;
-	Entity makeCube();
+	Entity* makeCube();
 };
 
 #endif // ENTITY_FACTORY_H

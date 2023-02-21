@@ -8,6 +8,7 @@ class Entity
 private:
 	EntityImpl* bridge;
 public:
+
 	Entity(EntityImpl* _bridge);
 	~Entity();
 	EntityImpl* content();

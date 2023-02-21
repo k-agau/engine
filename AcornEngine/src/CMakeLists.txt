@@ -9,7 +9,6 @@ target_sources(Core PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/WindowManager.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Layers/Layer.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Layers/LayerStack.cpp"
-	"${CMAKE_CURRENT_SOURCE_DIR}/Layers/MenuLayer.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Layers/WorldLayer.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Entity/Entity.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Entity/Entity_Impl.cpp"

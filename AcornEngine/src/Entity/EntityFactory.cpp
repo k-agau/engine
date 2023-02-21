@@ -2,7 +2,7 @@
 
 #include "Entity/Cube.h"
 
-Entity EntityFactory::makeCube()
+Entity* EntityFactory::makeCube()
 {
-	return Entity(new Cube("tmp", 1, 2, 3));
+	return new Entity(new Cube("tmp", 1, 2, 3));
 }

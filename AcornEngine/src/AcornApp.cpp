@@ -1,12 +1,25 @@
 #include "AcornApp.h"
 
-AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr)
+extern double deltaTime;
+
+double getElapsedTime() {
+	static double lasttime = glfwGetTime();
+	double actualtime = glfwGetTime();
+	double difference = actualtime - lasttime;
+	lasttime = actualtime;
+	return difference;
+}
+
+AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr), layers(nullptr)
 {
 	windowManager = WindowManager::instance();
 	windowManager->init(600, 800);
 
 	renderer = Renderer::instance();
 	renderer->init();
+
+	layers = new LayerStack(renderer->getEntityManager());
+	windowManager->SetEventCallBack(layers->distributeEvent());
 }
 
 void AcornApp::run()
@@ -14,12 +27,14 @@ void AcornApp::run()
 	while (WindowIsOpen())
 	{
 		render();
+		deltaTime = getElapsedTime();
 	}
-
+	 
 	Shutdown();
 }
 
 void AcornApp::render() {
+
 	if (renderer) {
 		renderer->Update();
 		glfwSwapBuffers(GetWindow());

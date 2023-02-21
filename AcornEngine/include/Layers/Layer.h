@@ -15,7 +15,7 @@ public:
 	virtual void onAttach() = 0;
 	virtual void onDetach() = 0;
 	virtual void onUpdate() = 0;
-	virtual void onEvent(Event &event) = 0;
+	virtual bool onEvent(Event &event) = 0;
 };
 
 #endif // LAYER_H
