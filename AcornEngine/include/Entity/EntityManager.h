@@ -1,8 +1,8 @@
 #ifndef ENTITY_MANAGER_H
 #define ENTITY_MANAGER_H
 
-#include "Camera.h"
-#include "EntityFactory.h"
+#include "Core/Camera.h"
+#include "Entity/EntityFactory.h"
 #include <vector>
 
 class EntityManager
