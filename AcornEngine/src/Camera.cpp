@@ -46,27 +46,21 @@ glm::vec3 Camera::GetRight()
 
 void Camera::MoveForward() 
 {
-	updatePosition(Position + getSpeed() * Front);
+	Position += cameraSpeed * Front;
 }
 
 void Camera::MoveBackward()
 {
-	updatePosition(Position - getSpeed() * Front);
+	Position -= cameraSpeed * Front;
 }
 void Camera::MoveRight()
 {
-	updatePosition(Position + glm::normalize(glm::cross(Front, Up)) * getSpeed());
+	Position += glm::normalize(glm::cross(Front, Up)) * cameraSpeed;
 }
 
 void Camera::MoveLeft()
 {
-	updatePosition(Position - glm::normalize(glm::cross(Front, Up)) * getSpeed());
-}
-
-float Camera::getSpeed() const {
-	
-	return cameraSpeed * deltaTime;
-
+	Position -= glm::normalize(glm::cross(Front, Up)) * cameraSpeed;
 }
 
 glm::mat4 Camera::LookAt(glm::vec3 targetPosition)

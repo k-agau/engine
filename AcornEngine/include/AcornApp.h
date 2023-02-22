@@ -8,7 +8,6 @@
 class AcornApp {
 public:
 
-
 	AcornApp();
 	void run();
 	void render();

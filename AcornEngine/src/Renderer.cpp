@@ -123,6 +123,7 @@ void Renderer::initGeom() {
 	glBindVertexArray(0);
 
 	entityManager->addCubeToWorld();
+	M = glm::scale(M, glm::vec3(0.5f, 0.5f, 0.5f));
 
 }
 
@@ -144,14 +145,13 @@ void Renderer::Update() {
 	glEnableVertexAttribArray(1);
 
 	V = entityManager->updateView();
-
-	glm::vec3 PlayerPos = glm::vec3(-3.0, 0.1f, -0.1f);
+	glm::vec3 PlayerPos = glm::vec3(0.0, 0.1f, -0.1f);
 	auto M1 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.1f, -0.1f)) *
 		glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
 	shaderManager->use();
 	for (auto& e : entityManager->getWorldEntities()) {
-		//M = e->content()->getTransform();
-		M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
+		M = e->content()->getTransform();
+		//M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
 		int modelLoc = glGetUniformLocation(shaderManager->ID, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(M));
 		int viewLoc = glGetUniformLocation(shaderManager->ID, "view");
