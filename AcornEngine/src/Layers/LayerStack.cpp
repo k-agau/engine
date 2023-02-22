@@ -1,9 +1,21 @@
 #include "Layers/LayerStack.h"
 #include <algorithm>
 
-LayerStack::LayerStack(EntityManager* m): layerTop(layers.begin())
+LayerStack* LayerStack::inst = nullptr;
+
+LayerStack* LayerStack::instance()
 {
-	createWorldLayer(m);
+	if (LayerStack::inst == nullptr)
+	{
+		LayerStack::inst = new LayerStack();
+	}
+
+	return inst;
+}
+
+LayerStack::LayerStack(): layerTop(layers.end())
+{
+	createWorldLayer(EntityManager::instance());
 }
 
 LayerStack::~LayerStack()
@@ -51,13 +63,11 @@ std::function<void(Event&e)> LayerStack::distributeEvent() {
 
 	return [this](Event& e) {
 		
-		for (auto& l : layers) 
+		for (auto it = layers.rbegin(); it != layers.rend(); --it)
 		{
-			bool processed = l->onEvent(e);
+			bool processed = (*it)->onEvent(e);
 			if (processed) break;
-
 		}
-
 	};
 }
 

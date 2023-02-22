@@ -126,11 +126,6 @@ void Renderer::initGeom() {
 
 }
 
-EntityManager* Renderer::getEntityManager()
-{
-	return entityManager;
-}
-
 void Renderer::Update() {
 
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);

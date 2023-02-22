@@ -1,5 +1,8 @@
 #include "Entity/EntityManager.h"
 
+#include "Layers/LayerStack.h"
+#include "Layers/MenuLayer.h"
+
 EntityManager* EntityManager::inst = nullptr;
 
 EntityManager::EntityManager() {
@@ -15,7 +18,6 @@ Entity* EntityManager::addCubeToWorld()
 		Entity* newCube = factory->makeCube();
 		worldObjects.push_back(newCube);
 		return newCube;
-
 	}
 }
 
@@ -51,6 +53,8 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 				case Key::S: camera->MoveBackward(); break;
 
 				case Key::D: camera->MoveRight(); break;
+				
+				case Key::B: LayerStack::instance()->pushOverlay(new MenuLayer());  break;
 				}
 
 			}

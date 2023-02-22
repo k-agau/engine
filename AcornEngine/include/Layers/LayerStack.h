@@ -13,8 +13,10 @@ class LayerStack
 private:
 	std::vector<Layer*> layers;
 	std::vector<Layer*>::iterator layerTop;
+	LayerStack();
+	static LayerStack* inst;
 public:
-	LayerStack(EntityManager* m);
+	static LayerStack* instance();
 	virtual ~LayerStack();
 
 	void pushLayer(Layer* layer);

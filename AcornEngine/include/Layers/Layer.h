@@ -10,7 +10,7 @@ protected:
 	std::string layerName;
 	bool enabled;
 public:
-	Layer(const std::string& name = "Layer");
+	Layer(const std::string& name = "Layer", bool _enabled = false);
 	virtual ~Layer();
 	virtual void onAttach() = 0;
 	virtual void onDetach() = 0;
