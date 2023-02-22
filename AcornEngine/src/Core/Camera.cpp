@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "Core/Camera.h"
 #include <iostream>
 
 double deltaTime = 0.0;

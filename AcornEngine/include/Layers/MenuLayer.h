@@ -11,7 +11,7 @@ public:
 	virtual void onAttach();
 	virtual void onDetach();
 	virtual void onUpdate();
-	virtual void onEvent(Event& event);
+	virtual bool onEvent(Event& event);
 };
 
 #endif // MENU_LAYER_H
