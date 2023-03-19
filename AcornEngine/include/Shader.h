@@ -7,7 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
+#include <glm/vec3.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader
 {
@@ -26,6 +27,7 @@ public:
     void setBool(const std::string& name, bool value) const;
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
+    void setVec3(const std::string& name, glm::vec3 value) const;
 
 private:
     const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\Shaders\\fragment_shader.glsl";

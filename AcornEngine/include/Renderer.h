@@ -12,7 +12,11 @@ public:
 	void Shutdown();
 	EntityManager* getEntityManager();
 
+	float colorChanger = 0.0;
+	bool goUp = true;
+
 	unsigned int VBO, VAO, CBO, EBO;
+	unsigned int pVBO, pVAO, pCBO, pEBO;
 
 private:
 	Renderer() = default;

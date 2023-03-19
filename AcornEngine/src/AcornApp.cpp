@@ -35,7 +35,7 @@ void AcornApp::run()
 void AcornApp::render() {
 
 	if (renderer) {
-		renderer->Update();
+		renderer->Update(); //physics and timestep updates
 		glfwSwapBuffers(GetWindow());
 		glfwPollEvents();
 	}
@@ -43,8 +43,7 @@ void AcornApp::render() {
 
 GLFWwindow* AcornApp::GetWindow() {
 
-	if (windowManager)
-		return windowManager->getHandle();
+	if (windowManager) return windowManager->getHandle();
 }
 
 void AcornApp::Shutdown() {

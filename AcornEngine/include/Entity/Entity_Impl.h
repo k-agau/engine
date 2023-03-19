@@ -11,16 +11,14 @@
 enum Entity_Type {
 	Null,
 	CUBE,
-	CAMERA
+	CAMERA,
+	PLANE
 };
 
 class EntityImpl
 {
 protected:
 
-
-
-	Entity_Type type;
 	std::string debugName;
 
 	uint8_t x;
@@ -28,6 +26,8 @@ protected:
 	uint8_t z;
 
 public:
+
+	Entity_Type type;
 
 	EntityImpl(Entity_Type _type, std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z);
 	virtual ~EntityImpl();
