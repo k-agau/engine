@@ -1,4 +1,5 @@
 #include "Core/Renderer.h"
+#include "Layers/LayerStack.h"
 
 Renderer* Renderer::inst = nullptr;
 
@@ -10,8 +11,9 @@ Renderer* Renderer::instance() {
 	return inst;
 
 }
-void Renderer::init() {
 
+void Renderer::init()
+{
 	//enter alternate paths in constructor, if wanted
 	shaderManager = new Shader();
 	entityManager = EntityManager::instance();
@@ -24,9 +26,81 @@ void Renderer::init() {
 
 }
 
-void Renderer::initGeom() {
+void Renderer::initGeom()
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		typeProperties.push_back(std::vector<unsigned int>(4, 0));
+	}
 
+	initCube();
+}
 
+void Renderer::Update()
+{
+	// Clear canvas
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	// Update view
+	V = entityManager->updateView();
+	glm::vec3 PlayerPos = glm::vec3(0.0, 0.1f, -0.1f);
+	auto M1 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.1f, -0.1f)) *
+		glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
+
+	// Activate shaders
+	shaderManager->use();
+
+	for (auto it = LayerStack::instance()->begin(); it != LayerStack::instance()->end(); ++it)
+	{
+		if ((*it)->layerName == "World")
+		{
+			renderWorld(*it);
+		}
+		else
+		{
+			std::cout << "ERROR: invalid layer" << std::endl;
+		}
+	}
+}
+
+void Renderer::renderWorld(Layer* layer)
+{
+	for (auto& e : entityManager->getWorldEntities()) {
+		int type = e->content()->getType();
+
+		glBindVertexArray(typeProperties[type][VAO_IDX]);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		M = e->content()->getTransform();
+		//M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
+		int modelLoc = glGetUniformLocation(shaderManager->ID, "model");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(M));
+		int viewLoc = glGetUniformLocation(shaderManager->ID, "view");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(V));
+		int projectionLoc = glGetUniformLocation(shaderManager->ID, "projection");
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(P));
+
+		//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(triangle), triangle);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		glBindVertexArray(0);
+	}
+}
+
+void Renderer::Shutdown()
+{
+	for (int i = 0; i < 1; ++i)
+	{
+		glDeleteVertexArrays(1, &typeProperties[i][0]);
+		glDeleteBuffers(1, &typeProperties[i][1]);
+	}
+	shaderManager->~Shader();
+}
+
+void Renderer::initCube()
+{
 	//DEFINITION OF A CUBE
 	float cube[] = {
 		-1.0, -1.0,  1.0,
@@ -92,14 +166,14 @@ void Renderer::initGeom() {
 	};
 
 	/*NEW OBJECT*/
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	glGenVertexArrays(1, &typeProperties[CUBE][VAO_IDX]); // VAO
+	glBindVertexArray(typeProperties[CUBE][VAO_IDX]);
 
 	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &typeProperties[CUBE][VBO_IDX]); // VBO
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[CUBE][VBO_IDX]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), cube, GL_STATIC_DRAW);
 
 	// vertex attribute
@@ -107,70 +181,21 @@ void Renderer::initGeom() {
 	glEnableVertexAttribArray(0);
 
 	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &CBO);
+	glGenBuffers(1, &typeProperties[CUBE][CBO_IDX]); // CBO
 	//set the current state to focus on our vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, CBO);
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[CUBE][CBO_IDX]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_colors), cube_colors, GL_STATIC_DRAW);
-	
+
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(1);
 
-	glGenBuffers(1, &EBO);
+	glGenBuffers(1, &typeProperties[CUBE][EBO_IDX]); // EBO
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[CUBE][EBO_IDX]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeElements), cubeElements, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 
 	entityManager->addCubeToWorld();
 	M = glm::scale(M, glm::vec3(0.5f, 0.5f, 0.5f));
-
-}
-
-EntityManager* Renderer::getEntityManager()
-{
-	return entityManager;
-}
-
-void Renderer::Update() {
-
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	//wireframe mode
-	//if (WIREFRAME) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	glBindVertexArray(VAO);
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-
-	V = entityManager->updateView();
-	glm::vec3 PlayerPos = glm::vec3(0.0, 0.1f, -0.1f);
-	auto M1 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.1f, -0.1f)) *
-		glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
-	shaderManager->use();
-	for (auto& e : entityManager->getWorldEntities()) {
-		M = e->content()->getTransform();
-		//M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
-		int modelLoc = glGetUniformLocation(shaderManager->ID, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(M));
-		int viewLoc = glGetUniformLocation(shaderManager->ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(V));
-		int projectionLoc = glGetUniformLocation(shaderManager->ID, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(P));
-
-		//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(triangle), triangle);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-	}
-
-	glBindVertexArray(0);
-
-}
-
-void Renderer::Shutdown() {
-
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	shaderManager->~Shader();
-
 }
