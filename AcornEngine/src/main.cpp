@@ -1,4 +1,4 @@
-#include "Core/AcornApp.h"
+#include "AcornApp.h"
 
 int main()
 {

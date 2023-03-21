@@ -1,3 +1,4 @@
+#include "AcornData.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include <glfw3.h>
@@ -42,7 +43,7 @@ public:
 
 private:
 
-	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 2.0f);
+	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 10.0f);
 	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
 	const float d_YAW = -90.0f;
 	const float d_PITCH = 0.0f;

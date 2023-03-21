@@ -11,25 +11,20 @@
 class LayerStack
 {
 private:
-	static LayerStack* inst;
 	std::vector<Layer*> layers;
 	std::vector<Layer*>::iterator layerTop;
-	LayerStack();
 public:
-	static LayerStack* instance();
-
+	LayerStack(EntityManager* m);
 	virtual ~LayerStack();
+
 	void pushLayer(Layer* layer);
 	void pushOverlay(Layer* overlay);
 	void popLayer(Layer* layer);
 	void popOverlay(Layer* overlay);
 
-	void createWorldLayer();
+	void createWorldLayer(EntityManager* m);
 
 	std::function<void(Event&)> distributeEvent();
-
-	std::vector<Layer*>::iterator begin();
-	std::vector<Layer*>::iterator end();
 };
 
 #endif // LAYER_STACK_H

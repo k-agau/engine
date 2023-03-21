@@ -25,7 +25,7 @@ void MenuLayer::onUpdate()
 
 }
 
-bool MenuLayer::onEvent(Event& event)
+void MenuLayer::onEvent(Event& event)
 {
-	return true;
+
 }

@@ -1,4 +1,4 @@
-#include "Core/WindowManager.h"
+#include "WindowManager.h"
 
 WindowManager* WindowManager::inst = nullptr;
 
