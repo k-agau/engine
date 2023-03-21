@@ -8,22 +8,13 @@ EntityManager::EntityManager() {
 	camera = new Camera();
 }
 
-Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
+Entity* EntityManager::addCubeToWorld()
 {
 	if (factory) {
-		Entity* newCube = factory->makeCube(WorldCoords);
+
+		Entity* newCube = factory->makeCube();
 		worldObjects.push_back(newCube);
 		return newCube;
-
-	}
-}
-
-Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
-{
-	if (factory) {
-		Entity* newPlane = factory->makePlane(WorldCoords);
-		worldObjects.push_back(newPlane);
-		return newPlane;
 
 	}
 }
@@ -52,9 +43,7 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 			
 			if (myE) {
 
-				switch (myE->getKeyCode()) 
-				{
-
+				switch (myE->getKeyCode()) {
 				case Key::W: camera->MoveForward(); break;
 
 				case Key::A: camera->MoveLeft(); break;
@@ -62,13 +51,6 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 				case Key::S: camera->MoveBackward(); break;
 
 				case Key::D: camera->MoveRight(); break;
-
-				case Key::H: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
-
-				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
-
-				case Key::V: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
-
 				}
 
 			}
@@ -76,22 +58,12 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 
 		}
 
-		//std::cout << "CAMERA_UPDATE::MOVEMENT" << std::endl;
+		std::cout << "CAMERA_UPDATE::MOVEMENT" << std::endl;
 
 	}
 	else {
 
 	}
-
-}
-
-uint8_t EntityManager::randomUint8_t() {
-
-	std::random_device rd; // obtain a random number from hardware
-	std::mt19937 gen(rd()); // seed the generator
-	std::uniform_int_distribution<> distr(0, 5);
-
-	return distr(gen);
 
 }
 

@@ -1,4 +1,4 @@
-#include "AcornApp.h"
+#include "Core/AcornApp.h"
 
 extern double deltaTime;
 double lastFrame;
@@ -17,7 +17,7 @@ AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr), layers(nullptr)
 	renderer = Renderer::instance();
 	renderer->init();
 
-	layers = new LayerStack(renderer->getEntityManager());
+	layers = LayerStack::instance();
 	windowManager->SetEventCallBack(layers->distributeEvent());
 }
 
@@ -28,14 +28,14 @@ void AcornApp::run()
 		render();
 		getElapsedTime();
 	}
-	 
+
 	Shutdown();
 }
 
 void AcornApp::render() {
 
 	if (renderer) {
-		renderer->Update(); //physics and timestep updates
+		renderer->Update();
 		glfwSwapBuffers(GetWindow());
 		glfwPollEvents();
 	}
@@ -43,7 +43,8 @@ void AcornApp::render() {
 
 GLFWwindow* AcornApp::GetWindow() {
 
-	if (windowManager) return windowManager->getHandle();
+	if (windowManager)
+		return windowManager->getHandle();
 }
 
 void AcornApp::Shutdown() {

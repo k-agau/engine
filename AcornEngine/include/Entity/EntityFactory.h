@@ -11,8 +11,7 @@ private:
 public:
 	EntityFactory() = default;
 	~EntityFactory() = default;
-	Entity* makeCube(glm::vec3 WorldCoordinates);
-	Entity* makePlane(glm::vec3 WorldCoordinates);
+	Entity* makeCube();
 };
 
 #endif // ENTITY_FACTORY_H

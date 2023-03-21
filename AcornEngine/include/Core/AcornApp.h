@@ -14,12 +14,9 @@ public:
 	void Shutdown();
 	GLFWwindow* GetWindow();
 	bool WindowIsOpen();
-
 private:
-
 	WindowManager* windowManager;
 	Renderer* renderer;
 	Logger logger;
 	LayerStack* layers;
-	
 };
