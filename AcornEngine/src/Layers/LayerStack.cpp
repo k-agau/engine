@@ -1,9 +1,20 @@
 #include "Layers/LayerStack.h"
 #include <algorithm>
 
-LayerStack::LayerStack(EntityManager* m): layerTop(layers.begin())
+LayerStack* LayerStack::inst = nullptr;
+
+LayerStack* LayerStack::instance() {
+
+	if (LayerStack::inst == nullptr) {
+		LayerStack::inst = new LayerStack;
+	}
+	return inst;
+
+}
+
+LayerStack::LayerStack(): layerTop(layers.begin())
 {
-	createWorldLayer(m);
+	createWorldLayer();
 }
 
 LayerStack::~LayerStack()
@@ -40,9 +51,9 @@ void LayerStack::popOverlay(Layer* overlay)
 	}
 }
 
-void LayerStack::createWorldLayer(EntityManager* m) {
+void LayerStack::createWorldLayer() {
 
-	WorldLayer* wl = new WorldLayer(m);
+	WorldLayer* wl = new WorldLayer(EntityManager::instance());
 	pushLayer(wl);
 
 }
@@ -61,3 +72,12 @@ std::function<void(Event&e)> LayerStack::distributeEvent() {
 	};
 }
 
+std::vector<Layer*>::iterator LayerStack::begin()
+{
+	return layers.begin();
+}
+
+std::vector<Layer*>::iterator LayerStack::end()
+{
+	return layers.end();
+}

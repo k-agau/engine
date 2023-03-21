@@ -1,7 +1,12 @@
+#ifndef RENDERER_H
+#define RENDERER_H
+
 #include "Shader.h"
 #include "Entity/EntityManager.h"
 #include <glad.h>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Layers/Layer.h"
 
 class Renderer {
 public:
@@ -10,10 +15,6 @@ public:
 	void init();
 	void Update();
 	void Shutdown();
-	EntityManager* getEntityManager();
-
-	unsigned int VBO, VAO, CBO, EBO;
-
 private:
 	Renderer() = default;
 	static Renderer* inst;
@@ -21,5 +22,22 @@ private:
 	EntityManager* entityManager;
 
 	glm::mat4 M, V, P;
+
 	void initGeom();
+	void initCube();
+	void renderWorld(Layer* layer);
+
+	std::vector<std::vector<unsigned int>> typeProperties;
 };
+
+enum class TYPES
+{
+	CUBE
+};
+
+const int VAO_IDX = 0;
+const int VBO_IDX = 1;
+const int CBO_IDX = 2;
+const int EBO_IDX = 3;
+
+#endif // RENDERER_H

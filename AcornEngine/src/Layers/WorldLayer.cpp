@@ -1,6 +1,6 @@
 #include "Layers/WorldLayer.h"
 
-WorldLayer::WorldLayer(EntityManager* m) : manager(m)
+WorldLayer::WorldLayer(EntityManager* m) : Layer("World"), manager(m)
 {
 
 }
