@@ -17,7 +17,7 @@ AcornApp::AcornApp(): windowManager(nullptr), renderer(nullptr), layers(nullptr)
 	renderer = Renderer::instance();
 	renderer->init();
 
-	layers = new LayerStack(renderer->getEntityManager());
+	layers = LayerStack::instance();
 	windowManager->SetEventCallBack(layers->distributeEvent());
 }
 
@@ -28,7 +28,7 @@ void AcornApp::run()
 		render();
 		getElapsedTime();
 	}
-	 
+
 	Shutdown();
 }
 

@@ -1,7 +1,7 @@
 #include "Entity/Cube.h"
 
 Cube::Cube(std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z):
-	EntityImpl(CUBE, _debugName, _x, _y, _z)
+	EntityImpl(0, _debugName, _x, _y, _z)
 {
 	translation = glm::vec3(0.0, 0.0f, 0.0f);
 	rotation = glm::vec3(1, 1, 1);
