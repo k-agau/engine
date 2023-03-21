@@ -1,11 +1,11 @@
 #include "Core/AcornApp.h"
 
-extern double deltaTime;
-double lastFrame;
+float dt;
+float lastFrame;
 
-void getElapsedTime() {
+void updateDeltaTime() {
 	float currentFrame = glfwGetTime();
-	deltaTime = currentFrame - lastFrame;
+	dt = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 }
 
@@ -26,7 +26,6 @@ void AcornApp::run()
 	while (WindowIsOpen())
 	{
 		render();
-		getElapsedTime();
 	}
 
 	Shutdown();
@@ -38,6 +37,7 @@ void AcornApp::render() {
 		renderer->Update();
 		glfwSwapBuffers(GetWindow());
 		glfwPollEvents();
+		updateDeltaTime();
 	}
 }
 

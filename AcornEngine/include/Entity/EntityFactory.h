@@ -3,6 +3,7 @@
 
 #include "Entity/Entity.h"
 #include "Cube.h"
+#include "Plane.h"
 
 class EntityFactory
 {
@@ -11,7 +12,8 @@ private:
 public:
 	EntityFactory() = default;
 	~EntityFactory() = default;
-	Entity* makeCube();
+	Entity* makeCube(glm::vec3 wc);
+	Entity* makePlane(glm::vec3 wc);
 };
 
 #endif // ENTITY_FACTORY_H

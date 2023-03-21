@@ -8,33 +8,38 @@
 #include <cstdint>
 #include <string>
 
-enum Entity_Type {
+enum ENTITY_TYPE {
 	CUBE,
-	CAMERA
+	PLANE,
+	CAMERA,
+	Last
 };
 
 class EntityImpl
 {
 protected:
-	int type;
-	std::string debugName;
 
-	uint8_t x;
-	uint8_t y;
-	uint8_t z;
+	std::string debugName;
 
 public:
 
-	EntityImpl(int _type, std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z);
+	ENTITY_TYPE type;
+
+	EntityImpl(ENTITY_TYPE _type, std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z);
 	virtual ~EntityImpl();
+
+	float mass = 5.0f;
+	glm::vec3 force = glm::vec3(0, 0, 0);
+	glm::vec3 velocity = glm::vec3(0, 0, 0);
+	glm::vec3 position;
 
 	virtual void onCreate() = 0;
 	virtual void onDelete() = 0;
 	virtual void onUpdate() = 0;
 	virtual void onEvent(Event& event) = 0;
 	virtual glm::mat4 getTransform() = 0;
+	virtual glm::mat4 rotate() = 0;
 
-	int getType();
 };
 
 #endif // ENTITY_IMPL_H

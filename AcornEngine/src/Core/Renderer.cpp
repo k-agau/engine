@@ -28,12 +28,13 @@ void Renderer::init()
 
 void Renderer::initGeom()
 {
-	for (int i = 0; i < 2; ++i)
+	for (int i = (int)ENTITY_TYPE::CUBE; i < (int)ENTITY_TYPE::Last; ++i)
 	{
 		typeProperties.push_back(std::vector<unsigned int>(4, 0));
 	}
 
 	initCube();
+	initPlane();
 }
 
 void Renderer::Update()
@@ -66,10 +67,11 @@ void Renderer::Update()
 
 void Renderer::renderWorld(Layer* layer)
 {
-	for (auto& e : entityManager->getWorldEntities()) {
-		int type = e->content()->getType();
+	for (auto& e : entityManager->getWorldEntities()) 
+	{
+		int entityType = (int)e->content()->type;
 
-		glBindVertexArray(typeProperties[type][VAO_IDX]);
+		glBindVertexArray(typeProperties[entityType][VAO_IDX]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
@@ -86,7 +88,9 @@ void Renderer::renderWorld(Layer* layer)
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(0);
+		
 	}
+	entityManager->worldStep();
 }
 
 void Renderer::Shutdown()
@@ -165,15 +169,17 @@ void Renderer::initCube()
 		0.0, 1.0, 1.0,
 	};
 
+	int cubeLoc = (int)ENTITY_TYPE::CUBE;
+
 	/*NEW OBJECT*/
-	glGenVertexArrays(1, &typeProperties[CUBE][VAO_IDX]); // VAO
-	glBindVertexArray(typeProperties[CUBE][VAO_IDX]);
+	glGenVertexArrays(1, &typeProperties[cubeLoc][VAO_IDX]); // VAO
+	glBindVertexArray(typeProperties[cubeLoc][VAO_IDX]);
 
 	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &typeProperties[CUBE][VBO_IDX]); // VBO
+	glGenBuffers(1, &typeProperties[cubeLoc][VBO_IDX]); // VBO
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 
-	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[CUBE][VBO_IDX]);
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[cubeLoc][VBO_IDX]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), cube, GL_STATIC_DRAW);
 
 	// vertex attribute
@@ -181,21 +187,82 @@ void Renderer::initCube()
 	glEnableVertexAttribArray(0);
 
 	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &typeProperties[CUBE][CBO_IDX]); // CBO
+	glGenBuffers(1, &typeProperties[cubeLoc][CBO_IDX]); // CBO
 	//set the current state to focus on our vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[CUBE][CBO_IDX]);
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[cubeLoc][CBO_IDX]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_colors), cube_colors, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(1);
 
-	glGenBuffers(1, &typeProperties[CUBE][EBO_IDX]); // EBO
+	glGenBuffers(1, &typeProperties[cubeLoc][EBO_IDX]); // EBO
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[CUBE][EBO_IDX]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[cubeLoc][EBO_IDX]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeElements), cubeElements, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
+}
 
-	entityManager->addCubeToWorld();
-	M = glm::scale(M, glm::vec3(0.5f, 0.5f, 0.5f));
+void Renderer::initPlane()
+{
+	float plane[] = {
+
+		-1.0,-1.0,0.0,
+		-1.0,1.0,0.0,
+		1.0,-1.0,0.0,
+		1.0,1.0,0.0,
+
+	};
+
+	float planeColors[] =
+	{
+
+		1.0,0.0,0.0,
+		0.0,1.0,0.0,
+		0.0,0.0,1.0,
+		0.0,1.0,1.0,
+
+	};
+
+	unsigned int planeElements[] =
+	{
+
+		0,1,2,
+		1,2,3,
+
+	};
+
+	int planeLoc = (int)ENTITY_TYPE::PLANE;
+
+	glGenVertexArrays(1, &typeProperties[planeLoc][VAO_IDX]);
+	glBindVertexArray(typeProperties[planeLoc][VAO_IDX]);
+
+	/*NEW OBJECT VERTEX BUFFER*/
+	glGenBuffers(1, &typeProperties[planeLoc][VBO_IDX]);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[planeLoc][VBO_IDX]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(plane), plane, GL_STATIC_DRAW);
+
+	// vertex attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(0);
+
+	/*NEW OBJECT VERTEX BUFFER*/
+	glGenBuffers(1, &typeProperties[planeLoc][CBO_IDX]);
+	//set the current state to focus on our vertex buffer
+	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[PLANE][CBO_IDX]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(planeColors), planeColors, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(1);
+
+	glGenBuffers(1, &typeProperties[planeLoc][EBO_IDX]);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[planeLoc][EBO_IDX]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(planeElements), planeElements, GL_STATIC_DRAW);
+
+	glBindVertexArray(0);
+
+	entityManager->addPlaneToWorld(glm::vec3(0,0,0));
 }

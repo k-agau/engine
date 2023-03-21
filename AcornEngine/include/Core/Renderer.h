@@ -25,14 +25,10 @@ private:
 
 	void initGeom();
 	void initCube();
+	void initPlane();
 	void renderWorld(Layer* layer);
 
 	std::vector<std::vector<unsigned int>> typeProperties;
-};
-
-enum class TYPES
-{
-	CUBE
 };
 
 const int VAO_IDX = 0;

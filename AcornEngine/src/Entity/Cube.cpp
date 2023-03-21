@@ -1,11 +1,11 @@
 #include "Entity/Cube.h"
 
-Cube::Cube(std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z):
-	EntityImpl(0, _debugName, _x, _y, _z)
+Cube::Cube(std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z) :
+	EntityImpl(ENTITY_TYPE::CUBE, _debugName, _x, _y, _z)
 {
-	translation = glm::vec3(0.0, 0.0f, 0.0f);
 	rotation = glm::vec3(1, 1, 1);
 	scale = glm::vec3(1, 1, 1);
+	transform = getTransform();
 }
 
 Cube::~Cube()
@@ -39,8 +39,13 @@ glm::mat4 Cube::getTransform()
 {
 	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
-	return glm::translate(glm::mat4(1.0f), translation)
-		 * glm::scale(glm::mat4(1.0f), scale);
+	return glm::translate(glm::mat4(1.0f), position)
+		* glm::scale(glm::mat4(1.0f), scale);
 }
 
+glm::mat4 Cube::rotate() {
 
+	transform = glm::rotate(transform, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
+	return transform;
+
+}

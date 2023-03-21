@@ -1,5 +1,7 @@
 #include "Entity/EntityManager.h"
 
+extern float dt;
+
 EntityManager* EntityManager::inst = nullptr;
 
 EntityManager::EntityManager() {
@@ -8,13 +10,26 @@ EntityManager::EntityManager() {
 	camera = new Camera();
 }
 
-Entity* EntityManager::addCubeToWorld()
+Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
 {
-	if (factory) {
+	if (factory) 
+	{
 
-		Entity* newCube = factory->makeCube();
+		Entity* newCube = factory->makeCube(WorldCoords);
 		worldObjects.push_back(newCube);
 		return newCube;
+
+	}
+}
+
+Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
+{
+	if (factory) 
+	{
+
+		Entity* newPlane = factory->makePlane(WorldCoords);
+		worldObjects.push_back(newPlane);
+		return newPlane;
 
 	}
 }
@@ -31,10 +46,10 @@ const std::vector<Entity*> EntityManager::getWorldEntities() const
 
 }
 
-void EntityManager::updateWorld(Entity_Type Target, Event& e) 
+void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 {
 
-	if (Target == Entity_Type::CAMERA) 
+	if (Target == ENTITY_TYPE::CAMERA)
 	{
 
 		if (e.GetEventType() == EventType::KeyPressed) 
@@ -51,6 +66,10 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 				case Key::S: camera->MoveBackward(); break;
 
 				case Key::D: camera->MoveRight(); break;
+
+				case Key::J:addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+
+				case Key::K:addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
 				}
 
 			}
@@ -67,6 +86,26 @@ void EntityManager::updateWorld(Entity_Type Target, Event& e)
 
 }
 
+void EntityManager::worldStep()
+{
+	for (auto obj : worldObjects)
+	{
+		glm::vec3* f = &obj->content()->force;
+		glm::vec3* p = &obj->content()->position;
+		glm::vec3* v = &obj->content()->velocity;
+		float* m = &obj->content()->mass;
+
+		//apply gravity
+		*f += *m * gravity;
+		*v += *f / *m * dt;
+		*p += *v * dt;
+
+		//reset force
+		*f = glm::vec3(0, 0, 0);
+
+	}
+}
+
 EntityManager* EntityManager::instance()
 {
 	if (EntityManager::inst == nullptr)
@@ -74,6 +113,17 @@ EntityManager* EntityManager::instance()
 		inst = new EntityManager();
 	}
 	return inst;
+}
+
+uint8_t EntityManager::randomUint8_t() 
+{
+
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 gen(rd()); // seed the generator
+	std::uniform_int_distribution<> distr(0, 5);
+
+	return distr(gen);
+
 }
 
 EntityManager::~EntityManager()
