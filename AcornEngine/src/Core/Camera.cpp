@@ -44,6 +44,38 @@ glm::vec3 Camera::GetRight()
 	return Right;
 }
 
+void Camera::updateMousePositions(float xpos, float ypos)
+{
+	lastX = xpos;
+	lastY = ypos;
+}
+
+void Camera::changeCameraYawAndPitch(float xpos, float ypos)
+{
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos;
+	lastX = xpos;
+	lastY = ypos;
+
+	float sensitivity = 0.1f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.y = sin(glm::radians(pitch));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	Front = glm::normalize(direction);
+}
+
 void Camera::MoveForward() 
 {
 	Position += cameraSpeed * Front;
@@ -67,24 +99,6 @@ glm::mat4 Camera::LookAt(glm::vec3 targetPosition)
 {
 	return glm::lookAt(Position, targetPosition, UP_VECTOR);
 }
-
-
-//float cameraSpeed = 2.5 * deltaTime;
-//
-//if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-//	myC.updatePosition(myC.GetPosition() + cameraSpeed * myC.GetFront());
-//}
-//if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-//	myC.updatePosition(myC.GetPosition() -
-//		glm::normalize(
-//			glm::cross(myC.GetFront(), myC.GetUp())) * cameraSpeed);
-//}
-//if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-//	myC.updatePosition(myC.GetPosition() - cameraSpeed * myC.GetFront());
-//}
-//if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-//	myC.updatePosition(myC.GetPosition() +
-//		myC.GetRight() * cameraSpeed);
 
 
 

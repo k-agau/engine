@@ -2,6 +2,7 @@
 #define ENTITY_IMPL_H
 
 #include "Events/KeyEvent.h"
+#include "Events/MouseEvent.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>

@@ -6,29 +6,27 @@ class Camera {
 
 public:
 
+	Camera();
+
 	glm::vec3 Position;
 	glm::vec3 Direction;
 	glm::vec3 Right;
 	glm::vec3 Up;
 	glm::vec3 Front;
 
-	float Yaw;
-	float Pitch;
-	float MovementSpeed;
-	float Zoom;
+	float yaw = - 90.0f;
+	float pitch = 0;
 
-	Camera();
+	//to control camera yaw and pitch changes
+	float lastX = 400.0f;
+	float lastY = 300.0f;
 
 	void updatePosition(glm::vec3 newPosition);
 
 	glm::vec3 GetPosition();
-
 	glm::vec3 GetDirection();
-
 	glm::vec3 GetUp();
-
 	glm::vec3 GetFront();
-
 	glm::vec3 GetRight();
 
 	void MoveForward();
@@ -38,14 +36,15 @@ public:
 
 	glm::mat4 LookAt(glm::vec3 targetPosition);
 
+	void updateMousePositions(float xpos, float ypos);
+	void changeCameraYawAndPitch(float xpos, float ypos);
+
 	//GetView();
 
 private:
 
 	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 2.0f);
 	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
-	const float d_YAW = -90.0f;
-	const float d_PITCH = 0.0f;
 	const float cameraSpeed = 0.05f;
 
 

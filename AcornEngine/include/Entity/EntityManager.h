@@ -9,12 +9,14 @@
 class EntityManager
 {
 private:
+
 	EntityManager();
 	static EntityManager* inst;
 	
 	EntityFactory* factory;
 
 	glm::vec3 gravity = glm::vec3(0, -9.81, 0);
+
 public:
 
 	~EntityManager();
@@ -23,6 +25,7 @@ public:
 
 	std::vector<Entity*> worldObjects;
 	Camera* camera;
+	bool isMouseDown = false;
 
 	Entity* addCubeToWorld(glm::vec3 WorldCoords);
 	Entity* addPlaneToWorld(glm::vec3 WorldCoords);
