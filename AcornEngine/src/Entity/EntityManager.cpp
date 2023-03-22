@@ -52,7 +52,9 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 	if (Target == ENTITY_TYPE::CAMERA)
 	{
 
-		if (e.GetEventType() == EventType::KeyPressed) 
+		EventType eventType = e.GetEventType();
+
+		if (eventType == EventType::KeyPressed)
 		{
 			KeyPressedEvent* myE = dynamic_cast<KeyPressedEvent*>(&e);
 			
@@ -76,8 +78,32 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 			else { std::cout << "Somethin Fricked up" << std::endl; }
 
 		}
+		else if (eventType == EventType::MousePressed)
+		{
+			isMouseDown = true;
+		}
+		else if (eventType == EventType::MouseReleased)
+		{
+			isMouseDown = false;
+		}
+		else if (eventType == EventType::MouseMoved)
+		{
 
-		std::cout << "CAMERA_UPDATE::MOVEMENT" << std::endl;
+			MouseMoveEvent* myE = dynamic_cast<MouseMoveEvent*>(&e);
+
+			if (myE) {
+
+				if (!isMouseDown)
+				{
+					camera->updateMousePositions(myE->GetX(), myE->GetY());
+				}
+				else
+				{
+					camera->changeCameraYawAndPitch(myE->GetX(), myE->GetY());
+				}
+
+			}
+		}
 
 	}
 	else {
