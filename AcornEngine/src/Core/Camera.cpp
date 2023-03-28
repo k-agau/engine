@@ -1,7 +1,7 @@
 #include "Core/Camera.h"
 #include <iostream>
 
-double deltaTime = 0.0;
+extern float dt;
 
 Camera::Camera()
 {
@@ -50,7 +50,7 @@ void Camera::updateMousePositions(float xpos, float ypos)
 	lastY = ypos;
 }
 
-void Camera::changeCameraYawAndPitch(float xpos, float ypos)
+void Camera::changeYawAndPitch(float xpos, float ypos)
 {
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos;
@@ -78,21 +78,21 @@ void Camera::changeCameraYawAndPitch(float xpos, float ypos)
 
 void Camera::MoveForward() 
 {
-	Position += cameraSpeed * Front;
+	Position += cameraSpeed * Front * dt;
 }
 
 void Camera::MoveBackward()
 {
-	Position -= cameraSpeed * Front;
+	Position -= cameraSpeed * Front * dt;
 }
 void Camera::MoveRight()
 {
-	Position += glm::normalize(glm::cross(Front, Up)) * cameraSpeed;
+	Position += glm::normalize(glm::cross(Front, Up)) * cameraSpeed * dt;
 }
 
 void Camera::MoveLeft()
 {
-	Position -= glm::normalize(glm::cross(Front, Up)) * cameraSpeed;
+	Position -= glm::normalize(glm::cross(Front, Up)) * cameraSpeed * dt;
 }
 
 glm::mat4 Camera::LookAt(glm::vec3 targetPosition)

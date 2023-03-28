@@ -15,7 +15,8 @@ private:
 	
 	EntityFactory* factory;
 
-	glm::vec3 gravity = glm::vec3(0, -9.81, 0);
+	//gravity
+	glm::vec3 g = glm::vec3(0, -9.81, 0);
 
 public:
 
@@ -26,6 +27,8 @@ public:
 	std::vector<Entity*> worldObjects;
 	Camera* camera;
 	bool isMouseDown = false;
+	bool shootLeft = true;
+	uint8_t demo = 0;
 
 	Entity* addCubeToWorld(glm::vec3 WorldCoords);
 	Entity* addPlaneToWorld(glm::vec3 WorldCoords);

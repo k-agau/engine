@@ -17,6 +17,7 @@ void Renderer::init()
 	//enter alternate paths in constructor, if wanted
 	shaderManager = new Shader();
 	entityManager = EntityManager::instance();
+	menuManager = MenuManager::instance();
 
 	M = glm::mat4(1.0f);
 	V = glm::mat4(1.0f);
@@ -74,9 +75,9 @@ void Renderer::renderWorld(Layer* layer)
 		glBindVertexArray(typeProperties[entityType][VAO_IDX]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-
-		M = e->content()->getTransform();
-		//M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
+		shaderManager->setVec3("worldPosition", (*e->content()->getPosition()));
+		if(entityType == ENTITY_TYPE::PLANE) M = e->content()->rotate();
+		else M = e->content()->getTransform();
 		int modelLoc = glGetUniformLocation(shaderManager->ID, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(M));
 		int viewLoc = glGetUniformLocation(shaderManager->ID, "view");
