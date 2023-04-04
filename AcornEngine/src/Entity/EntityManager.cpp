@@ -8,6 +8,11 @@ EntityManager::EntityManager() {
 
 	factory = new EntityFactory();
 	camera = new Camera();
+
+	sphereDimensions.push_back(std::pair(10, 10)); //Low  Dimensional Sphere
+	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
+	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
+
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
@@ -16,6 +21,7 @@ Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
 	{
 
 		Entity* newCube = factory->makeCube(WorldCoords);
+		newCube->content()->setID(++uid);
 		worldObjects.push_back(newCube);
 		return newCube;
 
@@ -29,9 +35,45 @@ Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
 
 		Entity* newPlane = factory->makePlane(WorldCoords);
 		worldObjects.push_back(newPlane);
+		newPlane->content()->setID(++uid);
 		return newPlane;
 
 	}
+}
+
+Entity* EntityManager::addSphereToWorld(glm::vec3 WorldCoords, ENTITY_TYPE res)
+{
+	if (factory)
+	{
+
+		Entity* newSphere = factory->makeSphere(
+			WorldCoords,
+			sphereDimensions[res-2].first,		//the offset from the enum position is 2
+			sphereDimensions[res-2].second,	
+			res
+		);
+		newSphere->content()->setID(++uid);
+		worldObjects.push_back(newSphere);
+		return newSphere;
+
+	}
+}
+
+void EntityManager::removeEntity(int id)
+{
+	for (auto it = worldObjects.begin(); it < worldObjects.end(); ++it)
+	{
+		if ((*it)->content()->getID() == id)
+		{
+			(*it)->content()->~EntityImpl();
+			(*it)->~Entity();
+			worldObjects.erase(it);
+			return;
+		}
+	}
+
+	std::cout << "ENTITY_MANAGER::ENTITY WAS NOT FOUND AND ERASED" << std::endl;
+
 }
 
 glm::mat4 EntityManager::updateView()
@@ -114,20 +156,28 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 void EntityManager::worldStep()
 {
-	for (auto obj : worldObjects)
+	for (auto objPtr : worldObjects)
 	{
-		glm::vec3* f = &obj->content()->force;
-		glm::vec3* p = &obj->content()->position;
-		glm::vec3* v = &obj->content()->velocity;
-		float* m = &obj->content()->mass;
+		auto obj = objPtr->content();
 
-		//apply gravity
-		*f += *m * gravity;
-		*v += *f / *m * dt;
-		*p += *v * dt;
+		if (obj->getApplyPhysics())
+		{
 
-		//reset force
-		*f = glm::vec3(0, 0, 0);
+			//get object values
+			glm::vec3* f = &obj->getForce();
+			glm::vec3* p = &obj->getPosition();
+			glm::vec3* v = &obj->getVelocity();
+			float	   m =  obj->getMass();
+
+			//apply gravity
+			*f += m * gravity;
+			*v += *f / m * dt;
+			*p += *v * dt;
+
+			//reset force
+			*f = glm::vec3(0, 0, 0);
+
+		}
 
 	}
 }

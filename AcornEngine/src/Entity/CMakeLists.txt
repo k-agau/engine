@@ -1,6 +1,7 @@
 target_sources(Core PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/Cube.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Plane.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Sphere.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Entity.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Entity_Impl.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/EntityFactory.cpp
