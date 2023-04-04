@@ -6,7 +6,10 @@
     ]
   },
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Core"
   ],
+  "SelectedNode": "\\src\\Core\\Renderer.cpp",
   "PreviewInSolutionExplorer": false
 }
