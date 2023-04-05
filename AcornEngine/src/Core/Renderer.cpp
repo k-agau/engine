@@ -22,6 +22,12 @@ void Renderer::init()
 	V = glm::mat4(1.0f);
 	P = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
+	//Initialize data connection points to shaders
+	modelShaderLoc = glGetUniformLocation(shaderManager->ID, "model");
+	viewShaderLoc = glGetUniformLocation(shaderManager->ID, "view");
+	projectionShaderLoc = glGetUniformLocation(shaderManager->ID, "projection");
+	colorShaderLoc = glGetUniformLocation(shaderManager->ID, "entityColor");
+
 	initGeom();
 
 }
@@ -34,23 +40,24 @@ void Renderer::initGeom()
 	}
 
 	initCube();
-	initPlane();
+	initPlane();               
+	initSphere();
+	initEntityColors();
+
+	float i = -12.5f;
+	for (auto color : entityColors) 
+	{
+		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
+		e->content()->setColor(color.first);
+		i += 5;
+	}
+	
+	//entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+
 }
 
 void Renderer::Update()
 {
-	// Clear canvas
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	// Update view
-	V = entityManager->updateView();
-	glm::vec3 PlayerPos = glm::vec3(0.0, 0.1f, -0.1f);
-	auto M1 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.1f, -0.1f)) *
-		glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
-
-	// Activate shaders
-	shaderManager->use();
 
 	for (auto it = LayerStack::instance()->begin(); it != LayerStack::instance()->end(); ++it)
 	{
@@ -67,30 +74,58 @@ void Renderer::Update()
 
 void Renderer::renderWorld(Layer* layer)
 {
+
+	// Clear canvas
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Update view
+	V = entityManager->updateView();
+
+	// Activate shaders
+	shaderManager->use();
+
 	for (auto& e : entityManager->getWorldEntities()) 
 	{
-		int entityType = (int)e->content()->type;
+		ENTITY_TYPE entityType = e->content()->type;
 
+		//intalize approporiate data objects
 		glBindVertexArray(typeProperties[entityType][VAO_IDX]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
+		//get transform
 		M = e->content()->getTransform();
-		//M = glm::rotate(M, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
-		int modelLoc = glGetUniformLocation(shaderManager->ID, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(M));
-		int viewLoc = glGetUniformLocation(shaderManager->ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(V));
-		int projectionLoc = glGetUniformLocation(shaderManager->ID, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(P));
 
-		//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(triangle), triangle);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//update matracies
+		glUniformMatrix4fv (modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+		glUniformMatrix4fv (viewShaderLoc, 1, GL_FALSE, glm::value_ptr(V));
+		glUniformMatrix4fv (projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
+		glUniform3fv	   (colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
 
+		//draw
+		if (isSphere(entityType))
+		{
+			Sphere* s = (Sphere*)e->content();
+			glDrawElements(GL_TRIANGLES, s->getIndexCount(), GL_UNSIGNED_INT, (void*)0);
+		}
+		else 
+		{
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		}
+			
+
+		//disable gl arrays
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 		glBindVertexArray(0);
 		
 	}
+
 	entityManager->worldStep();
+
 }
 
 void Renderer::Shutdown()
@@ -264,5 +299,53 @@ void Renderer::initPlane()
 
 	glBindVertexArray(0);
 
-	entityManager->addPlaneToWorld(glm::vec3(0,0,0));
+}
+
+void Renderer::initSphere()
+{
+
+	for (int sphereLoc = (int)ENTITY_TYPE::SPHERE_LOW; sphereLoc <= (int)ENTITY_TYPE::SPHERE_HIGH; ++sphereLoc)
+	{
+
+		Sphere* s = (Sphere*)entityManager->addSphereToWorld(glm::vec3(0, 0, 0), (ENTITY_TYPE)sphereLoc)->content();
+
+		glGenVertexArrays(1, &typeProperties[sphereLoc][VAO_IDX]);
+		glBindVertexArray(typeProperties[sphereLoc][VAO_IDX]);
+
+		/*NEW OBJECT VERTEX BUFFER*/
+		glGenBuffers(1, &typeProperties[sphereLoc][VBO_IDX]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, typeProperties[sphereLoc][VBO_IDX]);
+
+		glBufferData(
+			GL_ARRAY_BUFFER, 
+			s->getInterleavedVertexSize(),
+			s->getInterleavedVertices(),
+			GL_STATIC_DRAW);
+
+		int j = 5;
+		glGenBuffers(1, &typeProperties[sphereLoc][EBO_IDX]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[sphereLoc][EBO_IDX]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,           // target
+			s->getIndexSize(),             // data size, # of bytes
+			s->getIndices(),               // ptr to index data
+			GL_STATIC_DRAW);  
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, false, 32, (void*)0);
+		
+		glBindVertexArray(0);
+
+		entityManager->removeEntity(s->getID());
+	}
+}
+
+void Renderer::initEntityColors()
+{
+	entityColors.insert(std::pair(RED,    glm::vec3 (1.0f, 0.0f, 0.0f)));
+	entityColors.insert(std::pair(BLUE,   glm::vec3(0.0f, 0.0f, 1.0f)));
+	entityColors.insert(std::pair(GREEN,  glm::vec3(0.0f, 0.7f, 0.0f)));
+	entityColors.insert(std::pair(ORANGE, glm::vec3(1.0f, 0.5f, 0.0f)));
+	entityColors.insert(std::pair(YELLOW, glm::vec3(1.0f, 1.0f, 0.0f)));
+	entityColors.insert(std::pair(PURPLE, glm::vec3(1.0f, 0.0f, 1.0f)));
 }

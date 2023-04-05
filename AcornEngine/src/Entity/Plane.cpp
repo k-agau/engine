@@ -1,7 +1,7 @@
 #include "Entity/Plane.h"
 
-Plane::Plane(std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z) :
-	EntityImpl(ENTITY_TYPE::PLANE, _debugName, _x, _y, _z)
+Plane::Plane(std::string _debugName, glm::vec3 pos) :
+	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
 	rotation = glm::vec3(1, 1, 1);
 	scale = glm::vec3(1, 1, 1);
