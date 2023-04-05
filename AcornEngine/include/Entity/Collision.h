@@ -22,6 +22,24 @@ struct Transform
 	glm::quat Rotation;
 };
 
+struct CubeCollider;
+struct PlaneCollider;
+
+namespace algo
+{
+	CollisionPoints FindCubeCubeCollisionPoints(
+		const CubeCollider* a, const Transform* ta,
+		const CubeCollider* b, const Transform* tb);
+
+	CollisionPoints FindCubePlaneCollisionPoints(
+		const CubeCollider* a, const Transform* ta,
+		const PlaneCollider* b, const Transform* tb);
+
+	CollisionPoints FindPlaneCubeCollisionPoints(
+		const PlaneCollider* a, const Transform* ta,
+		const CubeCollider* b, const Transform* tb);
+}
+
 struct Collider
 {
 	virtual CollisionPoints TestCollision(
@@ -56,7 +74,8 @@ struct CubeCollider : Collider
 	{
 		return collider->TestCollision(colliderTransform, this, transform);
 	}
-	virtual CollisionPoints TestCollision(
+
+	CollisionPoints TestCollision(
 		const Transform* transform,
 		const CubeCollider* cube,
 		const Transform* cubeTransform
@@ -66,7 +85,7 @@ struct CubeCollider : Collider
 			this, transform, cube, cubeTransform);
 	}
 
-	virtual CollisionPoints TestCollision(
+	CollisionPoints TestCollision(
 		const Transform* transform,
 		const PlaneCollider* plane,
 		const Transform* planeTransform
@@ -109,19 +128,5 @@ struct PlaneCollider : Collider
 		return {}; // Assume that two planes cannot collide
 	}
 };
-
-namespace algo {
-	CollisionPoints FindCubeCubeCollisionPoints(
-		const CubeCollider* a, const Transform* ta,
-		const CubeCollider* b, const Transform* tb);
-
-	CollisionPoints FindCubePlaneCollisionPoints(
-		const CubeCollider* a, const Transform* ta,
-		const PlaneCollider* b, const Transform* tb);
-
-	CollisionPoints FindPlaneCubeCollisionPoints(
-		const PlaneCollider* a, const Transform* ta,
-		const CubeCollider* b, const Transform* tb);
-}
 
 #endif // COLLISION_H
