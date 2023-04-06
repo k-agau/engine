@@ -17,6 +17,7 @@ void Renderer::init()
 	//enter alternate paths in constructor, if wanted
 	shaderManager = new Shader();
 	entityManager = EntityManager::instance();
+	menuManager = MenuManager::instance();
 
 	M = glm::mat4(1.0f);
 	V = glm::mat4(1.0f);

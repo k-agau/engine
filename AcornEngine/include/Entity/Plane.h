@@ -6,6 +6,7 @@
 
 class Plane : public EntityImpl
 {
+
 public:
 
 	Plane(std::string _debugName, glm::vec3 pos);
@@ -23,7 +24,6 @@ private:
 	glm::mat4 transform;
 	glm::vec3 rotation;
 	glm::vec3 scale;
-
 };
 
 #endif // PLANE_H

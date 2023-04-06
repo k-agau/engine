@@ -3,7 +3,9 @@
 
 #include "Shader.h"
 #include "Entity/EntityManager.h"
+
 #include "Layers/Layer.h"
+#include "Menus/MenuManager.h"
 
 #include <glad.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,10 +25,12 @@ private:
 	static Renderer* inst;
 	Shader* shaderManager;
 	EntityManager* entityManager;
+
 	std::vector<std::vector<unsigned int>> typeProperties;
 	std::unordered_map<COLORS, glm::vec3> entityColors;
 	std::vector<float> normals;
-	
+  
+	MenuManager* menuManager;
 
 	glm::mat4 M, V, P;
 	Entity* L;

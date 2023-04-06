@@ -36,6 +36,7 @@ class EntityImpl
 {
 protected:
 
+
 	int ID = -1;
 	bool applyPhysics   = false;
 	bool applyCollision = false;
@@ -46,7 +47,6 @@ protected:
 	glm::vec3 force	   = glm::vec3(0, 0, 0);
 	glm::vec3 velocity = glm::vec3(0, 0, 0);
 	glm::vec3 position;
-
 	std::string debugName;
 
 public:
@@ -79,6 +79,12 @@ public:
 	inline void setColor(COLORS c)             { color = c; }
 	inline bool getApplyPhysics()			   { return applyPhysics; };
 
+
+	virtual glm::vec3* getPosition() = 0;
+	virtual glm::vec3* getVelocity() = 0;
+	virtual float getMass() = 0;
+	virtual glm::vec3* getForce() = 0;
+	glm::vec3 extraForce = glm::vec3(0, 0, 0);
 
 };
 

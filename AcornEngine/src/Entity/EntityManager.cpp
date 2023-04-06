@@ -111,9 +111,15 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::D: camera->MoveRight(); break;
 
-				case Key::J:addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::J: {
+					if (demo != 1) addCubeToWorld(glm::vec3(0, 0, 0));
+					else addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), randomUint8_t()));
+					break;
+				}
 
 				case Key::K:addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+
+				case Key::Right: demo = (demo + 1) % 3;
 				}
 
 			}
@@ -141,7 +147,7 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 				}
 				else
 				{
-					camera->changeCameraYawAndPitch(myE->GetX(), myE->GetY());
+					camera->changeYawAndPitch(myE->GetX(), myE->GetY());
 				}
 
 			}
@@ -176,7 +182,6 @@ void EntityManager::worldStep()
 
 			//reset force
 			*f = glm::vec3(0, 0, 0);
-
 		}
 
 	}
@@ -196,9 +201,19 @@ uint8_t EntityManager::randomUint8_t()
 
 	std::random_device rd; // obtain a random number from hardware
 	std::mt19937 gen(rd()); // seed the generator
-	std::uniform_int_distribution<> distr(0, 5);
-
+	std::uniform_real_distribution<> distr(-5,5);
+	if (demo == 2) {
+		std::uniform_real_distribution<> distr(-20, 20);
+		std::cout << demo << std::endl;
+		return distr(gen);
+	}
+	else {
+		std::uniform_real_distribution<> distr(0, 5);
+		return distr(gen);
+	}
 	return distr(gen);
+
+	
 
 }
 

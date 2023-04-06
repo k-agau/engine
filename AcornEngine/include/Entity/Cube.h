@@ -6,6 +6,7 @@
 
 class Cube : public EntityImpl
 {
+
 public:
 	Cube(std::string _debugName, glm::vec3 pos);
 	virtual ~Cube();

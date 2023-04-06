@@ -28,6 +28,8 @@ public:
 	std::vector<std::pair<unsigned int, unsigned int>> sphereDimensions;
 	Camera* camera;
 	bool isMouseDown = false;
+	bool shootLeft = true;
+	uint8_t demo = 0;
 
 	//World Modifier Functions
 	Entity* addCubeToWorld(glm::vec3 WorldCoords);
