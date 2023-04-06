@@ -27,6 +27,11 @@ void Renderer::init()
 	viewShaderLoc = glGetUniformLocation(shaderManager->ID, "view");
 	projectionShaderLoc = glGetUniformLocation(shaderManager->ID, "projection");
 	colorShaderLoc = glGetUniformLocation(shaderManager->ID, "entityColor");
+	cameraShaderLoc = glGetUniformLocation(shaderManager->ID, "viewPos");
+	lightLoc = glGetUniformLocation(shaderManager->ID, "lightPos");
+	
+	std::cout << glGetError() << std::endl;
+
 
 	initGeom();
 
@@ -44,15 +49,20 @@ void Renderer::initGeom()
 	initSphere();
 	initEntityColors();
 
+	L = glm::vec3(10.0, 5.0, 0.0);
+
+	/*
 	float i = -12.5f;
 	for (auto color : entityColors) 
 	{
 		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
 		e->content()->setColor(color.first);
 		i += 5;
-	}
+	}*/
 	
-	//entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
+	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
+	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
 
 }
 
@@ -83,7 +93,8 @@ void Renderer::renderWorld(Layer* layer)
 
 	// Update view
 	V = entityManager->updateView();
-
+	glm::vec3 C = entityManager->camera->GetPosition();
+	L[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
 	// Activate shaders
 	shaderManager->use();
 
@@ -99,11 +110,13 @@ void Renderer::renderWorld(Layer* layer)
 		//get transform
 		M = e->content()->getTransform();
 
-		//update matracies
+		//update uniforms
 		glUniformMatrix4fv (modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
 		glUniformMatrix4fv (viewShaderLoc, 1, GL_FALSE, glm::value_ptr(V));
 		glUniformMatrix4fv (projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
 		glUniform3fv	   (colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
+		glUniform3fv	   (cameraShaderLoc, 1, glm::value_ptr(C));
+		glUniform3fv	   (lightLoc, 1, glm::value_ptr(L));
 
 		//draw
 		if (isSphere(entityType))
@@ -113,7 +126,7 @@ void Renderer::renderWorld(Layer* layer)
 		}
 		else 
 		{
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 			
 
@@ -140,101 +153,70 @@ void Renderer::Shutdown()
 
 void Renderer::initCube()
 {
-	//DEFINITION OF A CUBE
-	float cube[] = {
-		-1.0, -1.0,  1.0,
-		1.0, -1.0,  1.0,
-		1.0,  1.0,  1.0,
-		-1.0,  1.0,  1.0,
-		// back
-		-1.0, -1.0, -1.0,
-		1.0, -1.0, -1.0,
-		1.0,  1.0, -1.0,
-		-1.0,  1.0, -1.0,
-		//tube 8 - 11
-		-1.0, -1.0,  1.0,
-		1.0, -1.0,  1.0,
-		1.0,  1.0,  1.0,
-		-1.0,  1.0,  1.0,
-		//12 - 15
-		-1.0, -1.0, -1.0,
-		1.0, -1.0, -1.0,
-		1.0,  1.0, -1.0,
-		-1.0,  1.0, -1.0
-	};
 
-	unsigned int cubeElements[] = {
-		// front
-		0, 1, 2,
-		2, 3, 0,
-		// back
-		7, 6, 5,
-		5, 4, 7,
-		//tube 8-11, 12-15
-		8,12,13,
-		8,13,9,
-		9,13,14,
-		9,14,10,
-		10,14,15,
-		10,15,11,
-		11,15,12,
-		11,12,8
-	};
+	float cVertices[] = {
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-	GLfloat cube_colors[] = {
-		// front colors
-		1.0, 0.0, 0.5,
-		1.0, 0.0, 0.5,
-		1.0, 0.0, 0.5,
-		1.0, 0.0, 0.5,
-		// back colors
-		0.5, 0.5, 0.0,
-		0.5, 0.5, 0.0,
-		0.5, 0.5, 0.0,
-		0.5, 0.5, 0.0,
-		// tube colors
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
-		0.0, 1.0, 1.0,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
 	int cubeLoc = (int)ENTITY_TYPE::CUBE;
 
-	/*NEW OBJECT*/
-	glGenVertexArrays(1, &typeProperties[cubeLoc][VAO_IDX]); // VAO
-	glBindVertexArray(typeProperties[cubeLoc][VAO_IDX]);
-
-	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &typeProperties[cubeLoc][VBO_IDX]); // VBO
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glGenVertexArrays(1, &typeProperties[cubeLoc][VAO_IDX]);
+	glGenBuffers(1, &typeProperties[cubeLoc][VBO_IDX]);
 
 	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[cubeLoc][VBO_IDX]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), cube, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cVertices), cVertices, GL_STATIC_DRAW);
 
-	// vertex attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glBindVertexArray(typeProperties[cubeLoc][VAO_IDX]);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
-	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &typeProperties[cubeLoc][CBO_IDX]); // CBO
-	//set the current state to focus on our vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[cubeLoc][CBO_IDX]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_colors), cube_colors, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glGenBuffers(1, &typeProperties[cubeLoc][EBO_IDX]); // EBO
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[cubeLoc][EBO_IDX]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeElements), cubeElements, GL_STATIC_DRAW);
-
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 	glBindVertexArray(0);
 }
 
@@ -333,6 +315,9 @@ void Renderer::initSphere()
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 32, (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, false, 32, (void*)(sizeof(float) * 3));
 		
 		glBindVertexArray(0);
 
