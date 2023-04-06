@@ -26,7 +26,9 @@ enum COLORS {
 	GREEN,
 	ORANGE,
 	YELLOW,
-	PURPLE
+	PURPLE,
+	WHITE,
+	BLACK,
 
 };
 
@@ -35,7 +37,7 @@ class EntityImpl
 protected:
 
 	int ID = -1;
-	bool applyPhysics = false;
+	bool applyPhysics   = false;
 	bool applyCollision = false;
 
 	COLORS color = RED;

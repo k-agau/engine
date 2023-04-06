@@ -29,7 +29,7 @@ private:
 	
 
 	glm::mat4 M, V, P;
-	glm::vec3 L;
+	Entity* L;
 	int modelShaderLoc, 
 		viewShaderLoc, 
 		projectionShaderLoc, 

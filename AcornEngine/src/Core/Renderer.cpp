@@ -49,19 +49,19 @@ void Renderer::initGeom()
 	initSphere();
 	initEntityColors();
 
-	L = glm::vec3(10.0, 5.0, 0.0);
-
-	/*
+	
 	float i = -12.5f;
 	for (auto color : entityColors) 
 	{
 		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
 		e->content()->setColor(color.first);
 		i += 5;
-	}*/
+	}
 	
 	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
 	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
+	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
+	L->content()->setColor(BLACK);
 	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
 
 }
@@ -86,7 +86,7 @@ void Renderer::renderWorld(Layer* layer)
 {
 
 	// Clear canvas
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -94,7 +94,8 @@ void Renderer::renderWorld(Layer* layer)
 	// Update view
 	V = entityManager->updateView();
 	glm::vec3 C = entityManager->camera->GetPosition();
-	L[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
+	L->content()->getPosition()[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
+	L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0f;
 	// Activate shaders
 	shaderManager->use();
 
@@ -116,7 +117,7 @@ void Renderer::renderWorld(Layer* layer)
 		glUniformMatrix4fv (projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
 		glUniform3fv	   (colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
 		glUniform3fv	   (cameraShaderLoc, 1, glm::value_ptr(C));
-		glUniform3fv	   (lightLoc, 1, glm::value_ptr(L));
+		glUniform3fv	   (lightLoc, 1, glm::value_ptr(L->content()->getPosition()));
 
 		//draw
 		if (isSphere(entityType))
@@ -333,4 +334,6 @@ void Renderer::initEntityColors()
 	entityColors.insert(std::pair(ORANGE, glm::vec3(1.0f, 0.5f, 0.0f)));
 	entityColors.insert(std::pair(YELLOW, glm::vec3(1.0f, 1.0f, 0.0f)));
 	entityColors.insert(std::pair(PURPLE, glm::vec3(1.0f, 0.0f, 1.0f)));
+	entityColors.insert(std::pair(WHITE,  glm::vec3(0.0f, 0.0f, 0.0f)));
+	entityColors.insert(std::pair(BLACK,  glm::vec3(1.0f, 1.0f, 1.0f)));
 }

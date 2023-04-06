@@ -7,8 +7,6 @@ Camera::Camera()
 {
 	Position = START_POS;
 	Direction = glm::normalize(Position - START_TARGET);
-	std::cout << UP_VECTOR[0] << UP_VECTOR[1] << UP_VECTOR[2]<< std::endl;
-	std::cout << Direction[0] << Direction[1] << Direction[2]<< std::endl;
 	Right = glm::normalize(glm::cross(UP_VECTOR, Direction));
 	Up = glm::cross(Direction, Right);
 	Front = glm::vec3(0.0, 0.0, -1.0);
