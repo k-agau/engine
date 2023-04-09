@@ -9,7 +9,6 @@ Renderer* Renderer::instance() {
 		Renderer::inst = new Renderer;
 	}
 	return inst;
-
 }
 
 void Renderer::init()

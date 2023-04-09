@@ -7,6 +7,7 @@ class Entity
 {
 private:
 	EntityImpl* bridge;
+	bool canCollide;
 public:
 
 	Entity(EntityImpl* _bridge);

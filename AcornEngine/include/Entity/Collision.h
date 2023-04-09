@@ -22,22 +22,22 @@ struct Transform
 	glm::quat Rotation;
 };
 
-struct CubeCollider;
+struct SphereCollider;
 struct PlaneCollider;
 
 namespace algo
 {
-	CollisionPoints FindCubeCubeCollisionPoints(
-		const CubeCollider* a, const Transform* ta,
-		const CubeCollider* b, const Transform* tb);
+	CollisionPoints FindSphereSphereCollisionPoints(
+		const SphereCollider* a, const Transform* ta,
+		const SphereCollider* b, const Transform* tb);
 
-	CollisionPoints FindCubePlaneCollisionPoints(
-		const CubeCollider* a, const Transform* ta,
+	CollisionPoints FindSpherePlaneCollisionPoints(
+		const SphereCollider* a, const Transform* ta,
 		const PlaneCollider* b, const Transform* tb);
 
-	CollisionPoints FindPlaneCubeCollisionPoints(
+	CollisionPoints FindPlaneSphereCollisionPoints(
 		const PlaneCollider* a, const Transform* ta,
-		const CubeCollider* b, const Transform* tb);
+		const SphereCollider* b, const Transform* tb);
 }
 
 struct Collider
@@ -50,8 +50,8 @@ struct Collider
 
 	virtual CollisionPoints TestCollision(
 		const Transform* transform,
-		const CubeCollider* cube,
-		const Transform* cubeTransform
+		const SphereCollider* Sphere,
+		const Transform* SphereTransform
 	) const = 0;
 
 	virtual CollisionPoints TestCollision(
@@ -61,7 +61,7 @@ struct Collider
 	) const = 0;
 };
 
-struct CubeCollider : Collider
+struct SphereCollider : Collider
 {
 	glm::vec3 Center;
 	float Distance;
@@ -77,12 +77,12 @@ struct CubeCollider : Collider
 
 	CollisionPoints TestCollision(
 		const Transform* transform,
-		const CubeCollider* cube,
-		const Transform* cubeTransform
+		const SphereCollider* Sphere,
+		const Transform* SphereTransform
 	) const override
 	{
-		return algo::FindCubeCubeCollisionPoints(
-			this, transform, cube, cubeTransform);
+		return algo::FindSphereSphereCollisionPoints(
+			this, transform, Sphere, SphereTransform);
 	}
 
 	CollisionPoints TestCollision(
@@ -91,7 +91,7 @@ struct CubeCollider : Collider
 		const Transform* planeTransform
 	) const override
 	{
-		return algo::FindCubePlaneCollisionPoints(
+		return algo::FindSpherePlaneCollisionPoints(
 			this, transform, plane, planeTransform);
 	}
 };
@@ -112,11 +112,11 @@ struct PlaneCollider : Collider
 
 	virtual CollisionPoints TestCollision(
 		const Transform* transform,
-		const CubeCollider* cube,
-		const Transform* cubeTransform
+		const SphereCollider* Sphere,
+		const Transform* SphereTransform
 	) const override
 	{
-		return algo::FindPlaneCubeCollisionPoints(this, transform, cube, cubeTransform);
+		return algo::FindPlaneSphereCollisionPoints(this, transform, Sphere, SphereTransform);
 	}
 
 	virtual CollisionPoints TestCollision(
