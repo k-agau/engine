@@ -76,7 +76,7 @@ public:
 	inline COLORS getColor()				   { return color; }
 	inline void setColor(COLORS c)             { color = c; }
 	inline bool getApplyPhysics()			   { return applyPhysics; };
-
+	inline bool getApplyCollision() { return applyCollision; }
 
 };
 

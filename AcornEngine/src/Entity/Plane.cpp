@@ -3,9 +3,11 @@
 Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
-	rotation = glm::vec3(1, 1, 1);
+	rotation = glm::vec3(1, 1.9, 1);
 	scale = glm::vec3(1, 1, 1);
 	transform = getTransform();
+	glm::mat4 invert = glm::inverse(transform);
+	forward = glm::normalize(glm::vec3(invert[2]));
 }
 
 Plane::~Plane()
@@ -45,7 +47,13 @@ glm::mat4 Plane::getTransform()
 
 glm::mat4 Plane::rotate() {
 
-	transform = glm::rotate(transform, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
+	transform = glm::rotate(transform, glm::radians(20.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+	glm::mat4 invert = glm::inverse(transform);
+	forward = glm::normalize(glm::vec3(invert[2]));
 	return transform;
+}
 
+glm::vec3 Plane::getForward()
+{
+	return forward;
 }

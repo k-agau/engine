@@ -14,10 +14,14 @@ public:
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
+
+	glm::vec3 getForward();
+
 	glm::mat4 getTransform() override;
 
 	//Demo Functions
 	glm::mat4 rotate();
+	glm::vec3 forward;
 
 private:
 	glm::mat4 transform;

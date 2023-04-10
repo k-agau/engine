@@ -111,9 +111,11 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::D: camera->MoveRight(); break;
 
-				case Key::J:addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
 
-				case Key::K:addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+
+				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
 				}
 
 			}
@@ -172,6 +174,9 @@ void EntityManager::worldStep()
 			//apply gravity
 			*f += m * gravity;
 
+			// Handle collisions
+			HandleCollisions(dt);
+
 			*v += *f / m * dt;
 			*p += *v * dt;
 
@@ -228,7 +233,7 @@ void EntityManager::HandleCollisions(float dt)
 	{
 		for (size_t j = i + 1; j < objects.size(); ++j)
 		{
-			if (objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
+			if (objects[i]->content()->getApplyCollision() && objects[j]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 			{
 				if (objects[j]->content()->type & PLANE)
 				{
@@ -289,7 +294,7 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 {
 	if (checkSpherePlaneCollision(obj1, obj2))
 	{
-		glm::vec3 reflected = getNormal(obj2->getPosition()) * (getNormal(obj2->getPosition()) * obj1->getVelocity()) * 2.0f;
+		glm::vec3 reflected = glm::normalize(obj2->getForward()) * (glm::normalize(obj2->getForward()) * obj1->getVelocity()) * 2.0f;
 
 		glm::vec3* v = &obj1->getVelocity();
 		*v -= reflected;

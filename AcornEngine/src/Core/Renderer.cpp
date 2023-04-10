@@ -51,8 +51,8 @@ void Renderer::initGeom()
 		i += 5;
 	}
 	
-	//entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
-
+	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	tmp->content()->setApplyCollision(true);
 }
 
 void Renderer::Update()
@@ -112,9 +112,13 @@ void Renderer::renderWorld(Layer* layer)
 		}
 		else 
 		{
+			if (entityType == ENTITY_TYPE::PLANE)
+			{
+				Plane* tmp = (Plane*)e->content();
+				tmp->rotate();
+			}
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		}
-			
 
 		//disable gl arrays
 		glDisableVertexAttribArray(0);
