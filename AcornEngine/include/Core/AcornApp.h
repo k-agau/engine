@@ -18,10 +18,4 @@ private:
 	void Shutdown();
 	GLFWwindow* GetWindow();
 	bool WindowIsOpen();
-	void HandleCollisions(float dt);
-	bool checkSpherePlaneCollision(Sphere* obj1, Plane* obj2);
-	bool checkSphereSphereCollision(Sphere* obj1, Sphere* obj2);
-	void resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2);
-	void resolveSphereCubeCollision(Sphere* obj1, Cube* obj2);
-	void resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2);
 };

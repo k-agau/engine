@@ -171,6 +171,7 @@ void EntityManager::worldStep()
 
 			//apply gravity
 			*f += m * gravity;
+
 			*v += *f / m * dt;
 			*p += *v * dt;
 
@@ -206,3 +207,121 @@ EntityManager::~EntityManager()
 {
 
 }
+
+glm::vec3 EntityManager::projectUonV(const glm::vec3& u, const glm::vec3 v)
+{
+	float scaleNum = glm::dot(u, v) / glm::dot(v, v);
+	glm::vec3 r = v * scaleNum;
+	return r;
+}
+
+void EntityManager::HandleCollisions(float dt)
+{
+	auto objects = getWorldEntities();
+
+	for (size_t i = 0; i < objects.size(); ++i)
+	{
+		for (size_t j = i + 1; j < objects.size(); ++j)
+		{
+			if (objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
+			{
+				if (objects[j]->content()->type & PLANE)
+				{
+					resolveSpherePlaneCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Plane*>(objects[j]->content()));
+				}
+				else if (objects[j]->content()->type & CUBE)
+				{
+					resolveSphereCubeCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Cube*>(objects[j]->content()));
+				}
+				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
+				{
+					resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+				}
+				else
+				{
+					std::cout << "NOT YET IMPLEMENTED" << std::endl;
+				}
+			}
+		}
+	}
+}
+
+bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
+{
+	int rad1 = obj1->getRadius();
+	auto vert1 = obj1->getVertices();
+	auto vert1Size = obj1->getVertexSize();
+
+	auto planePos = obj2->getPosition();
+
+	float dist =
+		std::pow(planePos[2] - *(vert1 + 0), 2) +
+		std::pow(planePos[1] - *(vert1 + 1), 2) +
+		std::pow(planePos[0] - *(vert1 + 2), 2);
+
+	dist = std::sqrt(dist);
+
+	return dist <= rad1;
+}
+
+bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
+{
+	int rad1 = obj1->getRadius(), rad2 = obj2->getRadius();
+	auto vert1 = obj1->getVertices(), vert2 = obj1->getVertices();
+	auto vert1Size = obj1->getVertexSize(), vert2Size = obj2->getVertexSize();
+
+	float dist =
+		std::pow(*(vert2 + 0) - *(vert1 + 0), 2) +
+		std::pow(*(vert2 + 1) - *(vert1 + 1), 2) +
+		std::pow(*(vert2 + 2) - *(vert1 + 2), 2);
+
+	dist = std::sqrt(dist);
+
+	return dist <= rad1 + rad2;
+}
+
+void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
+{
+	if (checkSpherePlaneCollision(obj1, obj2))
+	{
+		auto forceOfSphere = &obj1->getForce();
+		auto forceOfPlane = &obj2->getForce();
+
+		// Need normal for direction, depth for dist
+		// Two vals multiplied together, -> give us vector that tells us which dir and amt to pull them apart
+		// obj1 moves by -1 * normal * depth / 2, obj2 moves by normal * depth / 2
+		// Both bodies take 1/2 the total resolution
+	}
+}
+
+void EntityManager::resolveSphereCubeCollision(Sphere* obj1, Cube* obj2)
+{
+
+}
+
+void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
+{
+	if (checkSphereSphereCollision(obj1, obj2))
+	{
+		auto ctr1 = obj1->getVertices();
+		auto ctr2 = obj2->getVertices();
+
+		glm::vec3 pos1(*(ctr1 + 0), *(ctr1 + 1), *(ctr1 + 2));
+		glm::vec3 pos2(*(ctr2 + 0), *(ctr2 + 1), *(ctr2 + 2));
+
+		glm::vec3 nv1, nv2; // New velocity vectors
+
+		nv1 = obj1->getVelocity();
+		nv1 += projectUonV(obj2->getVelocity(), pos2 - pos1);
+		nv1 -= projectUonV(obj1->getVelocity(), pos1 - pos2);
+		nv2 = obj2->getVelocity();
+		nv2 += projectUonV(obj1->getVelocity(), pos2 - pos1);
+		nv2 -= projectUonV(obj2->getVelocity(), pos1 - pos2);
+
+		glm::vec3* v1 = &obj1->getVelocity();
+		glm::vec3* v2 = &obj2->getVelocity();
+		*v1 += nv1;
+		*v2 += nv2;
+	}
+}
+
