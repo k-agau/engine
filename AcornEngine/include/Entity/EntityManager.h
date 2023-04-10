@@ -24,6 +24,7 @@ private:
 	void resolveSphereCubeCollision(Sphere* obj1, Cube* obj2);
 	void resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2);
 	glm::vec3 projectUonV(const glm::vec3& u, const glm::vec3 v);
+	glm::vec3 getNormal(const glm::vec3& u);
 
 public:
 

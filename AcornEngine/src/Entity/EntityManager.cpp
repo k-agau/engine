@@ -215,6 +215,11 @@ glm::vec3 EntityManager::projectUonV(const glm::vec3& u, const glm::vec3 v)
 	return r;
 }
 
+glm::vec3 EntityManager::getNormal(const glm::vec3& u)
+{
+	return u / glm::length(u);
+}
+
 void EntityManager::HandleCollisions(float dt)
 {
 	auto objects = getWorldEntities();
@@ -284,13 +289,10 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 {
 	if (checkSpherePlaneCollision(obj1, obj2))
 	{
-		auto forceOfSphere = &obj1->getForce();
-		auto forceOfPlane = &obj2->getForce();
+		glm::vec3 reflected = getNormal(obj2->getPosition()) * (getNormal(obj2->getPosition()) * obj1->getVelocity()) * 2.0f;
 
-		// Need normal for direction, depth for dist
-		// Two vals multiplied together, -> give us vector that tells us which dir and amt to pull them apart
-		// obj1 moves by -1 * normal * depth / 2, obj2 moves by normal * depth / 2
-		// Both bodies take 1/2 the total resolution
+		glm::vec3* v = &obj1->getVelocity();
+		*v -= reflected;
 	}
 }
 
