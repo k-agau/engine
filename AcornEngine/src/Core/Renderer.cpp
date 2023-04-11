@@ -50,9 +50,10 @@ void Renderer::initGeom()
 		e->content()->setColor(color.first);
 		i += 5;
 	}
-	
 	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
-	tmp->content()->setApplyCollision(true);
+	//auto transform = &tmp->content()->getTransform();
+	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	//tmp->content()->setApplyCollision(true);
 }
 
 void Renderer::Update()
@@ -114,8 +115,8 @@ void Renderer::renderWorld(Layer* layer)
 		{
 			if (entityType == ENTITY_TYPE::PLANE)
 			{
-				Plane* tmp = (Plane*)e->content();
-				tmp->rotate();
+				 Plane* tmp = (Plane*)e->content();
+				//M = tmp->rotate();
 			}
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		}

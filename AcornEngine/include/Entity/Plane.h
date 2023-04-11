@@ -20,13 +20,14 @@ public:
 	glm::mat4 getTransform() override;
 
 	//Demo Functions
-	glm::mat4 rotate();
+	glm::mat4 rotate(float degrees = 90.0f);
 	glm::vec3 forward;
 
-private:
 	glm::mat4 transform;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+
+private:
 
 };
 

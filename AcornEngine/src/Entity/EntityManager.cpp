@@ -12,19 +12,16 @@ EntityManager::EntityManager() {
 	sphereDimensions.push_back(std::pair(10, 10)); //Low  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
-
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
 {
 	if (factory) 
 	{
-
 		Entity* newCube = factory->makeCube(WorldCoords);
 		newCube->content()->setID(++uid);
 		worldObjects.push_back(newCube);
 		return newCube;
-
 	}
 }
 
@@ -36,6 +33,7 @@ Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
 		Entity* newPlane = factory->makePlane(WorldCoords);
 		worldObjects.push_back(newPlane);
 		newPlane->content()->setID(++uid);
+		auto transform = &newPlane->content()->getTransform();
 		return newPlane;
 
 	}
@@ -101,7 +99,6 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 			KeyPressedEvent* myE = dynamic_cast<KeyPressedEvent*>(&e);
 			
 			if (myE) {
-
 				switch (myE->getKeyCode()) {
 				case Key::W: camera->MoveForward(); break;
 
