@@ -396,17 +396,21 @@ void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
 
 		glm::vec3 nv1(0.0f), nv2(0.0f); // New velocity vectors
 
-		nv1 = obj1->getVelocity();
-		nv1 += projectUonV(obj2->getVelocity(), pos2 - pos1);
-		nv1 -= projectUonV(obj1->getVelocity(), pos1 - pos2);
-		nv2 = obj2->getVelocity();
-		nv2 += projectUonV(obj1->getVelocity(), pos2 - pos1);
-		nv2 -= projectUonV(obj2->getVelocity(), pos1 - pos2);
+		glm::vec3 v1 = obj1->getVelocity();
+		glm::vec3 v2 = obj2->getVelocity();
+		float m1 = obj1->getMass(); // Get mass of sphere 1
+		float m2 = obj2->getMass(); // Get mass of sphere 2
 
-		glm::vec3* v1 = &obj1->getVelocity();
-		glm::vec3* v2 = &obj2->getVelocity();
-		*v1 += nv1;
-		*v2 += nv2;
+		glm::vec3 normal = glm::normalize(pos2 - pos1); // Calculate collision normal
+
+		float impulse = (2.0f * m2) / (m1 + m2); // Calculate impulse factor
+
+		nv1 = v1 + impulse * glm::dot(v2 - v1, normal) * normal; // Update velocity of sphere 1
+		nv2 = v2 + impulse * glm::dot(v1 - v2, normal) * normal; // Update velocity of sphere 2
+
+		obj1->setVelocity(nv1); // Set new velocity for sphere 1
+		obj2->setVelocity(nv2); // Set new velocity for sphere 2
+
 	}
 }
 
