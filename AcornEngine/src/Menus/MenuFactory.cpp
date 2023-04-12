@@ -5,13 +5,13 @@ ColorButton* MenuFactory::makeColorButton(const EventCallbackFn& f, Event e, COL
 	return new ColorButton(f, e, b, h, t, pos);
 }
 
-Menu* MenuFactory::makeEntityMenu(int id) 
+Menu* MenuFactory::makeEntityMenu() 
 {
 
 	float X_OFFSET = 2.4;
 	float Y_OFFSET = 2.0;
 
-	ScaleEvent newEvent(id, INC);
+	ScaleEvent newEvent(1, INC);
 	Menu* m = new Menu(menuV, ORANGE, menuP);
 	glm::vec3 menuF = glm::normalize(glm::vec3(menuV[2]));
 

@@ -61,7 +61,7 @@ void Renderer::initGeom()
 
 	}
 	
-	menuManager->createEntityMenu(1);
+	menuManager->createEntityMenu();
 	//entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
 	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
 	L->content()->setColor(WHITE);
@@ -183,68 +183,65 @@ void Renderer::renderWorld(Layer* layer)
 		for (auto m : menuManager->menus)
 		{
 
-			if (m->open)
+			std::vector<Button*> menuButtons = *m->getButtons();
+
+			M = m->getTransform();
+			glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[m->color]));
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+			for (auto b : menuButtons)
 			{
-				std::vector<Button*> menuButtons = *m->getButtons();
+				M = b->getTransform();
 
-				M = m->getTransform();
-				glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
-				glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[m->color]));
-
-				glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
-				for (auto b : menuButtons)
+				glm::mat4 tmp = M * V * P;
+				float x = (2.0f * menuManager->lastX) / 800.0f - 1.0f;
+				float y = 1.0f - (2.0f * menuManager->lastY) / 600.0f;
+				float z = 1.0f;
+				glm::vec3 mousePos = glm::vec3(x, y, z);
+				glm::vec3 O = glm::vec3(menuManager->lastX, menuManager->lastY, 0.0f);
+				//glm::vec3 mousePos = glm::project(O,M, P, glm::vec4(0.0f,0.0f,800.0f,600.0f));
+				//glm::vec3 O = glm::vec3(tmp[3][0], tmp[3][1], tmp[3][2
+				/*
+				for (int i = 0; i < 4; ++i)
 				{
-					M = b->getTransform();
-
-					glm::mat4 tmp = M * V * P;
-					float x = (2.0f * menuManager->lastX) / 800.0f - 1.0f;
-					float y = 1.0f - (2.0f * menuManager->lastY) / 600.0f;
-					float z = 1.0f;
-					glm::vec3 mousePos = glm::vec3(x, y, z);
-					glm::vec3 O = glm::vec3(menuManager->lastX, menuManager->lastY, 0.0f);
-					//glm::vec3 mousePos = glm::project(O,M, P, glm::vec4(0.0f,0.0f,800.0f,600.0f));
-					//glm::vec3 O = glm::vec3(tmp[3][0], tmp[3][1], tmp[3][2
-					/*
-					for (int i = 0; i < 4; ++i)
+					for (int j = 0; j < 4; ++j)
 					{
-						for (int j = 0; j < 4; ++j)
-						{
-							std::cout << tmp[i][j] << ", ";
-						}
-						std::cout<< std::endl;
+						std::cout << tmp[i][j] << ", ";
 					}
-					std::cout << std::endl;
-					*/
+					std::cout<< std::endl;
+				}
+				std::cout << std::endl;
+				*/
 
-					ColorButton* a = (ColorButton*)b;
+				ColorButton* a = (ColorButton*)b;
 
 					b->updateButton(mousePos.x, mousePos.y);
 					entityManager->test = false;
-
-					//update uniforms
-					glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
-					glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[a->getCurrentColor()]));
-					/*
-								if (entityType == ENTITY_TYPE::PLANE)
-								{
-									 Plane* tmp = (Plane*)e->content();
-									//M = tmp->rotate();
-								}
-								glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-							}*/
-
-					glDrawArrays(GL_TRIANGLES, 0, 36);
-				}
+			
+				//update uniforms
+				glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+				glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[a->getCurrentColor()]));
+/*
+			if (entityType == ENTITY_TYPE::PLANE)
+			{
+				 Plane* tmp = (Plane*)e->content();
+				//M = tmp->rotate();
 			}
-			glDisableVertexAttribArray(0);
-			glDisableVertexAttribArray(1);
-			glBindVertexArray(0);
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+		}*/
+
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
 		}
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
 	}
+	
 
 }
 
