@@ -15,14 +15,16 @@ public:
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
+
+	glm::vec3 getForward();
+
+	glm::vec3 getNormal();
+
 	glm::mat4 getTransform() override;
 	void calculateTransform();
 	void applyScale(glm::vec3 s);
 	COLORS color;
 	//Demo Functions
-	glm::mat4 rotate(float angle);
-	glm::mat4 transform;
-
 	glm::vec3 up;
 	glm::vec3 right;
 	glm::vec3 front;
@@ -35,6 +37,19 @@ private:
 	
 	glm::vec3 rotation;
 	glm::vec3 scale;
+
+	glm::mat4 rotate(float degrees = 90.0f);
+	glm::vec3 forward;
+
+	glm::mat4 transform;
+	glm::vec3 rotation;
+	glm::vec3 scale;
+
+	float xScale = 5.0;
+	float yScale = 5.0;
+	float noScale = 5.0;
+private:
+
 };
 
 #endif // PLANE_H

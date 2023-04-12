@@ -7,16 +7,15 @@
 
 class AcornApp {
 public:
-
 	AcornApp();
 	void run();
-	void render();
-	void Shutdown();
-	GLFWwindow* GetWindow();
-	bool WindowIsOpen();
 private:
 	WindowManager* windowManager;
 	Renderer* renderer;
 	Logger logger;
 	LayerStack* layers;
+	void render();
+	void Shutdown();
+	GLFWwindow* GetWindow();
+	bool WindowIsOpen();
 };

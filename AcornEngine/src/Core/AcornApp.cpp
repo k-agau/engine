@@ -41,8 +41,8 @@ void AcornApp::render() {
 	}
 }
 
-GLFWwindow* AcornApp::GetWindow() {
-
+GLFWwindow* AcornApp::GetWindow()
+{
 	if (windowManager)
 		return windowManager->getHandle();
 }

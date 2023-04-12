@@ -26,8 +26,8 @@ public:
 
     glm::mat4 getTransform() override;
     // ctor/dtor
-    Sphere(float radius=1.0f, int sectorCount=36, int stackCount=18, bool smooth=true, int up=3);
-    Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, ENTITY_TYPE res);
+    Sphere(float radius=1.0f, int sectorCount=36, int stackCount=18, bool smooth=true, int up=3, bool _applyPhysics = false, bool _applyCollision = false);
+    Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, ENTITY_TYPE res, bool _applyPhysics = true, bool _applyCollision = true);
     virtual ~Sphere() {}
 
     // getters/setters

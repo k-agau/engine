@@ -79,6 +79,7 @@ public:
 	inline COLORS getColor() { return color; }
 	inline void setColor(COLORS c) { color = c; }
 	inline bool getApplyPhysics() { return applyPhysics; };
+
 };
 
 #endif // ENTITY_IMPL_H

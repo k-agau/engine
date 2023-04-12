@@ -5,8 +5,38 @@ extern float dt;
 Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
-	rotation = glm::vec3(1.0, 5.0f,4.0f);
-	scale = glm::vec3(1, 1, 1);
+	setColor(BLUE);
+	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
+	
+	scale = glm::vec3(xScale, yScale, noScale);
+	transform = getTransform();
+	glm::mat4 invert = glm::inverse(transform);
+	forward = glm::normalize(glm::vec3(invert[2]));
+
+	applyCollision = true;
+
+	//auto cntr = position;
+	//glm::vec3 edge1 = b - a;
+	//glm::vec3 edge2 = c - a;
+
+	//normal = glm::cross(edge1, edge2);
+	//normal = glm::normalize(normal);
+	/*this->constant = -glm::dot(this->normal, a);
+	this->normalize();*/
+	// Example 4x4 transformation matrix
+	// Extract the rotation part of the transformation matrix
+
+	// Extract the rotation part of the transformation matrix
+	glm::mat3 rotation_matrix = glm::mat3(transform);
+
+	// Compute the inverse transpose of the rotation matrix
+	glm::mat3 inverse_transpose_rotation_matrix = glm::transpose(glm::inverse(rotation_matrix));
+
+	// Extract the normal vector of the plane from the inverse transpose rotation matrix
+	normal = glm::normalize(glm::vec3(inverse_transpose_rotation_matrix * glm::vec3(0.0f, 0.0f, 1.0f)));
+
+	applyCollision = true;
+
 }
 
 Plane::~Plane()
@@ -46,25 +76,24 @@ void Plane::calculateTransform() {
 
 	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
-	transform = 
-		glm::translate(glm::mat4(1.0f), position) *
-		glm::scale(glm::mat4(1.0f), scale) * 
-		rot;
-
+	return glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f)) * rot
+		* glm::scale(glm::mat4(1.0), scale);
 }
 
-glm::mat4 Plane::getTransform()
+glm::mat4 Plane::rotate(float degrees)
 {
+	transform = glm::rotate(transform, glm::radians(0.000001f), glm::vec3(0.0f, 1.0f, 0.0f));
+	/*glm::mat4 invert = glm::inverse(transform);
+	forward = glm::normalize(glm::vec3(invert[2]));*/
 	return transform;
 }
 
-glm::mat4 Plane::rotate(float angle) {
+glm::vec3 Plane::getForward()
+{
+	return forward;
+}
 
-	calculateTransform();
-	transform = glm::rotate(transform, 5.0f * dt,
-		glm::vec3(0.0,1.0,0.0));
-	calculateTransform();
-
-	return transform;
-
+glm::vec3 Plane::getNormal()
+{
+	return normal;
 }
