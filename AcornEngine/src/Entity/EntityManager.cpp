@@ -1,4 +1,6 @@
 #include "Entity/EntityManager.h"
+#include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtx/vector_angle.hpp"
 
 extern float dt;
 
@@ -84,7 +86,7 @@ const std::vector<Entity*> EntityManager::getWorldEntities() const
 
 }
 
-void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
+bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 {
 
 	if (Target == ENTITY_TYPE::CAMERA)
@@ -98,32 +100,42 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 			
 			if (myE) {
 				switch (myE->getKeyCode()) {
-				case Key::W: camera->MoveForward(); break;
+				case Key::W: camera->MoveForward(); return true;
 
-				case Key::A: camera->MoveLeft(); break;
+				case Key::A: camera->MoveLeft(); return true;
 
-				case Key::S: camera->MoveBackward(); break;
+				case Key::S: camera->MoveBackward(); return true;
 
-				case Key::D: camera->MoveRight(); break;
+				case Key::D: camera->MoveRight(); return true;
 
-				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::Right: demo = (demo + 1) % 3; return true;
 
-				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::T: test = !test; break;
+        
+				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); return true;
 
-				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
+				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); return true;
+
+				case Key::B:{
+
+						auto tmp = addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); return true;
+						tmp->content()->setApplyCollision(true);
+				}
 				}
 
 			}
-			else { std::cout << "Somethin Fricked up" << std::endl; }
+			return false;
 
 		}
 		else if (eventType == EventType::MousePressed)
 		{
 			isMouseDown = true;
+			return true;
 		}
 		else if (eventType == EventType::MouseReleased)
 		{
 			isMouseDown = false;
+			return true;
 		}
 		else if (eventType == EventType::MouseMoved)
 		{
@@ -134,12 +146,14 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				if (!isMouseDown)
 				{
+					std::cout << myE->GetX() << ", " << myE->GetY() << std::endl;
 					camera->updateMousePositions(myE->GetX(), myE->GetY());
 				}
 				else
 				{
-					camera->changeCameraYawAndPitch(myE->GetX(), myE->GetY());
+					camera->changeYawAndPitch(myE->GetX(), myE->GetY());
 				}
+				return true;
 
 			}
 		}
@@ -148,7 +162,7 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 	else {
 
 	}
-
+	return false;
 }
 
 void EntityManager::worldStep()
@@ -177,7 +191,6 @@ void EntityManager::worldStep()
 
 			//reset force
 			*f = glm::vec3(0, 0, 0);
-
 		}
 
 	}
@@ -197,9 +210,19 @@ uint8_t EntityManager::randomUint8_t()
 
 	std::random_device rd; // obtain a random number from hardware
 	std::mt19937 gen(rd()); // seed the generator
-	std::uniform_int_distribution<> distr(0, 5);
-
+	std::uniform_real_distribution<> distr(-5,5);
+	if (demo == 2) {
+		std::uniform_real_distribution<> distr(-20, 20);
+		std::cout << demo << std::endl;
+		return distr(gen);
+	}
+	else {
+		std::uniform_real_distribution<> distr(0, 5);
+		return distr(gen);
+	}
 	return distr(gen);
+
+	
 
 }
 
@@ -227,12 +250,7 @@ void EntityManager::HandleCollisions(float dt)
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		for (size_t j = 0; j < objects.size() &&
-			objects[i]->content()->getApplyCollision() &&
-			(objects[i]->content()->type == SPHERE_HIGH ||
-			objects[i]->content()->type == SPHERE_MID ||
-			objects[i]->content()->type == SPHERE_LOW);
-			 ++j)
+		for (size_t j = 0; j < objects.size() && isSphere(objects[i]->content()->type); ++j)
 		{
 			if (!objects[j]->content()->getApplyCollision()) continue;
 			if (i != j && objects[j]->content()->getApplyCollision())

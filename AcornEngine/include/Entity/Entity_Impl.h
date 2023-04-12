@@ -26,7 +26,9 @@ enum COLORS {
 	GREEN,
 	ORANGE,
 	YELLOW,
-	PURPLE
+	PURPLE,
+	WHITE,
+	BLACK,
 
 };
 
@@ -34,8 +36,9 @@ class EntityImpl
 {
 protected:
 
+
 	int ID = -1;
-	bool applyPhysics = false;
+	bool applyPhysics   = false;
 	bool applyCollision = false;
 
 	COLORS color = RED;
@@ -44,7 +47,6 @@ protected:
 	glm::vec3 force	   = glm::vec3(0, 0, 0);
 	glm::vec3 velocity = glm::vec3(0, 0, 0);
 	glm::vec3 position;
-
 	std::string debugName;
 
 public:
@@ -67,16 +69,17 @@ public:
 	virtual glm::vec3& getVelocity() const { return const_cast<glm::vec3&>(velocity); };
 	virtual glm::vec3& getPosition() const { return const_cast<glm::vec3&>(position); };
 	virtual float	   getMass()	 const { return mass; };
+	virtual bool	   getApplyCollision() const { return applyCollision; };
+	virtual void	   setPostion(glm::vec3 pos) { position = pos; }
 
 	//Object Settings
-	inline void setApplyPhysics(bool apply)    { applyPhysics = apply; };
-	inline void setApplyCollision(bool apply)  { applyCollision = apply; };
-	inline void setID(unsigned int newID)	   { ID = newID; }
-	inline int	 getID()					   { return ID; }
-	inline COLORS getColor()				   { return color; }
-	inline void setColor(COLORS c)             { color = c; }
-	inline bool getApplyPhysics()			   { return applyPhysics; };
-	inline bool getApplyCollision() { return applyCollision; }
+	inline void setApplyPhysics(bool apply) { applyPhysics = apply; };
+	inline void setApplyCollision(bool apply) { applyCollision = apply; };
+	inline void setID(unsigned int newID) { ID = newID; }
+	inline int	 getID() { return ID; }
+	inline COLORS getColor() { return color; }
+	inline void setColor(COLORS c) { color = c; }
+	inline bool getApplyPhysics() { return applyPhysics; };
 
 };
 

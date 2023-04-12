@@ -37,16 +37,18 @@ public:
 	glm::mat4 LookAt(glm::vec3 targetPosition);
 
 	void updateMousePositions(float xpos, float ypos);
-	void changeCameraYawAndPitch(float xpos, float ypos);
+	void changeYawAndPitch(float xpos, float ypos);
+
+	void setStartOrientation();
 
 	//GetView();
 
 private:
 
 	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 3.0f);
-	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
-	const float cameraSpeed = 0.05f;
 
+	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
+	const float cameraSpeed = 1000.0f;
 
 	//Used to produce orthogonal vector (e.g. rightVector).
 	const glm::vec3 UP_VECTOR = glm::vec3(0.0f, 1.0f, 0.0f);

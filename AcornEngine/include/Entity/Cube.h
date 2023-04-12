@@ -6,6 +6,7 @@
 
 class Cube : public EntityImpl
 {
+
 public:
 	Cube(std::string _debugName, glm::vec3 pos);
 	virtual ~Cube();
@@ -13,6 +14,7 @@ public:
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
+	void setTransform(glm::mat4x4 t) { transform = t; };
 	glm::mat4 getTransform() override;
 
 	//Demo Functions

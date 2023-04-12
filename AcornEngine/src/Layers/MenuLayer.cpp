@@ -1,6 +1,6 @@
 #include "Layers/MenuLayer.h"
 
-MenuLayer::MenuLayer()
+MenuLayer::MenuLayer(MenuManager* m) : Layer("Menu"), manager(m)
 {
 
 }
@@ -27,5 +27,5 @@ void MenuLayer::onUpdate()
 
 bool MenuLayer::onEvent(Event& event)
 {
-	return true;
+	return manager->handleEvent(event);
 }

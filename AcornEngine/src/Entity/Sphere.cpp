@@ -55,7 +55,7 @@ Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, E
     EntityImpl(res, _debugName, pos), 
     interleavedStride(32)
 {
-    set(2.0f, sectors, stacks, true, 3);
+    set(1.0f, sectors, stacks, true, 3);
 
     rotation = glm::vec3(1, 1, 1);
     scale = glm::vec3(1, 1, 1);

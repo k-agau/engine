@@ -2,9 +2,7 @@
 #define RENDERER_H
 
 #include "Shader.h"
-#include "Entity/EntityManager.h"
-#include "Layers/Layer.h"
-
+#include "Layers/LayerStack.h"
 #include <glad.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <unordered_map>
@@ -23,13 +21,15 @@ private:
 	static Renderer* inst;
 	Shader* shaderManager;
 	EntityManager* entityManager;
+
 	std::vector<std::vector<unsigned int>> typeProperties;
 	std::unordered_map<COLORS, glm::vec3> entityColors;
 	std::vector<float> normals;
-	
+  
+	MenuManager* menuManager;
 
 	glm::mat4 M, V, P;
-	glm::vec3 L;
+	Entity* L;
 	int modelShaderLoc, 
 		viewShaderLoc, 
 		projectionShaderLoc, 
