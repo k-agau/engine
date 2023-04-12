@@ -1,28 +1,48 @@
 #include "Menus/Button.h";
 
-Button::Button(void* func()) :
-	onClickFunction(func), area(new Plane("button", 0, 0, 0), scale(glm::vec3(1, 1, 1))
+Button::Button(const EventCallbackFn& f,Event e, glm::mat4 t, glm::vec3 pos) :
+	callback(f),
+	m_event (e),
+	area(new Plane("button", pos)), 
+	scale(glm::vec3(0.04, 0.04, 0.04))
 {
-	scaleBackground(scale);
+	//t[3][0] = 0.0f; t[3][1] = 0.0f; t[3][2] = 0.0f; 
+	
+	area->transform = t;
+	area->transform = glm::scale(area->transform, scale);
 }
 
 void Button::onClick()
 {
-	onClickFunction();
+	callback(m_event);
 }
 
-ColorButton::ColorButton(void (*func)(Entity* e)) :
-	Button(func), baseColor(bColor), highlightColor(hColor)
+void Button::updateButton(float xpos, float ypos)
+{
+	if (xpos >= xLower && xpos <= xUpper && ypos >= yLower && ypos <= yUpper) {
+		onHover();
+	}
+	else
+	{
+		onUnhover();
+	}
+}
+
+ColorButton::ColorButton(const EventCallbackFn& f, Event e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos) :
+	Button(f,e,t,pos), 
+	baseColor(bColor),
+	highlightColor(hColor), 
+	currentColor(bColor)
 {
 
 }
 
 void ColorButton::onHover()
 {
-	area->color = highlightColor;
+	currentColor = highlightColor;
 }
 
 void ColorButton::onUnhover()
 {
-	area->color = baseColor;
+	currentColor = baseColor;
 }

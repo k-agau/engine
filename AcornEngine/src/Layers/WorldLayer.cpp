@@ -27,6 +27,5 @@ void WorldLayer::onUpdate()
 
 bool WorldLayer::onEvent(Event& event)
 {
-	manager->updateWorld(ENTITY_TYPE::CAMERA, event);
-	return true;
+	return manager->updateWorld(ENTITY_TYPE::CAMERA, event);
 }

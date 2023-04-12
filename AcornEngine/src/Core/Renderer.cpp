@@ -1,5 +1,5 @@
 #include "Core/Renderer.h"
-#include "Layers/LayerStack.h"
+#include "glm/gtx/vector_angle.hpp"
 
 Renderer* Renderer::inst = nullptr;
 
@@ -20,8 +20,10 @@ void Renderer::init()
 	menuManager = MenuManager::instance();
 
 	M = glm::mat4(1.0f);
-	V = glm::mat4(1.0f);
+	V = entityManager->updateView();
 	P = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+	menuManager->init(LayerStack::instance()->distributeEvent(), V, entityManager->camera->GetPosition());
 
 	//Initialize data connection points to shaders
 	modelShaderLoc = glGetUniformLocation(shaderManager->ID, "model");
@@ -32,7 +34,6 @@ void Renderer::init()
 	lightLoc = glGetUniformLocation(shaderManager->ID, "lightPos");
 	
 	std::cout << glGetError() << std::endl;
-
 
 	initGeom();
 
@@ -59,31 +60,15 @@ void Renderer::initGeom()
 		i += 5;
 	}
 	
-	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
-	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
+	menuManager->createEntityMenu();
+	entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
 	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
-	L->content()->setColor(BLACK);
-	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
+	L->content()->setColor(WHITE);
+
 
 }
 
 void Renderer::Update()
-{
-
-	for (auto it = LayerStack::instance()->begin(); it != LayerStack::instance()->end(); ++it)
-	{
-		if ((*it)->layerName == "World")
-		{
-			renderWorld(*it);
-		}
-		else
-		{
-			std::cout << "ERROR: invalid layer" << std::endl;
-		}
-	}
-}
-
-void Renderer::renderWorld(Layer* layer)
 {
 
 	// Clear canvas
@@ -92,54 +77,146 @@ void Renderer::renderWorld(Layer* layer)
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Update view
+	// Update views
 	V = entityManager->updateView();
+	menuManager->updateCam(V, entityManager->camera->GetPosition());
 	glm::vec3 C = entityManager->camera->GetPosition();
+
+	//light dem
+
 	L->content()->getPosition()[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
-	L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0f;
+	L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0;
+
+	//necessary gpu updates
+	glUniformMatrix4fv(projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
+	glUniform3fv(cameraShaderLoc, 1, glm::value_ptr(C));
+	glUniform3fv(lightLoc, 1, glm::value_ptr(L->content()->getPosition()));
+	glUniformMatrix4fv(viewShaderLoc, 1, GL_FALSE, glm::value_ptr(V));
 	// Activate shaders
 	shaderManager->use();
 
-	for (auto& e : entityManager->getWorldEntities()) 
+	for (auto it = LayerStack::instance()->begin(); it != LayerStack::instance()->end(); ++it)
 	{
-		ENTITY_TYPE entityType = e->content()->type;
-
-		//intalize approporiate data objects
-		glBindVertexArray(typeProperties[entityType][VAO_IDX]);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-
-		//get transform
-		M = e->content()->getTransform();
-
-		//update uniforms
-		glUniformMatrix4fv (modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
-		glUniformMatrix4fv (viewShaderLoc, 1, GL_FALSE, glm::value_ptr(V));
-		glUniformMatrix4fv (projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
-		glUniform3fv	   (colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
-		glUniform3fv	   (cameraShaderLoc, 1, glm::value_ptr(C));
-		glUniform3fv	   (lightLoc, 1, glm::value_ptr(L->content()->getPosition()));
-
-		//draw
-		if (isSphere(entityType))
+		if ((*it)->layerName == "World" || (*it)->layerName == "Menu")
 		{
-			Sphere* s = (Sphere*)e->content();
-			glDrawElements(GL_TRIANGLES, s->getIndexCount(), GL_UNSIGNED_INT, (void*)0);
+			renderWorld(*it);
 		}
-		else 
+		else
 		{
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+			std::cout << "ERROR: invalid layer" << std::endl;
 		}
-			
-
-		//disable gl arrays
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glBindVertexArray(0);
-		
 	}
 
 	entityManager->worldStep();
+
+}
+
+void Renderer::renderWorld(Layer* layer)
+{
+
+
+	if (layer->layerName == "World")
+	{
+
+		for (auto& e : entityManager->getWorldEntities())
+		{
+			ENTITY_TYPE entityType = e->content()->type;
+
+			//intalize approporiate data objects
+			glBindVertexArray(typeProperties[entityType][VAO_IDX]);
+			glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(1);
+
+			//get transform
+			M = e->content()->getTransform();
+
+			//update uniforms
+			glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
+
+			//draw
+			if (isSphere(entityType))
+			{
+				Sphere* s = (Sphere*)e->content();
+				glDrawElements(GL_TRIANGLES, s->getIndexCount(), GL_UNSIGNED_INT, (void*)0);
+			}
+			else
+			{
+				if (entityType == ENTITY_TYPE::PLANE)
+				{
+					Plane* g = (Plane*)e->content();
+					g->rotate(2.0f);
+				}
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
+
+
+			//disable gl arrays
+			glDisableVertexAttribArray(0);
+			glDisableVertexAttribArray(1);
+			glBindVertexArray(0);
+
+		}
+	}
+	else
+	{
+
+		glBindVertexArray(typeProperties[ENTITY_TYPE::PLANE][VAO_IDX]);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		for (auto m : menuManager->menus)
+		{
+
+			std::vector<Button*> menuButtons = *m->getButtons();
+
+			M = m->getTransform();
+			glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[m->color]));
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+
+			for (auto b : menuButtons)
+			{
+				M = b->getTransform();
+
+				glm::mat4 tmp = M * V * P;
+				float x = (2.0f * menuManager->lastX) / 800.0f - 1.0f;
+				float y = 1.0f - (2.0f * menuManager->lastY) / 600.0f;
+				float z = 1.0f;
+				glm::vec3 mousePos = glm::vec3(x, y, z);
+				glm::vec3 O = glm::vec3(menuManager->lastX, menuManager->lastY, 0.0f);
+				//glm::vec3 mousePos = glm::project(O,M, P, glm::vec4(0.0f,0.0f,800.0f,600.0f));
+				//glm::vec3 O = glm::vec3(tmp[3][0], tmp[3][1], tmp[3][2
+				/*
+				for (int i = 0; i < 4; ++i)
+				{
+					for (int j = 0; j < 4; ++j)
+					{
+						std::cout << tmp[i][j] << ", ";
+					}
+					std::cout<< std::endl;
+				}
+				std::cout << std::endl;
+				*/
+
+				ColorButton* a = (ColorButton*)b;
+
+					b->updateButton(mousePos.x, mousePos.y);
+					entityManager->test = false;
+			
+				//update uniforms
+				glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
+				glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[a->getCurrentColor()]));
+
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
+		}
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
+	}
+	
 
 }
 
@@ -226,64 +303,71 @@ void Renderer::initPlane()
 {
 	float plane[] = {
 
-		-1.0,-1.0,0.0,
-		-1.0,1.0,0.0,
-		1.0,-1.0,0.0,
-		1.0,1.0,0.0,
+
+	//-1.0,-1.0,0.0, 0.0f,  0.0f, -1.0f,
+	//-1.0,1.0,0.0, 0.0f,  0.0f, -1.0f,
+	//1.0,-1.0,0.0, 0.0f,  0.0f, -1.0f,
+
+	//1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
+	//	-1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
+	//1.0,-1.0,0.0, 0.0f,  0.0f, 1.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+
 
 	};
 
-	float planeColors[] =
-	{
+	//float planeColors[] =
+	//{
 
-		1.0,0.0,0.0,
-		0.0,1.0,0.0,
-		0.0,0.0,1.0,
-		0.0,1.0,1.0,
+	//	1.0,0.0,0.0,
+	//	0.0,1.0,0.0,
+	//	0.0,0.0,1.0,
+	//	0.0,1.0,1.0,
 
-	};
+	//};
 
-	unsigned int planeElements[] =
-	{
+	//unsigned int planeElements[] =
+	//{
 
-		0,1,2,
-		1,2,3,
+	//	0,1,2,
+	//	1,2,3,
 
-	};
+	//};
 
 	int planeLoc = (int)ENTITY_TYPE::PLANE;
 
 	glGenVertexArrays(1, &typeProperties[planeLoc][VAO_IDX]);
-	glBindVertexArray(typeProperties[planeLoc][VAO_IDX]);
-
-	/*NEW OBJECT VERTEX BUFFER*/
 	glGenBuffers(1, &typeProperties[planeLoc][VBO_IDX]);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 
 	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[planeLoc][VBO_IDX]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(plane), plane, GL_STATIC_DRAW);
 
-	// vertex attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glBindVertexArray(typeProperties[planeLoc][VAO_IDX]);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
-	/*NEW OBJECT VERTEX BUFFER*/
-	glGenBuffers(1, &typeProperties[planeLoc][CBO_IDX]);
-	//set the current state to focus on our vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, typeProperties[PLANE][CBO_IDX]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(planeColors), planeColors, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glGenBuffers(1, &typeProperties[planeLoc][EBO_IDX]);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, typeProperties[planeLoc][EBO_IDX]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(planeElements), planeElements, GL_STATIC_DRAW);
-
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 	glBindVertexArray(0);
-
 }
+
 
 void Renderer::initSphere()
 {
@@ -335,6 +419,6 @@ void Renderer::initEntityColors()
 	entityColors.insert(std::pair(ORANGE, glm::vec3(1.0f, 0.5f, 0.0f)));
 	entityColors.insert(std::pair(YELLOW, glm::vec3(1.0f, 1.0f, 0.0f)));
 	entityColors.insert(std::pair(PURPLE, glm::vec3(1.0f, 0.0f, 1.0f)));
-	entityColors.insert(std::pair(WHITE,  glm::vec3(0.0f, 0.0f, 0.0f)));
-	entityColors.insert(std::pair(BLACK,  glm::vec3(1.0f, 1.0f, 1.0f)));
+	entityColors.insert(std::pair(BLACK,  glm::vec3(0.0f, 0.0f, 0.0f)));
+	entityColors.insert(std::pair(WHITE,  glm::vec3(1.0f, 1.0f, 1.0f)));
 }

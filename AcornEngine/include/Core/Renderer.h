@@ -2,11 +2,7 @@
 #define RENDERER_H
 
 #include "Shader.h"
-#include "Entity/EntityManager.h"
-
-#include "Layers/Layer.h"
-#include "Menus/MenuManager.h"
-
+#include "Layers/LayerStack.h"
 #include <glad.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <unordered_map>

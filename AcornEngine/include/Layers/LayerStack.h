@@ -5,6 +5,7 @@
 
 #include "Layer.h"
 #include "WorldLayer.h"
+#include "MenuLayer.h"
 #include <functional>
 #include <iostream>
 
@@ -25,6 +26,7 @@ public:
 	void popOverlay(Layer* overlay);
 
 	void createWorldLayer();
+	void createMenuLayer();
 
 	std::function<void(Event&)> distributeEvent();
 

@@ -2,7 +2,10 @@
 
 Cube::Cube(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::CUBE, _debugName, pos)
+
 {
+	rotation = glm::vec3(1, 1, 1);
+	scale = glm::vec3(1, 1, 1);
 	transform = getTransform();
 }
 

@@ -1,9 +1,21 @@
-#include "Entity/Entity.h"
+#include "Entity/Plane.h"
+#include <functional>
 
 class Button {
 
+public:
+
+	glm::mat4 getTransform() { return area->transform; };
+	void setTransform(glm::mat4 t) { area->transform = t; };
+	float x, y;
+	float xLower, xUpper, yLower, yUpper;
+	void updateButton(float xpos, float ypos);
+
 protected:
-	Button(void* func());
+
+	using EventCallbackFn = std::function<void(Event&)>;
+
+	Button(const EventCallbackFn& f, Event e, glm::mat4 t, glm::vec3 pos);
 
 	void onClick();
 	virtual void onHover() = 0;
@@ -13,23 +25,27 @@ protected:
 	glm::vec3 scale;
 
 	void scaleBackground(glm::vec3 s) { scale = s; area->applyScale(scale); }
+
 	
-	template<typename T>
-	void (*onClickFunction)(T e);
+	EventCallbackFn callback;
+
+	Event m_event;
 
 };
 
 class ColorButton : Button {
 
-	ColorButton(void (*func)(Entity* e), glm::vec3 bColor, glm::vec3 hColor);
-
+public:
+	ColorButton(const EventCallbackFn& f, Event e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos);
 	void onHover() override;
 	void onUnhover() override;
+	COLORS getCurrentColor() { return currentColor; };
+	
 
-public:
-	glm::vec3 currentColor;
-	glm::vec3 baseColor;
-	glm::vec3 highlightColor;
+private:
+	COLORS currentColor;
+	COLORS baseColor;
+	COLORS highlightColor;
 
 
 };

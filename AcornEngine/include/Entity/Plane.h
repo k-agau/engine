@@ -16,12 +16,23 @@ public:
 	void onUpdate() override;
 	void onEvent(Event& event) override;
 	glm::mat4 getTransform() override;
-
+	void calculateTransform();
+	void applyScale(glm::vec3 s);
+	COLORS color;
 	//Demo Functions
-	glm::mat4 rotate();
+	glm::mat4 rotate(float angle);
+	glm::mat4 transform;
+
+	glm::vec3 up;
+	glm::vec3 right;
+	glm::vec3 front;
+	glm::vec3 cUp;
+	glm::vec3 cRight;
+	glm::vec3 cFront;
+	glm::vec3 worldUp = glm::vec3(0.0, 1.0, 0.0);
 
 private:
-	glm::mat4 transform;
+	
 	glm::vec3 rotation;
 	glm::vec3 scale;
 };

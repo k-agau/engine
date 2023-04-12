@@ -31,6 +31,8 @@ public:
 	bool shootLeft = true;
 	uint8_t demo = 0;
 
+	bool test = false;
+
 	//World Modifier Functions
 	Entity* addCubeToWorld(glm::vec3 WorldCoords);
 	Entity* addPlaneToWorld(glm::vec3 WorldCoords);
@@ -39,7 +41,7 @@ public:
 
 	//Update Functions
 	glm::mat4 updateView();
-	void updateWorld(ENTITY_TYPE Target, Event& e);
+	bool updateWorld(ENTITY_TYPE Target, Event& e);
 	void worldStep();
 
 	//Get

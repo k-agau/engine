@@ -14,6 +14,7 @@ public:
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
+	void setTransform(glm::mat4x4 t) { transform = t; };
 	glm::mat4 getTransform() override;
 
 	//Demo Functions

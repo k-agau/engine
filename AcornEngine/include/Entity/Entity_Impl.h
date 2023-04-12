@@ -69,23 +69,16 @@ public:
 	virtual glm::vec3& getVelocity() const { return const_cast<glm::vec3&>(velocity); };
 	virtual glm::vec3& getPosition() const { return const_cast<glm::vec3&>(position); };
 	virtual float	   getMass()	 const { return mass; };
+	virtual void setPostion(glm::vec3 pos) { position = pos; }
 
 	//Object Settings
-	inline void setApplyPhysics(bool apply)    { applyPhysics = apply; };
-	inline void setApplyCollision(bool apply)  { applyCollision = apply; };
-	inline void setID(unsigned int newID)	   { ID = newID; }
-	inline int	 getID()					   { return ID; }
-	inline COLORS getColor()				   { return color; }
-	inline void setColor(COLORS c)             { color = c; }
-	inline bool getApplyPhysics()			   { return applyPhysics; };
-
-
-	virtual glm::vec3* getPosition() = 0;
-	virtual glm::vec3* getVelocity() = 0;
-	virtual float getMass() = 0;
-	virtual glm::vec3* getForce() = 0;
-	glm::vec3 extraForce = glm::vec3(0, 0, 0);
-
+	inline void setApplyPhysics(bool apply) { applyPhysics = apply; };
+	inline void setApplyCollision(bool apply) { applyCollision = apply; };
+	inline void setID(unsigned int newID) { ID = newID; }
+	inline int	 getID() { return ID; }
+	inline COLORS getColor() { return color; }
+	inline void setColor(COLORS c) { color = c; }
+	inline bool getApplyPhysics() { return applyPhysics; };
 };
 
 #endif // ENTITY_IMPL_H

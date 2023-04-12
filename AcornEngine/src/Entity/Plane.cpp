@@ -1,9 +1,12 @@
 #include "Entity/Plane.h"
 
+extern float dt;
+
 Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
-	calculateTransform();
+	rotation = glm::vec3(1.0, 5.0f,4.0f);
+	scale = glm::vec3(1, 1, 1);
 }
 
 Plane::~Plane()
@@ -36,6 +39,7 @@ void Plane::onEvent(Event& event)
 void Plane::applyScale(glm::vec3 s) 
 {
 	scale = s;
+	calculateTransform();
 }
 
 void Plane::calculateTransform() {
@@ -54,9 +58,13 @@ glm::mat4 Plane::getTransform()
 	return transform;
 }
 
-glm::mat4 Plane::rotate() {
+glm::mat4 Plane::rotate(float angle) {
 
-	transform = glm::rotate(transform, glm::radians(20.0f) * dt, glm::vec3(0.5f, 1.0f, 0.0f));
+	calculateTransform();
+	transform = glm::rotate(transform, 5.0f * dt,
+		glm::vec3(0.0,1.0,0.0));
+	calculateTransform();
+
 	return transform;
 
 }

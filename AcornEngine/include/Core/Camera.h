@@ -39,6 +39,8 @@ public:
 	void updateMousePositions(float xpos, float ypos);
 	void changeYawAndPitch(float xpos, float ypos);
 
+	void setStartOrientation();
+
 	//GetView();
 
 private:
