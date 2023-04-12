@@ -6,29 +6,35 @@
 
 class Plane : public EntityImpl
 {
-private:
-	ENTITY_TYPE PLANE;
-
-	glm::mat4 transform;
-	void calculateTransform();
 
 public:
-	Plane(std::string _debugName, uint8_t _x, uint8_t _y, uint8_t _z);
+
+	Plane(std::string _debugName, glm::vec3 pos);
 	virtual ~Plane();
 	void onCreate() override;
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
 	glm::mat4 getTransform() override;
+	void calculateTransform();
 	void applyScale(glm::vec3 s);
-	glm::mat4 rotate();
+	COLORS color;
+	//Demo Functions
+	glm::mat4 rotate(float angle);
+	glm::mat4 transform;
 
-	glm::vec3 color;
+	glm::vec3 up;
+	glm::vec3 right;
+	glm::vec3 front;
+	glm::vec3 cUp;
+	glm::vec3 cRight;
+	glm::vec3 cFront;
+	glm::vec3 worldUp = glm::vec3(0.0, 1.0, 0.0);
 
-	glm::vec3* getPosition() override { return &position; };
-	glm::vec3* getVelocity() override { return &velocity; };
-	float getMass() override { return this->mass; };
-	glm::vec3* getForce() override { return &force; };
+private:
+	
+	glm::vec3 rotation;
+	glm::vec3 scale;
 };
 
 #endif // PLANE_H

@@ -2,12 +2,10 @@
 #define RENDERER_H
 
 #include "Shader.h"
-#include "Entity/EntityManager.h"
-#include "Menus/MenuManager.h"
+#include "Layers/LayerStack.h"
 #include <glad.h>
 #include <glm/gtc/type_ptr.hpp>
-
-#include "Layers/Layer.h"
+#include <unordered_map>
 
 class Renderer {
 public:
@@ -16,21 +14,41 @@ public:
 	void init();
 	void Update();
 	void Shutdown();
+
 private:
+
 	Renderer() = default;
 	static Renderer* inst;
 	Shader* shaderManager;
 	EntityManager* entityManager;
+
+	std::vector<std::vector<unsigned int>> typeProperties;
+	std::unordered_map<COLORS, glm::vec3> entityColors;
+	std::vector<float> normals;
+  
 	MenuManager* menuManager;
 
 	glm::mat4 M, V, P;
+	Entity* L;
+	int modelShaderLoc, 
+		viewShaderLoc, 
+		projectionShaderLoc, 
+		colorShaderLoc,
+		cameraShaderLoc,
+		lightLoc;
 
 	void initGeom();
 	void initCube();
 	void initPlane();
+	void initSphere();
+	void initEntityColors();
 	void renderWorld(Layer* layer);
 
-	std::vector<std::vector<unsigned int>> typeProperties;
+	inline bool isSphere(ENTITY_TYPE type) {
+		return type == ENTITY_TYPE::SPHERE_LOW ||
+			   type == ENTITY_TYPE::SPHERE_MID ||
+			   type == ENTITY_TYPE::SPHERE_HIGH;
+	}
 };
 
 const int VAO_IDX = 0;

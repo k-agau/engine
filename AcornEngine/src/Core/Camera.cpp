@@ -5,13 +5,16 @@ extern float dt;
 
 Camera::Camera()
 {
+	setStartOrientation();
+}
+
+void Camera::setStartOrientation()
+{
 	Position = START_POS;
 	Direction = glm::normalize(Position - START_TARGET);
-	std::cout << UP_VECTOR[0] << UP_VECTOR[1] << UP_VECTOR[2]<< std::endl;
-	std::cout << Direction[0] << Direction[1] << Direction[2]<< std::endl;
 	Right = glm::normalize(glm::cross(UP_VECTOR, Direction));
 	Up = glm::cross(Direction, Right);
-	Front = glm::vec3(0.0, 0.0, -1.0);
+	Front = glm::vec3(0.0f, 0.0f, -1.0f);
 }
 
 void Camera::updatePosition(glm::vec3 newPosition)
@@ -74,6 +77,8 @@ void Camera::changeYawAndPitch(float xpos, float ypos)
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	Front = glm::normalize(direction);
+	Right = glm::normalize(glm::cross(Front, glm::vec3(0.0f, 1.0f, 0.0f)));
+	Up = glm::normalize(glm::cross(Right, Front));
 }
 
 void Camera::MoveForward() 

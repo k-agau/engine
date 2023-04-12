@@ -1,4 +1,5 @@
 #include "Button.h"
+#include <vector>
 
 enum MENUS {
 
@@ -28,13 +29,13 @@ protected:
 	uint8_t rows = 1;
 
 public:
-	
-	Menu(glm::vec3 s, glm::vec3 c);
+	//			   scale    color         position
+	Menu(glm::mat4 t, COLORS c, glm::vec3 p);
 
 	glm::vec3 scale;
-	glm::vec3 color;
+	COLORS color;
 
 	void addButton(Button* b) { buttons.push_back(b);  };
 	std::vector<Button*>* getButtons() { return &buttons; };
-
+	glm::mat4 getTransform() { return area->getTransform(); };
 };

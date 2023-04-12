@@ -14,31 +14,41 @@ private:
 	static EntityManager* inst;
 	
 	EntityFactory* factory;
-
-	//gravity
-	glm::vec3 g = glm::vec3(0, -9.81, 0);
+	glm::vec3 gravity = glm::vec3(0, -9.81, 0);
+	unsigned int uid = 0;
 
 public:
 
 	~EntityManager();
 	EntityManager(const EntityManager&) = delete;
 	EntityManager& operator= (const EntityManager&) = delete;
+	static EntityManager* instance();
 
 	std::vector<Entity*> worldObjects;
+	std::vector<std::pair<unsigned int, unsigned int>> sphereDimensions;
 	Camera* camera;
 	bool isMouseDown = false;
 	bool shootLeft = true;
 	uint8_t demo = 0;
 
+	bool test = false;
+
+	//World Modifier Functions
 	Entity* addCubeToWorld(glm::vec3 WorldCoords);
 	Entity* addPlaneToWorld(glm::vec3 WorldCoords);
+	Entity* addSphereToWorld(glm::vec3 WorldCoords, ENTITY_TYPE res);
+	void removeEntity(int id);
+
+	//Update Functions
 	glm::mat4 updateView();
-	void updateWorld(ENTITY_TYPE Target, Event& e);
+	bool updateWorld(ENTITY_TYPE Target, Event& e);
 	void worldStep();
-	uint8_t randomUint8_t();
+
+	//Get
 	const std::vector<Entity*> getWorldEntities() const;
 
-	static EntityManager* instance();
+	//Demo Helpers
+	uint8_t randomUint8_t();
 };
 
 #endif // ENTITY_MANAGER_H

@@ -8,7 +8,7 @@ Entity::Entity(EntityImpl* _bridge): bridge(_bridge)
 
 Entity::~Entity()
 {
-
+	bridge = nullptr;
 }
 
 
