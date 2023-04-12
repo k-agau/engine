@@ -277,13 +277,8 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 	float planeHalfHeight = obj2->yScale;
 
 	// Is point w/in finite plane
-	if (std::abs(projectedPoint.x - planePos.x) > planeHalfWidth ||
-		std::abs(projectedPoint.y - planePos.y) > planeHalfHeight) {
-
-		return false;
-	}
-
-	return true;
+	return !(std::abs(projectedPoint.x - planePos.x) > planeHalfWidth ||
+		std::abs(projectedPoint.y - planePos.y) > planeHalfHeight);
 }
 
 bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
