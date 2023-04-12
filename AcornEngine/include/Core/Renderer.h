@@ -25,13 +25,17 @@ private:
 	EntityManager* entityManager;
 	std::vector<std::vector<unsigned int>> typeProperties;
 	std::unordered_map<COLORS, glm::vec3> entityColors;
+	std::vector<float> normals;
 	
 
 	glm::mat4 M, V, P;
+	glm::vec3 L;
 	int modelShaderLoc, 
 		viewShaderLoc, 
 		projectionShaderLoc, 
-		colorShaderLoc;
+		colorShaderLoc,
+		cameraShaderLoc,
+		lightLoc;
 
 	void initGeom();
 	void initCube();

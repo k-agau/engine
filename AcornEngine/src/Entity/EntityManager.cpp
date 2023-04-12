@@ -228,7 +228,7 @@ void EntityManager::HandleCollisions(float dt)
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
 		for (size_t j = 0; j < objects.size() &&
-			objects[j]->content()->getApplyCollision() &&
+			objects[i]->content()->getApplyCollision() &&
 			(objects[i]->content()->type == SPHERE_HIGH ||
 			objects[i]->content()->type == SPHERE_MID ||
 			objects[i]->content()->type == SPHERE_LOW);

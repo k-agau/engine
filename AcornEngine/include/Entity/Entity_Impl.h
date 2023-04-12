@@ -43,7 +43,7 @@ protected:
 
 	glm::vec3 force	   = glm::vec3(0, 0, 0);
 	glm::vec3 velocity = glm::vec3(0, 0, 0);
-	glm::vec3 position = glm::vec3(0, 0, 0);
+	glm::vec3 position;
 
 	std::string debugName;
 
