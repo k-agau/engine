@@ -5,10 +5,14 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 {
 	setColor(BLUE);
 	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
-	scale = glm::vec3(2.0, 2.0, 2.0);
+	scale = glm::vec3(20.0, 20.0, 20.0);
 	transform = getTransform();
 	glm::mat4 invert = glm::inverse(transform);
-	forward = glm::normalize(glm::vec3(invert[2]));
+	//forward = glm::normalize(glm::vec3(invert[2]));
+	forward = glm::vec3(invert[2]);
+	forward[0] *= scale[0];
+	forward[1] *= scale[1];
+	forward[2] *= scale[2];
 
 	applyCollision = true;
 }
@@ -43,7 +47,7 @@ void Plane::onEvent(Event& event)
 glm::mat4 Plane::getTransform()
 {
 	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
-	
+
 	return glm::translate(glm::mat4(1.0), position) * rot
 		* glm::scale(glm::mat4(1.0), scale);
 }

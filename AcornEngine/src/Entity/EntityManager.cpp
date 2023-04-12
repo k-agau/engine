@@ -111,7 +111,7 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
 
-				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
+				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), 100, 0), SPHERE_HIGH); break;
 				}
 
 			}
@@ -272,13 +272,8 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
 {
 	int rad1 = obj1->getRadius(), rad2 = obj2->getRadius();
-	auto vert1 = obj1->getVertices(), vert2 = obj1->getVertices();
-	auto vert1Size = obj1->getVertexSize(), vert2Size = obj2->getVertexSize();
 
-	float dist =
-		std::pow(*(vert2 + 0) - *(vert1 + 0), 2) +
-		std::pow(*(vert2 + 1) - *(vert1 + 1), 2) +
-		std::pow(*(vert2 + 2) - *(vert1 + 2), 2);
+	float dist = glm::length(obj1->getPosition() - obj2->getPosition());
 
 	dist = std::sqrt(dist);
 
@@ -301,7 +296,7 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 		auto v = &obj1->getVelocity();
 		auto mag = glm::length(*v);
 
-		*v = *v - fwdNorm * mag;
+		*v = *v - fwdNorm * mag * .01f;
 	}
 }
 
