@@ -1,4 +1,5 @@
 target_sources(Core PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}/Collision.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Cube.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Plane.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Sphere.cpp

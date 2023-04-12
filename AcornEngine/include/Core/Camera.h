@@ -43,7 +43,7 @@ public:
 
 private:
 
-	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 2.0f);
+	const glm::vec3 START_POS = glm::vec3(0.0f, 0.0f, 3.0f);
 	const glm::vec3 START_TARGET = glm::vec3(0.0f, 0.0f, 0.0f);
 	const float cameraSpeed = 0.05f;
 
