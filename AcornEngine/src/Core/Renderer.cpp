@@ -44,12 +44,12 @@ void Renderer::initGeom()
 	initEntityColors();
 
 	float i = -12.5f;
-	for (auto color : entityColors) 
+	/*for (auto color : entityColors) 
 	{
 		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
 		e->content()->setColor(color.first);
 		i += 5;
-	}
+	}*/
 	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
 	//auto transform = &tmp->content()->getTransform();
 	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));

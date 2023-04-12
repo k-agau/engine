@@ -3,11 +3,14 @@
 Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
+	setColor(BLUE);
 	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
-	scale = glm::vec3(1, 1, 1);
+	scale = glm::vec3(2.0, 2.0, 2.0);
 	transform = getTransform();
 	glm::mat4 invert = glm::inverse(transform);
 	forward = glm::normalize(glm::vec3(invert[2]));
+
+	applyCollision = true;
 }
 
 Plane::~Plane()

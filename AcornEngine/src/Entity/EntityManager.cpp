@@ -35,7 +35,6 @@ Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
 		newPlane->content()->setID(++uid);
 		auto transform = &newPlane->content()->getTransform();
 		return newPlane;
-
 	}
 }
 
@@ -212,8 +211,9 @@ EntityManager::~EntityManager()
 
 glm::vec3 EntityManager::projectUonV(const glm::vec3& u, const glm::vec3 v)
 {
-	float scaleNum = glm::dot(u, v) / glm::dot(v, v);
-	glm::vec3 r = v * scaleNum;
+	glm::vec3 r;
+	float scalar = glm::dot(u, v);
+	r = v * scalar;
 	return r;
 }
 
@@ -228,9 +228,9 @@ void EntityManager::HandleCollisions(float dt)
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		for (size_t j = i + 1; j < objects.size(); ++j)
+		for (size_t j = 0; j < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++j)
 		{
-			if (objects[i]->content()->getApplyCollision() && objects[j]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
+			if (i != j && objects[j]->content()->getApplyCollision())
 			{
 				if (objects[j]->content()->type & PLANE)
 				{
@@ -238,11 +238,11 @@ void EntityManager::HandleCollisions(float dt)
 				}
 				else if (objects[j]->content()->type & CUBE)
 				{
-					resolveSphereCubeCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Cube*>(objects[j]->content()));
+					//resolveSphereCubeCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Cube*>(objects[j]->content()));
 				}
 				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 				{
-					resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+					//resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
 				}
 				else
 				{
@@ -256,17 +256,15 @@ void EntityManager::HandleCollisions(float dt)
 bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 {
 	int rad1 = obj1->getRadius();
-	auto vert1 = obj1->getVertices();
-	auto vert1Size = obj1->getVertexSize();
 
+	auto point = obj1->getPosition();
 	auto planePos = obj2->getPosition();
 
-	float dist =
-		std::pow(planePos[2] - *(vert1 + 0), 2) +
-		std::pow(planePos[1] - *(vert1 + 1), 2) +
-		std::pow(planePos[0] - *(vert1 + 2), 2);
+	auto sub = point - planePos;
+	auto fwd = obj2->getForward();
+	auto norm = glm::normalize(fwd);
 
-	dist = std::sqrt(dist);
+	float dist = std::abs(glm::dot(sub, norm));
 
 	return dist <= rad1;
 }
@@ -291,10 +289,19 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 {
 	if (checkSpherePlaneCollision(obj1, obj2))
 	{
-		glm::vec3 reflected = glm::normalize(obj2->getForward()) * (glm::normalize(obj2->getForward()) * obj1->getVelocity()) * 2.0f;
+		auto fwd = obj2->getForward();
+		auto fwdNorm = glm::normalize(fwd);
+		auto vel = obj1->getVelocity();
 
-		glm::vec3* v = &obj1->getVelocity();
-		*v -= reflected;
+		glm::vec3 reflected = fwdNorm * (fwdNorm * vel) * 2.0f;
+
+		/*glm::vec3* v = &obj1->getVelocity();
+		*v -= reflected;*/
+
+		auto v = &obj1->getVelocity();
+		auto mag = glm::length(*v);
+
+		*v = *v - fwdNorm * mag;
 	}
 }
 
@@ -313,7 +320,7 @@ void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
 		glm::vec3 pos1(*(ctr1 + 0), *(ctr1 + 1), *(ctr1 + 2));
 		glm::vec3 pos2(*(ctr2 + 0), *(ctr2 + 1), *(ctr2 + 2));
 
-		glm::vec3 nv1, nv2; // New velocity vectors
+		glm::vec3 nv1(0.0f), nv2(0.0f); // New velocity vectors
 
 		nv1 = obj1->getVelocity();
 		nv1 += projectUonV(obj2->getVelocity(), pos2 - pos1);
