@@ -80,6 +80,7 @@ public:
 	inline COLORS getColor() { return color; }
 	inline void setColor(COLORS c) { color = c; }
 	inline bool getApplyPhysics() { return applyPhysics; };
+	inline void setVelocity(glm::vec3 newVel) { velocity = newVel; }
 
 };
 
