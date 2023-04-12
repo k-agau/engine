@@ -9,7 +9,6 @@ Renderer* Renderer::instance() {
 		Renderer::inst = new Renderer;
 	}
 	return inst;
-
 }
 
 void Renderer::init()
@@ -53,17 +52,23 @@ void Renderer::initGeom()
 
 	/*
 	float i = -12.5f;
-	for (auto color : entityColors) 
+	/*for (auto color : entityColors) 
 	{
 		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
 		e->content()->setColor(color.first);
 		i += 5;
 	}*/
-	
-	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
-	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
-	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
-
+//<<<<<<< HEAD
+//	
+//	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
+//	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
+//	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
+//
+//=======
+	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	//auto transform = &tmp->content()->getTransform();
+	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	//tmp->content()->setApplyCollision(true);
 }
 
 void Renderer::Update()
@@ -127,8 +132,14 @@ void Renderer::renderWorld(Layer* layer)
 		else 
 		{
 			glDrawArrays(GL_TRIANGLES, 0, 36);
+			if (entityType == ENTITY_TYPE::PLANE)
+			{
+				 Plane* tmp = (Plane*)e->content();
+				//M = tmp->rotate();
+			}
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
 		}
-			
 
 		//disable gl arrays
 		glDisableVertexAttribArray(0);

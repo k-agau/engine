@@ -17,6 +17,15 @@ private:
 	glm::vec3 gravity = glm::vec3(0, -9.81, 0);
 	unsigned int uid = 0;
 
+	void HandleCollisions(float dt);
+	bool checkSpherePlaneCollision(Sphere* obj1, Plane* obj2);
+	bool checkSphereSphereCollision(Sphere* obj1, Sphere* obj2);
+	void resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2);
+	void resolveSphereCubeCollision(Sphere* obj1, Cube* obj2);
+	void resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2);
+	glm::vec3 projectUonV(const glm::vec3& u, const glm::vec3 v);
+	glm::vec3 getNormal(const glm::vec3& u);
+
 public:
 
 	~EntityManager();

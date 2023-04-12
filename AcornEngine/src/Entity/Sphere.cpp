@@ -38,7 +38,7 @@ const int MIN_STACK_COUNT  = 2;
 ///////////////////////////////////////////////////////////////////////////////
 // ctor
 ///////////////////////////////////////////////////////////////////////////////
-Sphere::Sphere(float radius, int sectors, int stacks, bool smooth, int up) : interleavedStride(32),
+Sphere::Sphere(float radius, int sectors, int stacks, bool smooth, int up, bool _applyPhysics, bool _applyCollision) : interleavedStride(32),
     EntityImpl(ENTITY_TYPE::SPHERE_HIGH, "sphere", glm::vec3(0,0,0))
 {
     set(radius, sectors, stacks, smooth, up);
@@ -47,9 +47,11 @@ Sphere::Sphere(float radius, int sectors, int stacks, bool smooth, int up) : int
     scale = glm::vec3(1, 1, 1);
     transform = getTransform();
 
+    applyPhysics = _applyPhysics;
+    applyCollision = _applyCollision;
 }
 
-Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, ENTITY_TYPE res):
+Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, ENTITY_TYPE res, bool _applyPhysics, bool _applyCollision):
     EntityImpl(res, _debugName, pos), 
     interleavedStride(32)
 {
@@ -58,6 +60,9 @@ Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, E
     rotation = glm::vec3(1, 1, 1);
     scale = glm::vec3(1, 1, 1);
     transform = getTransform();
+
+    applyPhysics = _applyPhysics;
+    applyCollision = _applyCollision;
 }
 
 

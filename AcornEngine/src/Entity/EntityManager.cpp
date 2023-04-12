@@ -12,19 +12,16 @@ EntityManager::EntityManager() {
 	sphereDimensions.push_back(std::pair(10, 10)); //Low  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
-
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
 {
 	if (factory) 
 	{
-
 		Entity* newCube = factory->makeCube(WorldCoords);
 		newCube->content()->setID(++uid);
 		worldObjects.push_back(newCube);
 		return newCube;
-
 	}
 }
 
@@ -32,12 +29,11 @@ Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
 {
 	if (factory) 
 	{
-
 		Entity* newPlane = factory->makePlane(WorldCoords);
 		worldObjects.push_back(newPlane);
 		newPlane->content()->setID(++uid);
+		auto transform = &newPlane->content()->getTransform();
 		return newPlane;
-
 	}
 }
 
@@ -101,7 +97,6 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 			KeyPressedEvent* myE = dynamic_cast<KeyPressedEvent*>(&e);
 			
 			if (myE) {
-
 				switch (myE->getKeyCode()) {
 				case Key::W: camera->MoveForward(); break;
 
@@ -111,9 +106,11 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::D: camera->MoveRight(); break;
 
-				case Key::J:addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
 
-				case Key::K:addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+
+				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
 				}
 
 			}
@@ -171,6 +168,10 @@ void EntityManager::worldStep()
 
 			//apply gravity
 			*f += m * gravity;
+
+			// Handle collisions
+			HandleCollisions(dt);
+
 			*v += *f / m * dt;
 			*p += *v * dt;
 
@@ -206,3 +207,137 @@ EntityManager::~EntityManager()
 {
 
 }
+
+glm::vec3 EntityManager::projectUonV(const glm::vec3& u, const glm::vec3 v)
+{
+	glm::vec3 r;
+	float scalar = glm::dot(u, v);
+	r = v * scalar;
+	return r;
+}
+
+glm::vec3 EntityManager::getNormal(const glm::vec3& u)
+{
+	return u / glm::length(u);
+}
+
+void EntityManager::HandleCollisions(float dt)
+{
+	auto objects = getWorldEntities();
+
+	for (size_t i = 0; i < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++i)
+	{
+		for (size_t j = 0; j < objects.size() && objects[j]->content()->getApplyCollision(); ++j)
+		{
+			if (i != j && objects[j]->content()->getApplyCollision())
+			{
+				if (objects[j]->content()->type & PLANE)
+				{
+					resolveSpherePlaneCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Plane*>(objects[j]->content()));
+				}
+				else if (objects[j]->content()->type & CUBE)
+				{
+					//resolveSphereCubeCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Cube*>(objects[j]->content()));
+				}
+				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
+				{
+					// resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+				}
+				else
+				{
+					std::cout << "NOT YET IMPLEMENTED" << std::endl;
+				}
+			}
+		}
+	}
+}
+
+bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
+{
+	int rad1 = obj1->getRadius();
+
+	auto point = obj1->getPosition();
+	auto planePos = obj2->getPosition();
+
+	auto sub = point - planePos;
+	auto norm = obj2->getNormal();
+
+	float dist = std::abs(glm::dot(sub, norm));
+
+	if (dist > rad1) { // The sphere is not currently intersecting the plane
+		return false;
+	}
+
+	// Additional checks: see if the sphere is still within bounds
+
+	glm::vec3 projectedPoint = point - dist * norm;
+
+	// Finite plane details
+	float planeHalfWidth = obj2->xScale;
+	float planeHalfHeight = obj2->yScale;
+
+	// Is point w/in finite plane
+	return !(std::abs(projectedPoint.x - planePos.x) > planeHalfWidth ||
+		std::abs(projectedPoint.y - planePos.y) > planeHalfHeight);
+}
+
+bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
+{
+	int rad1 = obj1->getRadius(), rad2 = obj2->getRadius();
+
+	float dist = glm::length(obj1->getPosition() - obj2->getPosition());
+
+	dist = std::sqrt(dist);
+
+	return dist <= rad1 + rad2;
+}
+
+void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
+{
+	if (checkSpherePlaneCollision(obj1, obj2))
+	{
+		auto norm = obj2->getNormal();
+		auto vel = obj1->getVelocity();
+
+		glm::vec3 reflected = norm * (norm * vel) * 2.0f;
+
+		/*glm::vec3* v = &obj1->getVelocity();
+		*v -= reflected;*/
+
+		auto v = &obj1->getVelocity();
+		auto mag = glm::length(*v);
+
+		*v = *v + norm * mag * .01f;
+
+		auto x = 1 + 1;
+	}
+}
+
+void EntityManager::resolveSphereCubeCollision(Sphere* obj1, Cube* obj2)
+{
+
+}
+
+void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
+{
+	if (checkSphereSphereCollision(obj1, obj2))
+	{
+		auto pos1 = obj1->getPosition();
+		auto pos2 = obj2->getPosition();
+
+		glm::vec3 nv1(0.0f), nv2(0.0f); // New velocity vectors
+
+		nv1 = obj1->getVelocity();
+		nv1 += projectUonV(obj2->getVelocity(), pos2 - pos1);
+		nv1 -= projectUonV(obj1->getVelocity(), pos1 - pos2);
+		nv2 = obj2->getVelocity();
+		nv2 += projectUonV(obj1->getVelocity(), pos2 - pos1);
+		nv2 -= projectUonV(obj2->getVelocity(), pos1 - pos2);
+
+		glm::vec3* v1 = &obj1->getVelocity();
+		glm::vec3* v2 = &obj2->getVelocity();
+		*v1 += nv1;
+		*v2 += nv2;
+	}
+}
+

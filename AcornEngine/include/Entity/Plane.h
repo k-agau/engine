@@ -14,16 +14,26 @@ public:
 	void onDelete() override;
 	void onUpdate() override;
 	void onEvent(Event& event) override;
+
+	glm::vec3 getForward();
+
+	glm::vec3 getNormal();
+
 	glm::mat4 getTransform() override;
 
 	//Demo Functions
-	glm::mat4 rotate();
+	glm::mat4 rotate(float degrees = 90.0f);
+	glm::vec3 forward;
 
-private:
 	glm::mat4 transform;
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
+	float xScale = 5.0;
+	float yScale = 5.0;
+	float noScale = 5.0;
+private:
+	glm::vec3 normal;
 };
 
 #endif // PLANE_H
