@@ -61,9 +61,9 @@ void Renderer::initGeom()
 	}*/
 	
 	//menuManager->createEntityMenu();
-	entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
-	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
-	L->content()->setColor(WHITE);
+	//entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
+	//L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
+	//L->content()->setColor(WHITE);
 
 
 
@@ -99,13 +99,13 @@ void Renderer::Update()
 
 	//light dem
 
-	L->content()->getPosition()[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
-	L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0;
+	//L->content()->getPosition()[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
+	//L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0;
 
 	//necessary gpu updates
 	glUniformMatrix4fv(projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
 	glUniform3fv(cameraShaderLoc, 1, glm::value_ptr(C));
-	glUniform3fv(lightLoc, 1, glm::value_ptr(L->content()->getPosition()));
+	//glUniform3fv(lightLoc, 1, glm::value_ptr(L->content()->getPosition()));
 	glUniformMatrix4fv(viewShaderLoc, 1, GL_FALSE, glm::value_ptr(V));
 	// Activate shaders
 	shaderManager->use();
