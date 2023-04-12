@@ -69,7 +69,8 @@ public:
 	virtual glm::vec3& getVelocity() const { return const_cast<glm::vec3&>(velocity); };
 	virtual glm::vec3& getPosition() const { return const_cast<glm::vec3&>(position); };
 	virtual float	   getMass()	 const { return mass; };
-	virtual void setPostion(glm::vec3 pos) { position = pos; }
+	virtual bool	   getApplyCollision() const { return applyCollision; };
+	virtual void	   setPostion(glm::vec3 pos) { position = pos; }
 
 	//Object Settings
 	inline void setApplyPhysics(bool apply) { applyPhysics = apply; };

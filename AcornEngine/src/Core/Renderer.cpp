@@ -58,16 +58,16 @@ void Renderer::initGeom()
 		e->content()->setColor(color.first);
 		i += 5;
 
-	}
+	}*/
 	
-	menuManager->createEntityMenu();
+	//menuManager->createEntityMenu();
 	entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
 	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
 	L->content()->setColor(WHITE);
 
 
 
-	}*/
+	
 //
 //	
 //	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
@@ -75,7 +75,8 @@ void Renderer::initGeom()
 //	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
 //
 //=======
-	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	auto tmp = (Plane*)entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	//tmp->rotate(glm::vec3(-0.97f, 0.5f, 0.0f));
 	//auto transform = &tmp->content()->getTransform();
 	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	//tmp->content()->setApplyCollision(true);
@@ -159,7 +160,7 @@ void Renderer::renderWorld(Layer* layer)
 				if (entityType == ENTITY_TYPE::PLANE)
 				{
 					Plane* g = (Plane*)e->content();
-					g->rotate(2.0f);
+					//g->rotate(2.0f);
 				}
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 			}
@@ -336,18 +337,18 @@ void Renderer::initPlane()
 	//	-1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
 	//1.0,-1.0,0.0, 0.0f,  0.0f, 1.0f,
 
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
 
 	};

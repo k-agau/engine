@@ -24,7 +24,7 @@ protected:
 	Plane* area;
 	glm::vec3 scale;
 
-	void scaleBackground(glm::vec3 s) { scale = s; area->applyScale(scale); }
+	void scaleBackground(glm::vec3 s) { scale = s; }
 
 	
 	EventCallbackFn callback;

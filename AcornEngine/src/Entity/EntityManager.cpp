@@ -108,15 +108,6 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::D: camera->MoveRight(); return true;
 
-
-				case Key::J: {
-					if (demo != 1) addCubeToWorld(glm::vec3(0, 0, 0));
-					else addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), randomUint8_t()));
-					return true;
-				}
-
-				case Key::K:addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); return true;
-
 				case Key::Right: demo = (demo + 1) % 3; return true;
 
 				case Key::M: 
@@ -163,12 +154,15 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 				}
 				case Key::T: test = !test; break;
         
-				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::J: addCubeToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); return true;
 
-				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
+				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); return true;
 
-				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
+				case Key::B:{
 
+						auto tmp = addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); return true;
+						tmp->content()->setApplyCollision(true);
+				}
 				}
 
 			}
