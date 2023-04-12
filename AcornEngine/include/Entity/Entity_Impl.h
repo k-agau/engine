@@ -3,6 +3,7 @@
 
 #include "Events/KeyEvent.h"
 #include "Events/MouseEvent.h"
+#include "Events/EntityEvent.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>

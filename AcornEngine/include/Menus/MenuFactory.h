@@ -19,8 +19,8 @@ public:
 	glm::vec3 menuP;
 	void updateFactoryCam(glm::mat4 v, glm::vec3 p) { menuV = v; menuP = p; };
 
-	ColorButton* makeColorButton(const EventCallbackFn& f, Event e, COLORS b, COLORS h, glm::mat4 t, glm::vec3 pos);
-	Menu* makeEntityMenu();
+	ColorButton* makeColorButton(const EventCallbackFn& f, ScaleEvent e, COLORS b, COLORS h, glm::mat4 t, glm::vec3 pos);
+	Menu* makeEntityMenu(int id);
 
 	EventCallbackFn cb;		//callbacks
 	//Menu* makeHomeMenu();

@@ -1,17 +1,17 @@
 #include "Menus/MenuFactory.h"
 
-ColorButton* MenuFactory::makeColorButton(const EventCallbackFn& f, Event e, COLORS b, COLORS h, glm::mat4 t, glm::vec3 pos)
+ColorButton* MenuFactory::makeColorButton(const EventCallbackFn& f, ScaleEvent e, COLORS b, COLORS h, glm::mat4 t, glm::vec3 pos)
 {
 	return new ColorButton(f, e, b, h, t, pos);
 }
 
-Menu* MenuFactory::makeEntityMenu() 
+Menu* MenuFactory::makeEntityMenu(int id) 
 {
 
 	float X_OFFSET = 2.4;
 	float Y_OFFSET = 2.0;
 
-	ScaleEvent newEvent(1, INC);
+	ScaleEvent newEvent(4, INC);
 	Menu* m = new Menu(menuV, ORANGE, menuP);
 	glm::vec3 menuF = glm::normalize(glm::vec3(menuV[2]));
 
@@ -32,7 +32,8 @@ Menu* MenuFactory::makeEntityMenu()
 	b->yUpper = buttonPos[1] + 0.05;
 	b->yLower = buttonPos[1] - 0.2;
 
-	b = (Button*)new ColorButton(cb, newEvent, BLUE, GREEN, menuV, menuP);
+	ScaleEvent newEvent1(4, DEC);
+	b = (Button*)new ColorButton(cb, newEvent1, BLUE, GREEN, menuV, menuP);
 	b->setTransform(glm::translate(b->getTransform(), glm::vec3(5.15f, 1.0f, -11.9f)));
 	m->addButton(b);
 	buttonPos = glm::project(glm::vec3(menuP[0], menuP[1], 0.0), b->getTransform(),

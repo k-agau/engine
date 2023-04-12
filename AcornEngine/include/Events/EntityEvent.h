@@ -14,8 +14,10 @@ class ScaleEvent : public EntityEvent {
 
 public:
 
-	ScaleEvent(int id, const ENTITY_EVENT_MOD m) :
-		EntityEvent(id),mod(m) {};
+	ScaleEvent(const int id, const ENTITY_EVENT_MOD m) :
+		EntityEvent(id), mod(m) {
+		SetEventType(ScaleInc);
+	};
 	ENTITY_EVENT_MOD getMod() const { return mod; }
 	ENTITY_EVENT_MOD mod;
 

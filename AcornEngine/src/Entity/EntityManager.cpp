@@ -89,10 +89,10 @@ const std::vector<Entity*> EntityManager::getWorldEntities() const
 bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 {
 
+	EventType eventType = e.GetEventType();
+
 	if (Target == ENTITY_TYPE::CAMERA)
 	{
-
-		EventType eventType = e.GetEventType();
 
 		if (eventType == EventType::KeyPressed)
 		{
@@ -120,6 +120,9 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 						auto tmp = addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); return true;
 						tmp->content()->setApplyCollision(true);
+						color = ++color % 8;
+						COLORS c = static_cast<COLORS>(color);
+						tmp->content()->setColor(c);
 				}
 				}
 
@@ -161,8 +164,40 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 	}
 	else {
 
+		if (eventType == EventType::ScaleInc)
+		{
+			ScaleEvent* myE = dynamic_cast<ScaleEvent*>(&e);
+
+			if (myE)
+			{
+
+				for (auto i : worldObjects)
+				{
+					if (i->content()->getID() == myE->uid)
+					{
+						auto a = (Cube*)i->content();
+						if (myE->getMod() == INC)
+						{
+							a->scale[0] += 1.5f;
+							a->scale[1] += 1.5f;
+							a->scale[2] += 1.5f;
+						}
+						else
+						{
+							a->scale[0] -= 1.5f;
+							a->scale[1] -= 1.5f;
+							a->scale[2] -= 1.5f;
+						}
+
+						a->setTransform(glm::scale(a->getTransform(), a->scale) );
+
+					}
+				}
+				}
+
+		}
+		return false;
 	}
-	return false;
 }
 
 void EntityManager::worldStep()
@@ -265,7 +300,7 @@ void EntityManager::HandleCollisions(float dt)
 				}
 				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 				{
-					resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+					//resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
 				}
 				else
 				{
@@ -282,6 +317,7 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 
 	auto point = obj1->getPosition();
 	auto planePos = obj2->getPosition();
+	planePos[1] *= -1;
 
 	auto sub = point - planePos;
 	auto norm = obj2->getNormal();

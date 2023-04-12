@@ -52,7 +52,7 @@ public:
 	glm::mat4 updateView();
 	bool updateWorld(ENTITY_TYPE Target, Event& e);
 	void worldStep();
-
+	int color = 0;
 	//Get
 	const std::vector<Entity*> getWorldEntities() const;
 

@@ -50,7 +50,7 @@ void Renderer::initGeom()
 	initSphere();
 	initEntityColors();
 
-	
+	entityManager->addCubeToWorld(glm::vec3(5.0, 5.0, 0.0));
 	float i = -12.5f;
 	for (auto color : entityColors) 
 	{
@@ -61,7 +61,7 @@ void Renderer::initGeom()
 
 	}
 	
-	menuManager->createEntityMenu();
+	menuManager->createEntityMenu(1);
 	//entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
 	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
 	L->content()->setColor(WHITE);

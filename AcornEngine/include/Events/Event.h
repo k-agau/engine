@@ -15,7 +15,8 @@ enum EventType {
 	KeyReleased,
 	MousePressed,
 	MouseReleased,
-	MouseMoved
+	MouseMoved,
+	ScaleInc
 };
 
 enum ENTITY_EVENT_MOD {

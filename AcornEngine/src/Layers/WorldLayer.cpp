@@ -27,5 +27,14 @@ void WorldLayer::onUpdate()
 
 bool WorldLayer::onEvent(Event& event)
 {
-	return manager->updateWorld(ENTITY_TYPE::CAMERA, event);
+	if (event.GetEventType() == ScaleInc)
+	{
+		return manager->updateWorld(ENTITY_TYPE::CUBE, event);
+
+	}
+	else
+	{
+		return manager->updateWorld(ENTITY_TYPE::CAMERA, event);
+
+	}
 }

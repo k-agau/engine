@@ -23,7 +23,7 @@ public:
 	std::vector<Menu*> menus;
 	glm::mat4 camV;
 	glm::vec3 camP;
-	Menu* createEntityMenu();
+	Menu* createEntityMenu(int id);
 	static MenuManager* instance();
 	void init(const EventCallbackFn& f, glm::mat4 view, glm::vec3 pos);
 	void updateCam(glm::mat4 view, glm::vec3 pos);

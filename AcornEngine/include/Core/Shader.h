@@ -29,8 +29,8 @@ public:
     void setVec3(const std::string& name, glm::vec3 value) const;
 
 private:
-    const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\ksilv\\Github\\engine\\AcornEngine\\Shaders\\fragment_shader.glsl";
-    const char* ACORN_VERTEX_SHADER_PATH = "C:\\Users\\ksilv\\Github\\engine\\AcornEngine\\Shaders\\vertex_shader.glsl";
+    const char* ACORN_FRAGMENT_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\Shaders\\fragment_shader.glsl";
+    const char* ACORN_VERTEX_SHADER_PATH = "C:\\Users\\zachs\\vandy-c\\swp\\AcornEngine\\AcornEngine\\Shaders\\vertex_shader.glsl";
     void checkCompileErrors(unsigned int shader, std::string type);
     void createGLShaders(const char* vertexPath, const char* fragmentPath);
 };
