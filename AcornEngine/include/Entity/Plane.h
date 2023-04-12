@@ -17,6 +17,8 @@ public:
 
 	glm::vec3 getForward();
 
+	glm::vec3 getNormal();
+
 	glm::mat4 getTransform() override;
 
 	//Demo Functions
@@ -28,7 +30,10 @@ public:
 	glm::vec3 scale;
 
 private:
-
+	glm::vec3 normal;
+	float xScale = 2.0;
+	float yScale = 2.0;
+	float noScale = 2.0;
 };
 
 #endif // PLANE_H

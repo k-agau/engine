@@ -29,7 +29,6 @@ Entity* EntityManager::addPlaneToWorld(glm::vec3 WorldCoords)
 {
 	if (factory) 
 	{
-
 		Entity* newPlane = factory->makePlane(WorldCoords);
 		worldObjects.push_back(newPlane);
 		newPlane->content()->setID(++uid);
@@ -111,7 +110,7 @@ void EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::K: addPlaneToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0)); break;
 
-				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), 100, 0), SPHERE_HIGH); break;
+				case Key::B: addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); break;
 				}
 
 			}
@@ -261,8 +260,7 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 	auto planePos = obj2->getPosition();
 
 	auto sub = point - planePos;
-	auto fwd = obj2->getForward();
-	auto norm = glm::normalize(fwd);
+	auto norm = obj2->getNormal();
 
 	float dist = std::abs(glm::dot(sub, norm));
 
@@ -284,11 +282,10 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 {
 	if (checkSpherePlaneCollision(obj1, obj2))
 	{
-		auto fwd = obj2->getForward();
-		auto fwdNorm = glm::normalize(fwd);
+		auto norm = obj2->getNormal();
 		auto vel = obj1->getVelocity();
 
-		glm::vec3 reflected = fwdNorm * (fwdNorm * vel) * 2.0f;
+		glm::vec3 reflected = norm * (norm * vel) * 2.0f;
 
 		/*glm::vec3* v = &obj1->getVelocity();
 		*v -= reflected;*/
@@ -296,7 +293,9 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 		auto v = &obj1->getVelocity();
 		auto mag = glm::length(*v);
 
-		*v = *v - fwdNorm * mag * .01f;
+		*v = *v + norm * mag * .01f;
+
+		auto x = 1 + 1;
 	}
 }
 
