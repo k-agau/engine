@@ -9,6 +9,7 @@ add_subdirectory(./src/Entity)
 add_subdirectory(./src/Events)
 add_subdirectory(./src/Layers)
 add_subdirectory(./src/Logs)
+add_subdirectory(./src/Menus)
 
 add_executable (${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 if (CMAKE_VERSION VERSION_GREATER 3.12)

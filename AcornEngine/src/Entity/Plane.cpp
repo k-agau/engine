@@ -1,5 +1,7 @@
 #include "Entity/Plane.h"
 
+extern float dt;
+
 Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
@@ -34,6 +36,7 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	normal = glm::normalize(glm::vec3(inverse_transpose_rotation_matrix * glm::vec3(0.0f, 0.0f, 1.0f)));
 
 	applyCollision = true;
+
 }
 
 Plane::~Plane()
@@ -63,8 +66,14 @@ void Plane::onEvent(Event& event)
 	std::cout << "Event for Plane triggered" << std::endl;
 }
 
-glm::mat4 Plane::getTransform()
+void Plane::applyScale(glm::vec3 s) 
 {
+	scale = s;
+	calculateTransform();
+}
+
+void Plane::calculateTransform() {
+
 	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
 	return glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f)) * rot

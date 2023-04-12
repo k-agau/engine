@@ -15,6 +15,7 @@ LayerStack* LayerStack::instance() {
 LayerStack::LayerStack(): layerTop(layers.begin())
 {
 	createWorldLayer();
+	createMenuLayer();
 }
 
 LayerStack::~LayerStack()
@@ -55,6 +56,13 @@ void LayerStack::createWorldLayer() {
 
 	WorldLayer* wl = new WorldLayer(EntityManager::instance());
 	pushLayer(wl);
+
+}
+
+void LayerStack::createMenuLayer() {
+
+	MenuLayer* ml = new MenuLayer(MenuManager::instance());
+	pushLayer(ml);
 
 }
 

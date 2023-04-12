@@ -18,6 +18,16 @@ enum EventType {
 	MouseMoved
 };
 
+enum ENTITY_EVENT_MOD {
+
+	INC,
+	DEC,
+	X,
+	Y,
+	Z
+
+};
+
 class Event {
 
 public:
