@@ -21,17 +21,19 @@ public:
 
 	glm::mat4 getTransform() override;
 
+	glm::mat4 getRotation();
+
 	//Demo Functions
 	glm::mat4 rotate(float degrees = 90.0f);
 	glm::vec3 forward;
 
 	glm::mat4 transform;
-	glm::vec3 rotation;
+	glm::mat4 rotation;
 	glm::vec3 scale;
 
-	float xScale = 5.0;
-	float yScale = 5.0;
-	float noScale = 5.0;
+	float xScale = 10.0;
+	float yScale = 10.0;
+	float noScale = 10.0;
 private:
 	glm::vec3 normal;
 };

@@ -58,17 +58,8 @@ void Renderer::initGeom()
 		e->content()->setColor(color.first);
 		i += 5;
 	}*/
-//<<<<<<< HEAD
-//	
-//	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
-//	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
-//	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
-//
-//=======
-	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
-	//auto transform = &tmp->content()->getTransform();
-	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	//tmp->content()->setApplyCollision(true);
+
+	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, -1));
 }
 
 void Renderer::Update()

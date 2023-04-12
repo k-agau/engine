@@ -4,7 +4,7 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
 	setColor(BLUE);
-	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
+	rotation = glm::rotate(glm::mat4(1.0), glm::radians(-89.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	
 	scale = glm::vec3(xScale, yScale, noScale);
 	transform = getTransform();
@@ -21,8 +21,6 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	//normal = glm::normalize(normal);
 	/*this->constant = -glm::dot(this->normal, a);
 	this->normalize();*/
-	// Example 4x4 transformation matrix
-	// Extract the rotation part of the transformation matrix
 
 	// Extract the rotation part of the transformation matrix
 	glm::mat3 rotation_matrix = glm::mat3(transform);
@@ -65,9 +63,7 @@ void Plane::onEvent(Event& event)
 
 glm::mat4 Plane::getTransform()
 {
-	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
-
-	return glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f)) * rot
+	return glm::translate(glm::mat4(1.0), position) * rotation
 		* glm::scale(glm::mat4(1.0), scale);
 }
 
@@ -87,4 +83,9 @@ glm::vec3 Plane::getForward()
 glm::vec3 Plane::getNormal()
 {
 	return normal;
+}
+
+glm::mat4 Plane::getRotation()
+{
+	return rotation;
 }

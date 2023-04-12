@@ -225,10 +225,16 @@ void EntityManager::HandleCollisions(float dt)
 {
 	auto objects = getWorldEntities();
 
-	for (size_t i = 0; i < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++i)
+	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		for (size_t j = 0; j < objects.size() && objects[j]->content()->getApplyCollision(); ++j)
+		for (size_t j = 0; j < objects.size() &&
+			objects[i]->content()->getApplyCollision() &&
+			(objects[i]->content()->type == SPHERE_HIGH ||
+			objects[i]->content()->type == SPHERE_MID ||
+			objects[i]->content()->type == SPHERE_LOW);
+			 ++j)
 		{
+			if (!objects[j]->content()->getApplyCollision()) continue;
 			if (i != j && objects[j]->content()->getApplyCollision())
 			{
 				if (objects[j]->content()->type & PLANE)
@@ -241,7 +247,7 @@ void EntityManager::HandleCollisions(float dt)
 				}
 				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 				{
-					// resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+					resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
 				}
 				else
 				{
@@ -270,15 +276,18 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 
 	// Additional checks: see if the sphere is still within bounds
 
+
 	glm::vec3 projectedPoint = point - dist * norm;
+	glm::quat planeRotation = obj2->getRotation();
+	glm::vec3 rotatedProjectedPoint = planePos + glm::rotate(glm::inverse(planeRotation), projectedPoint - planePos);
 
 	// Finite plane details
 	float planeHalfWidth = obj2->xScale;
 	float planeHalfHeight = obj2->yScale;
 
-	// Is point w/in finite plane
-	return !(std::abs(projectedPoint.x - planePos.x) > planeHalfWidth ||
-		std::abs(projectedPoint.y - planePos.y) > planeHalfHeight);
+	// Check if the rotated projected point is within the finite plane
+	return !(std::abs(rotatedProjectedPoint.x - planePos.x) > planeHalfWidth ||
+		std::abs(rotatedProjectedPoint.y - planePos.y) > planeHalfHeight);
 }
 
 bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
