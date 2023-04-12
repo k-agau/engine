@@ -31,9 +31,9 @@ public:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-	float xScale = 20.0;
-	float yScale = 20.0;
-	float noScale = 20.0;
+	float xScale = 5.0;
+	float yScale = 5.0;
+	float noScale = 5.0;
 
 	bool isMenu = false;
 private:

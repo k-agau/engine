@@ -4,7 +4,7 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
 	setColor(BLUE);
-	rotation = glm::vec3(-0.6f, 0.5f, 0.0f);
+	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
 
 	scale = glm::vec3(xScale, yScale, noScale);
 	transform = getTransform();

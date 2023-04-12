@@ -31,11 +31,13 @@ protected:
 public:
 	//			   scale    color         position
 	Menu(glm::mat4 t, COLORS c, glm::vec3 p);
-
+	~Menu();
 	glm::vec3 scale;
 	COLORS color;
+	bool open = true;
 
 	void addButton(Button* b) { buttons.push_back(b);  };
 	std::vector<Button*>* getButtons() { return &buttons; };
-	glm::mat4 getTransform() { return area->getTransform(); };
+	glm::mat4 getTransform() { return area->transform; };
+	void setTransform(glm::mat4 t) { area->transform = t; };
 };

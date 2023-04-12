@@ -11,3 +11,10 @@ Menu::Menu(glm::mat4 t, COLORS c, glm::vec3 p) :
 	area->scale = scale;
 	area->color = c;
 }
+
+Menu::~Menu() 
+{
+
+	area->~Plane();
+
+}

@@ -290,9 +290,9 @@ void EntityManager::HandleCollisions(float dt)
 {
 	auto objects = getWorldEntities();
 
-	for (size_t i = 0; i < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++i)
+	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		for (size_t j = 0; j < objects.size() && objects[j]->content()->getApplyCollision(); ++j)
+		for (size_t j = 0; j < objects.size() && isSphere(objects[i]->content()->type); ++j)
 		{
 			if (i != j && objects[j]->content()->getApplyCollision())
 			{

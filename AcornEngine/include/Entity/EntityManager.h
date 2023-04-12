@@ -58,6 +58,11 @@ public:
 
 	//Demo Helpers
 	uint8_t randomUint8_t();
+	inline bool isSphere(ENTITY_TYPE type) {
+		return type == ENTITY_TYPE::SPHERE_LOW ||
+			type == ENTITY_TYPE::SPHERE_MID ||
+			type == ENTITY_TYPE::SPHERE_HIGH;
+	}
 };
 
 #endif // ENTITY_MANAGER_H

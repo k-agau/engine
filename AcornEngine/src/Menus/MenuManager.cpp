@@ -34,9 +34,9 @@ void MenuManager::updateCam( glm::mat4 view, glm::vec3 pos )
 	factory->updateFactoryCam(view, pos);
 }
 
-Menu* MenuManager::createEntityMenu()
+Menu* MenuManager::createEntityMenu(int id)
 {
-	Menu* m = factory->makeEntityMenu();
+	Menu* m = factory->makeEntityMenu(id);
 	menus.push_back(m);
 	return m;
 }
@@ -54,7 +54,12 @@ bool MenuManager::handleEvent(Event& e)
 		{
 			switch (myE->getKeyCode())
 			{
-			case Key::M: createEntityMenu(); return true;
+			case Key::M: {
+
+				menus[0]->~Menu();
+				menus.clear();
+				createEntityMenu(currentID); return true;
+			}
 			}
 		}
 	}
