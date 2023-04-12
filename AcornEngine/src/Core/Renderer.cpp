@@ -50,7 +50,12 @@ void Renderer::initGeom()
 		e->content()->setColor(color.first);
 		i += 5;
 	}*/
-	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+
+	auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
+	e->content()->setColor(BLUE);
+	e->content()->setApplyPhysics(false);
+
+	auto tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0, -1));
 	//auto transform = &tmp->content()->getTransform();
 	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	//tmp->content()->setApplyCollision(true);
