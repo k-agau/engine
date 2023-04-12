@@ -4,7 +4,7 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
 	setColor(BLUE);
-	rotation = glm::vec3(-0.97f, 0.5f, 0.0f);
+	rotation = glm::vec3(-0.6f, 0.5f, 0.0f);
 
 	scale = glm::vec3(xScale, yScale, noScale);
 	transform = getTransform();
@@ -34,6 +34,14 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	normal = glm::normalize(glm::vec3(inverse_transpose_rotation_matrix * glm::vec3(0.0f, 0.0f, 1.0f)));
 
 	applyCollision = true;
+}
+
+Plane::Plane(std::string _debugName, glm::vec3 pos, bool menu) : 
+	isMenu(menu),
+	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
+{
+	rotation = glm::vec3(1.0, 1.0f, 1.0f);
+	scale = glm::vec3(1, 1, 1);
 }
 
 Plane::~Plane()
@@ -67,10 +75,20 @@ glm::mat4 Plane::getTransform()
 {
 	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
-	return glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f)) * rot
+	return glm::translate(glm::mat4(1.0), position) * rot
 		* glm::scale(glm::mat4(1.0), scale);
 }
 
+void Plane::rotatevec3(glm::vec3 r)
+{
+
+	glm::mat4 rot = glm::toMat4(glm::quat(r));
+
+	transform = glm::translate(glm::mat4(1.0), position) * rot
+		* glm::scale(glm::mat4(1.0), scale);
+	
+
+}
 glm::mat4 Plane::rotate(float degrees)
 {
 	transform = glm::rotate(transform, glm::radians(0.000001f), glm::vec3(0.0f, 1.0f, 0.0f));

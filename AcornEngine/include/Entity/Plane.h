@@ -9,6 +9,7 @@ class Plane : public EntityImpl
 public:
 
 	Plane(std::string _debugName, glm::vec3 pos);
+	Plane(std::string _debugName, glm::vec3 pos, bool menu);
 	virtual ~Plane();
 	void onCreate() override;
 	void onDelete() override;
@@ -22,6 +23,7 @@ public:
 	glm::mat4 getTransform() override;
 	COLORS color;
 	//Demo Functions
+	void rotatevec3(glm::vec3 r);
 	glm::mat4 rotate(float degrees = 90.0f);
 	glm::vec3 forward;
 
@@ -29,9 +31,11 @@ public:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-	float xScale = 5.0;
-	float yScale = 5.0;
-	float noScale = 5.0;
+	float xScale = 20.0;
+	float yScale = 20.0;
+	float noScale = 20.0;
+
+	bool isMenu = false;
 private:
 	glm::vec3 normal;
 };

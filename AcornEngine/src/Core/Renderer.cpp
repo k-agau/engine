@@ -60,7 +60,7 @@ void Renderer::initGeom()
 
 	}*/
 	
-	//menuManager->createEntityMenu();
+	menuManager->createEntityMenu();
 	//entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
 	//L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
 	//L->content()->setColor(WHITE);
@@ -75,7 +75,7 @@ void Renderer::initGeom()
 //	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
 //
 //=======
-	auto tmp = (Plane*)entityManager->addPlaneToWorld(glm::vec3(0, 0, 0));
+	Entity* tmp = entityManager->addPlaneToWorld(glm::vec3(0, 0.0, 0.0));
 	//tmp->rotate(glm::vec3(-0.97f, 0.5f, 0.0f));
 	//auto transform = &tmp->content()->getTransform();
 	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
