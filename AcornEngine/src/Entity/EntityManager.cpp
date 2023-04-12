@@ -43,7 +43,6 @@ Entity* EntityManager::addSphereToWorld(glm::vec3 WorldCoords, ENTITY_TYPE res)
 {
 	if (factory)
 	{
-
 		Entity* newSphere = factory->makeSphere(
 			WorldCoords,
 			sphereDimensions[res-2].first,		//the offset from the enum position is 2
@@ -53,7 +52,6 @@ Entity* EntityManager::addSphereToWorld(glm::vec3 WorldCoords, ENTITY_TYPE res)
 		newSphere->content()->setID(++uid);
 		worldObjects.push_back(newSphere);
 		return newSphere;
-
 	}
 }
 
@@ -71,7 +69,6 @@ void EntityManager::removeEntity(int id)
 	}
 
 	std::cout << "ENTITY_MANAGER::ENTITY WAS NOT FOUND AND ERASED" << std::endl;
-
 }
 
 glm::mat4 EntityManager::updateView()
@@ -281,9 +278,15 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 	int rad1 = obj1->getRadius();
 
 	auto point = obj1->getPosition();
-	auto planePos = obj2->getPosition();
+	auto pointOnPlane = obj2->getPosition();
+	glm::vec3 planeNormal = obj2->getNormal(); // Retrieve the plane's normal vector
+	float planeDistance = -glm::dot(planeNormal, obj2->getPosition()); // Compute the distance from the origin using the plane's normal and a point on the plane (e.g., obtained from getPosition())
 
-	auto sub = point - planePos;
+	glm::vec3 pointOnPlaneLocal = planeNormal * planeDistance; // Get a point on the plane in local space
+	glm::vec3 pointOnPlaneWorld = glm::vec3(obj2->getTransform() * glm::vec4(pointOnPlaneLocal, 1.0f)); // Transform the point to world space using the plane's transformation matrix
+
+	pointOnPlane = pointOnPlaneLocal;
+	auto sub = point - pointOnPlane;
 	auto norm = obj2->getNormal();
 
 	float dist = std::abs(glm::dot(sub, norm));
@@ -297,15 +300,17 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 
 	glm::vec3 projectedPoint = point - dist * norm;
 	glm::quat planeRotation = obj2->getRotation();
-	glm::vec3 rotatedProjectedPoint = planePos + glm::rotate(glm::inverse(planeRotation), projectedPoint - planePos);
+	glm::vec3 rotatedProjectedPoint = pointOnPlane + glm::rotate(glm::inverse(planeRotation), projectedPoint - pointOnPlane);
 
 	// Finite plane details
 	float planeHalfWidth = obj2->xScale;
 	float planeHalfHeight = obj2->yScale;
 
 	// Check if the rotated projected point is within the finite plane
-	return !(std::abs(rotatedProjectedPoint.x - planePos.x) > planeHalfWidth ||
-		std::abs(rotatedProjectedPoint.y - planePos.y) > planeHalfHeight);
+	return !(std::abs(rotatedProjectedPoint.x - pointOnPlane.x) > planeHalfWidth ||
+		std::abs(rotatedProjectedPoint.y - pointOnPlane.y) > planeHalfHeight);
+
+
 }
 
 bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
