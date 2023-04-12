@@ -7,6 +7,7 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	rotation = glm::rotate(glm::mat4(1.0), glm::radians(-89.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	scale = glm::vec3(xScale, yScale, noScale);
 	transform = getTransform();
+
 	glm::mat4 invert = glm::inverse(transform);
 	forward = glm::normalize(glm::vec3(invert[2]));
 
