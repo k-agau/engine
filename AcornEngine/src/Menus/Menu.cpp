@@ -14,7 +14,7 @@ Menu::Menu(glm::mat4 t, COLORS c, glm::vec3 p) :
 
 Menu::~Menu() 
 {
-
+	open = false;
 	area->~Plane();
 
 }

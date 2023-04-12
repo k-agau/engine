@@ -56,7 +56,18 @@ bool MenuManager::handleEvent(Event& e)
 			{
 			case Key::M: {
 
-				createEntityMenu(); return true;
+				if (open)
+				{
+					createEntityMenu();
+					open = !open;
+				}
+				else {
+					menus[0]->~Menu();
+					menus.clear();
+					open = !open;
+				}
+				return true;
+				
 			}
 			}
 		}

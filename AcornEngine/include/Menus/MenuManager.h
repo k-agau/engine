@@ -33,7 +33,7 @@ public:
 	void updateMousePositions(float xpos, float ypos) {
 		lastX = xpos; lastY = ypos;
 	}
-
+	bool open = false;
 	int currentID = 1;
 
 	//Menu* createHomeMenu();
