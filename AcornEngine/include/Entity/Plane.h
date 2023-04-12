@@ -29,11 +29,11 @@ public:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
+	float xScale = 5.0;
+	float yScale = 5.0;
+	float noScale = 5.0;
 private:
 	glm::vec3 normal;
-	float xScale = 2.0;
-	float yScale = 2.0;
-	float noScale = 2.0;
 };
 
 #endif // PLANE_H

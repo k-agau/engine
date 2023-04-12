@@ -225,9 +225,9 @@ void EntityManager::HandleCollisions(float dt)
 {
 	auto objects = getWorldEntities();
 
-	for (size_t i = 0; i < objects.size(); ++i)
+	for (size_t i = 0; i < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++i)
 	{
-		for (size_t j = 0; j < objects.size() && objects[i]->content()->getApplyCollision() && objects[i]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW); ++j)
+		for (size_t j = 0; j < objects.size() && objects[j]->content()->getApplyCollision(); ++j)
 		{
 			if (i != j && objects[j]->content()->getApplyCollision())
 			{
@@ -241,7 +241,7 @@ void EntityManager::HandleCollisions(float dt)
 				}
 				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 				{
-					//resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+					// resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
 				}
 				else
 				{
@@ -264,7 +264,26 @@ bool EntityManager::checkSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 
 	float dist = std::abs(glm::dot(sub, norm));
 
-	return dist <= rad1;
+	if (dist > rad1) { // The sphere is not currently intersecting the plane
+		return false;
+	}
+
+	// Additional checks: see if the sphere is still within bounds
+
+	glm::vec3 projectedPoint = point - dist * norm;
+
+	// Finite plane details
+	float planeHalfWidth = obj2->xScale;
+	float planeHalfHeight = obj2->yScale;
+
+	// Is point w/in finite plane
+	if (std::abs(projectedPoint.x - planePos.x) > planeHalfWidth ||
+		std::abs(projectedPoint.y - planePos.y) > planeHalfHeight) {
+
+		return false;
+	}
+
+	return true;
 }
 
 bool EntityManager::checkSphereSphereCollision(Sphere* obj1, Sphere* obj2)
@@ -308,11 +327,8 @@ void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
 {
 	if (checkSphereSphereCollision(obj1, obj2))
 	{
-		auto ctr1 = obj1->getVertices();
-		auto ctr2 = obj2->getVertices();
-
-		glm::vec3 pos1(*(ctr1 + 0), *(ctr1 + 1), *(ctr1 + 2));
-		glm::vec3 pos2(*(ctr2 + 0), *(ctr2 + 1), *(ctr2 + 2));
+		auto pos1 = obj1->getPosition();
+		auto pos2 = obj2->getPosition();
 
 		glm::vec3 nv1(0.0f), nv2(0.0f); // New velocity vectors
 
