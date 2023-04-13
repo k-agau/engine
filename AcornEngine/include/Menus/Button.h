@@ -20,6 +20,7 @@ protected:
 
 	virtual void onHover() = 0;
 	virtual void onUnhover() = 0;
+	virtual void onSelect() = 0;
 	 
 	Plane* area;
 	glm::vec3 scale;
@@ -30,7 +31,7 @@ protected:
 	EventCallbackFn callback;
 
 	Event* m_event;
-
+	float timer = 0.0f;
 };
 
 class ColorButton : Button {
@@ -39,8 +40,8 @@ public:
 	ColorButton(const EventCallbackFn& f, Event* e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos);
 	void onHover() override;
 	void onUnhover() override;
+	void onSelect() override;
 	COLORS getCurrentColor() { return currentColor; };
-	
 
 private:
 	COLORS currentColor;

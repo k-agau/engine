@@ -1,5 +1,7 @@
 #include "Menus/Button.h";
 
+extern float dt;
+
 Button::Button(const EventCallbackFn& f,Event* e, glm::mat4 t, glm::vec3 pos) :
 	callback(f),
 	m_event (e),
@@ -15,7 +17,7 @@ Button::Button(const EventCallbackFn& f,Event* e, glm::mat4 t, glm::vec3 pos) :
 void Button::onClick()
 {
 	callback(*m_event);
-	onHover();
+	onSelect();
 }
 
 void Button::updateButton(float xpos, float ypos)
@@ -36,6 +38,17 @@ ColorButton::ColorButton(const EventCallbackFn& f, Event* e, COLORS bColor, COLO
 	currentColor(bColor)
 {
 
+}
+
+void ColorButton::onSelect()
+{
+
+	currentColor = highlightColor;
+	while (timer < 1.0f)
+	{
+		timer += dt;
+	}
+	currentColor = baseColor;
 }
 
 void ColorButton::onHover()

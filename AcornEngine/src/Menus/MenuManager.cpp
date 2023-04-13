@@ -106,10 +106,13 @@ bool MenuManager::handleEvent(Event& e)
 
 		if (myE) 
 		{
-
+			if (!open)
+			{
 				updateMousePositions(myE->GetX(), myE->GetY());
 
-				return false;
+				return true;
+			}
+
 		}
 	}
 
