@@ -43,7 +43,7 @@ protected:
 	bool applyCollision = false;
 
 	COLORS color = RED;
-	float  mass  = 5.0f;
+	float  mass  = 50.0f;
 
 	glm::vec3 force	   = glm::vec3(0, 0, 0);
 	glm::vec3 velocity = glm::vec3(0, 0, 0);

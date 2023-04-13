@@ -16,27 +16,34 @@ public:
 
 	ScaleEvent(const int id, const ENTITY_EVENT_MOD m) :
 		EntityEvent(id), mod(m) {
-		SetEventType(ScaleInc);
+		SetEventType(Scale);
 	};
 	ENTITY_EVENT_MOD getMod() const { return mod; }
 	ENTITY_EVENT_MOD mod;
-
-
-	
-
 };
-/*
+
 class RotateEvent : public EntityEvent {
 
 public:
 
-	ScaleEvent(int id, const ENTITY_EVENT_MOD m) :
-		EntityEvent(id), mod(m) {};
+	RotateEvent(const int id, const ENTITY_EVENT_MOD m) :
+		EntityEvent(id), mod(m) {
+		SetEventType(Rotate);
+	};
 	ENTITY_EVENT_MOD getMod() const { return mod; }
 	ENTITY_EVENT_MOD mod;
+};
 
+class PositionEvent : public EntityEvent {
 
+public:
 
+	PositionEvent(const int id, const ENTITY_EVENT_MOD m) :
+		EntityEvent(id), mod(m) {
+		SetEventType(Position);
+	};
+	ENTITY_EVENT_MOD getMod() const { return mod; }
+	ENTITY_EVENT_MOD mod;
+};
 
-};*/
 #endif // ENTITY_EVENT_H

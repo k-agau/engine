@@ -14,6 +14,12 @@ public:
 	void onDetach() override;
 	void onUpdate() override;
 	bool onEvent(Event& event) override;
+	bool isEntity(EventType et) { 
+		return
+			et == EventType::Scale  ||
+			et == EventType::Rotate ||
+			et == EventType::Position;
+	}
 
 private:
 	EntityManager* manager;

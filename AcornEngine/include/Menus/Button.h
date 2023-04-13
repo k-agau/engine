@@ -16,7 +16,7 @@ protected:
 
 	using EventCallbackFn = std::function<void(Event&)>;
 
-	Button(const EventCallbackFn& f, ScaleEvent e, glm::mat4 t, glm::vec3 pos);
+	Button(const EventCallbackFn& f, Event* e, glm::mat4 t, glm::vec3 pos);
 
 	virtual void onHover() = 0;
 	virtual void onUnhover() = 0;
@@ -29,14 +29,14 @@ protected:
 	
 	EventCallbackFn callback;
 
-	ScaleEvent m_event;
+	Event* m_event;
 
 };
 
 class ColorButton : Button {
 
 public:
-	ColorButton(const EventCallbackFn& f, ScaleEvent e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos);
+	ColorButton(const EventCallbackFn& f, Event* e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos);
 	void onHover() override;
 	void onUnhover() override;
 	COLORS getCurrentColor() { return currentColor; };

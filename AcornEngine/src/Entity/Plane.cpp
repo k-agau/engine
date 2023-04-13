@@ -4,7 +4,11 @@ Plane::Plane(std::string _debugName, glm::vec3 pos) :
 	EntityImpl(ENTITY_TYPE::PLANE, _debugName, pos)
 {
 	setColor(BLUE);
-	rotation = glm::rotate(glm::mat4(1.0), glm::radians(-89.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::mat4 trans = glm::mat4(1.0f);
+	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 5.0f));
+	position = trans * vec;
+	rotation = glm::rotate(glm::mat4(1.0), glm::radians(-70.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	scale = glm::vec3(xScale, yScale, noScale);
 	transform = getTransform();
 
@@ -87,7 +91,7 @@ void Plane::rotatevec3(glm::vec3 r)
 }
 glm::mat4 Plane::rotate(float degrees)
 {
-	transform = glm::rotate(transform, glm::radians(0.000001f), glm::vec3(0.0f, 1.0f, 0.0f));
+	transform = glm::rotate(transform, glm::radians(degrees), glm::vec3(0.0f, 1.0f, 0.0f));
 	/*glm::mat4 invert = glm::inverse(transform);
 	forward = glm::normalize(glm::vec3(invert[2]));*/
 	return transform;

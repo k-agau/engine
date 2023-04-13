@@ -69,11 +69,20 @@ bool MenuManager::handleEvent(Event& e)
 				return true;
 				
 			}
+			case Key::P: {
+
+				if (!open)
+				{
+					togglePos = (togglePos + 2) % 6;
+					return true;
+				}
+
+			}
 			case Key::RightBracket: {
 
 				if (!open)
 				{
-					menus[0]->buttons[0]->onClick();
+					menus[0]->buttons[togglePos]->onClick();
 					return true;
 				}
 
@@ -82,7 +91,7 @@ bool MenuManager::handleEvent(Event& e)
 
 				if (!open)
 				{
-					menus[0]->buttons[1]->onClick();
+					menus[0]->buttons[togglePos+1]->onClick();
 					return true;
 				}
 

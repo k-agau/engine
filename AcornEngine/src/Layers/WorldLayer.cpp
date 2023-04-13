@@ -27,7 +27,8 @@ void WorldLayer::onUpdate()
 
 bool WorldLayer::onEvent(Event& event)
 {
-	if (event.GetEventType() == ScaleInc)
+	EventType et = event.GetEventType();
+	if (isEntity(et))
 	{
 		return manager->updateWorld(ENTITY_TYPE::CUBE, event);
 

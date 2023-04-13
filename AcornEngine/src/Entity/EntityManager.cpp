@@ -14,6 +14,7 @@ EntityManager::EntityManager() {
 	sphereDimensions.push_back(std::pair(10, 10)); //Low  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
+	collideSphere = false;
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
@@ -121,6 +122,7 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 						COLORS c = static_cast<COLORS>(color);
 						tmp->content()->setColor(c);
 				}
+				case Key::L: collideSphere = !collideSphere; return true;
 				}
 
 			}
@@ -161,7 +163,7 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 	}
 	else {
 
-		if (eventType == EventType::ScaleInc)
+		if (eventType == EventType::Scale)
 		{
 			ScaleEvent* myE = dynamic_cast<ScaleEvent*>(&e);
 
@@ -187,11 +189,67 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 						}
 
 						a->setTransform(glm::scale(a->getTransform(), a->scale) );
-
+						return true;
 					}
 				}
-				}
+			}
+		}
+		if (eventType == EventType::Rotate)
+		{
+			RotateEvent* myE = dynamic_cast<RotateEvent*>(&e);
 
+			if (myE)
+			{
+
+				for (auto i : worldObjects)
+				{
+					if (i->content()->getID() == myE->uid)
+					{
+						glm::mat4 tmp;
+						auto a = (Cube*)i->content();
+						if (myE->getMod() == INC)
+						{
+							a->rotate(45.0f);
+						}
+						else
+						{
+							a->rotate(-45.0f);
+						}
+						
+						return true;
+					}
+				}
+			}
+		}
+		if (eventType == EventType::Position)
+		{
+			PositionEvent* myE = dynamic_cast<PositionEvent*>(&e);
+
+			if (myE)
+			{
+
+				for (auto i : worldObjects)
+				{
+					if (i->content()->getID() == myE->uid)
+					{
+						glm::mat4 tmp;
+						auto a = (Cube*)i->content();
+						auto p = a->getPosition();
+						if (myE->getMod() == INC)
+						{
+							p.x += 2.0f;
+							a->setPosition(p);
+						}
+						else
+						{
+							p.x -= 2.0f;
+							a->setPosition(p);
+						}
+
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}
@@ -297,7 +355,7 @@ void EntityManager::HandleCollisions(float dt)
 				}
 				else if (objects[j]->content()->type & (SPHERE_HIGH | SPHERE_MID | SPHERE_LOW))
 				{
-					//resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
+					if(collideSphere) resolveSphereSphereCollision(dynamic_cast<Sphere*>(objects[i]->content()), dynamic_cast<Sphere*>(objects[j]->content()));
 				}
 				else
 				{
@@ -368,7 +426,7 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 		auto norm = obj2->getNormal();
 		auto vel = obj1->getVelocity();
 
-		glm::vec3 reflected = norm * (norm * vel) * 2.0f;
+		glm::vec3 reflected = norm * (norm * vel) * 2.0f * 0.1f;
 
 		/*glm::vec3* v = &obj1->getVelocity();
 		*v -= reflected;*/
@@ -376,9 +434,8 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 		auto v = &obj1->getVelocity();
 		auto mag = glm::length(*v);
 
-		*v = *v + norm * mag * .01f;
-
-		auto x = 1 + 1;
+		*v = *v - norm * reflected;
+		*v = *v + glm::vec3(0.0, 0.5, 0.1);
 	}
 }
 

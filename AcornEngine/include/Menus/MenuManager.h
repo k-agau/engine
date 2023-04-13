@@ -34,6 +34,7 @@ public:
 		lastX = xpos; lastY = ypos;
 	}
 	bool open = false;
+	int togglePos = 0;
 	int currentID = 1;
 
 	//Menu* createHomeMenu();

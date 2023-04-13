@@ -1,6 +1,6 @@
 #include "Menus/Button.h";
 
-Button::Button(const EventCallbackFn& f,ScaleEvent e, glm::mat4 t, glm::vec3 pos) :
+Button::Button(const EventCallbackFn& f,Event* e, glm::mat4 t, glm::vec3 pos) :
 	callback(f),
 	m_event (e),
 	area(new Plane("button", pos)), 
@@ -14,7 +14,7 @@ Button::Button(const EventCallbackFn& f,ScaleEvent e, glm::mat4 t, glm::vec3 pos
 
 void Button::onClick()
 {
-	callback(m_event);
+	callback(*m_event);
 	onHover();
 }
 
@@ -29,7 +29,7 @@ void Button::updateButton(float xpos, float ypos)
 	}
 }
 
-ColorButton::ColorButton(const EventCallbackFn& f, ScaleEvent e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos) :
+ColorButton::ColorButton(const EventCallbackFn& f, Event* e, COLORS bColor, COLORS hColor, glm::mat4 t, glm::vec3 pos) :
 	Button(f,e,t,pos), 
 	baseColor(bColor),
 	highlightColor(hColor), 

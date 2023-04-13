@@ -5,6 +5,7 @@ Cube::Cube(std::string _debugName, glm::vec3 pos) :
 
 {
 	rotation = glm::vec3(1, 1, 1);
+	rot = 0.0;
 	scale = glm::vec3(1, 1, 1);
 	transform = getTransform();
 }
@@ -38,15 +39,15 @@ void Cube::onEvent(Event& event)
 
 glm::mat4 Cube::getTransform()
 {
-	glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
 	return glm::translate(glm::mat4(1.0f), position)
+		* glm::rotate(glm::mat4(1.0), glm::radians(rot), glm::vec3(1.0, 0.0, 0.0))
 		* glm::scale(glm::mat4(1.0f), scale);
 }
 
-glm::mat4 Cube::rotate() {
+glm::mat4 Cube::rotate(float degrees) {
 
-	transform = glm::rotate(transform, glm::radians(0.01f), glm::vec3(0.5f, 1.0f, 0.0f));
-	return transform;
+	rot += degrees;
+	return getTransform();
 
 }
