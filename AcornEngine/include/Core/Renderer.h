@@ -35,7 +35,8 @@ private:
 		projectionShaderLoc, 
 		colorShaderLoc,
 		cameraShaderLoc,
-		lightLoc;
+		lightLoc,
+		isBackMenuLoc;
 
 	void initGeom();
 	void initCube();

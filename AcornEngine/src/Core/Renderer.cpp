@@ -31,6 +31,7 @@ void Renderer::init()
 	colorShaderLoc = glGetUniformLocation(shaderManager->ID, "entityColor");
 	cameraShaderLoc = glGetUniformLocation(shaderManager->ID, "viewPos");
 	lightLoc = glGetUniformLocation(shaderManager->ID, "lightPos");
+	isBackMenuLoc = glGetUniformLocation(shaderManager->ID, "isMenu");
 	
 	std::cout << glGetError() << std::endl;
 
@@ -174,6 +175,7 @@ void Renderer::renderWorld(Layer* layer)
 		glBindVertexArray(typeProperties[ENTITY_TYPE::PLANE][VAO_IDX]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glUniform1i(isBackMenuLoc, 1);
 
 		for (auto m : menuManager->menus)
 		{
@@ -232,6 +234,8 @@ void Renderer::renderWorld(Layer* layer)
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 			}
 		}
+
+		glUniform1i(isBackMenuLoc, 0);
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glBindVertexArray(0);
@@ -331,7 +335,8 @@ void Renderer::initPlane()
 	//1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
 	//	-1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
 	//1.0,-1.0,0.0, 0.0f,  0.0f, 1.0f,
-
+	// 
+	//verticies					  //normals
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, 1.0f,

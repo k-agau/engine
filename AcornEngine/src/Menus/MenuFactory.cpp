@@ -32,7 +32,7 @@ Menu* MenuFactory::makeEntityMenu(int id)
 	float y_off = 0.0;
 
 	ScaleEvent* newEvent = new ScaleEvent(4, INC);
-	Menu* m = new Menu(menuV, ORANGE, menuP);
+	Menu* m = new Menu(menuV, BLUE, menuP);
 	glm::vec3 menuF = glm::normalize(glm::vec3(menuV[2]));
 	Button* b = nullptr;
 
@@ -40,13 +40,13 @@ Menu* MenuFactory::makeEntityMenu(int id)
 	{
 		if (i % 2)
 		{
-			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-1)%3](4, INC)), BLUE, GREEN, menuV, menuP);
+			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-1)%3](4, INC)), WHITE, GREEN, menuV, menuP);
 			m->addButton(b);
 			b->setTransform(glm::translate(b->getTransform(), glm::vec3(2.6f, 3.8f + y_off, -11.9f)));
 		}
 		else
 		{
-			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-2)%3](4, DEC)), BLUE, GREEN, menuV, menuP);
+			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-2)%3](4, DEC)), WHITE, GREEN, menuV, menuP);
 			m->addButton(b);
 			b->setTransform(glm::translate(b->getTransform(), glm::vec3(4.8f, 3.8f + y_off, -11.9f)));
 			y_off -= 2.0;

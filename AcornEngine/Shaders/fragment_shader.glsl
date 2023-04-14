@@ -5,13 +5,22 @@ in vec3 FragPos;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;
+uniform bool isMenu;
 
 out vec4 FragColor; 
 void main()
 {
     vec3 lightColor = vec3(1.0,1.0,0.5);
 
-    //Calculate Ambient
+    vec3 result;
+
+    if(isMenu)
+    {
+        result = ourColor;
+    }
+    else {
+
+     //Calculate Ambient
     float ambientStrength = 0.4f;
     vec3 ambient = ambientStrength * lightColor;
     
@@ -27,7 +36,8 @@ void main()
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 256);
     vec3 specular = specularStrength * spec * lightColor;  
-
-    vec3 result = (ambient + diffuse + specular) * ourColor;
+     result = (ambient + diffuse + specular) * ourColor;
+    }
+   
     FragColor = vec4(result, 1.0);
 }
