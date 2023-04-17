@@ -15,6 +15,7 @@ EntityManager::EntityManager() {
 	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
 	collideSphere = false;
+	currentAxis = X_AXIS;
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
@@ -106,7 +107,16 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 				case Key::D: camera->MoveRight(); return true;
 
-				case Key::Right: demo = (demo + 1) % 3; return true;
+				case Key::Right: {
+
+					auto tmp1 = addSphereToWorld(glm::vec3(-10.0f, 2, randomUint8_t()), SPHERE_HIGH);
+					auto tmp2 = addSphereToWorld(glm::vec3(10.0f, 2, randomUint8_t()), SPHERE_HIGH);
+
+					glm::vec3 dir = tmp1->content()->getPosition() - tmp2->content()->getPosition();
+					tmp2->content()->setForce(dir * 5000.0f);
+					tmp1->content()->setForce(dir * -5000.0f);
+
+				}
 
 				case Key::T: test = !test; break;
         
@@ -118,9 +128,6 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 
 						auto tmp = addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); return true;
 						tmp->content()->setApplyCollision(true);
-						color = ++color % 8;
-						COLORS c = static_cast<COLORS>(color);
-						tmp->content()->setColor(c);
 				}
 				case Key::L: collideSphere = !collideSphere; return true;
 				}
@@ -166,7 +173,6 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 		if (eventType == EventType::Scale)
 		{
 			ScaleEvent* myE = dynamic_cast<ScaleEvent*>(&e);
-
 			if (myE)
 			{
 
@@ -174,7 +180,7 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 				{
 					if (i->content()->getID() == myE->uid)
 					{
-						auto a = (Cube*)i->content();
+						auto a = (Sphere*)i->content();
 						if (myE->getMod() == INC)
 						{
 							a->scale[0] += 1.5f;
@@ -197,7 +203,6 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 		if (eventType == EventType::Rotate)
 		{
 			RotateEvent* myE = dynamic_cast<RotateEvent*>(&e);
-
 			if (myE)
 			{
 
@@ -205,8 +210,8 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 				{
 					if (i->content()->getID() == myE->uid)
 					{
-						glm::mat4 tmp;
-						auto a = (Cube*)i->content();
+						auto a = (Sphere*)i->content();
+						a->currentAxis = currentAxis;
 						if (myE->getMod() == INC)
 						{
 							a->rotate(45.0f);
@@ -224,25 +229,22 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 		if (eventType == EventType::Position)
 		{
 			PositionEvent* myE = dynamic_cast<PositionEvent*>(&e);
-
 			if (myE)
 			{
-
 				for (auto i : worldObjects)
 				{
 					if (i->content()->getID() == myE->uid)
 					{
-						glm::mat4 tmp;
-						auto a = (Cube*)i->content();
+						auto a = (Sphere*)i->content();
 						auto p = a->getPosition();
 						if (myE->getMod() == INC)
 						{
-							p.x += 2.0f;
+							p += 2.0f * currentAxis;
 							a->setPosition(p);
 						}
 						else
 						{
-							p.x -= 2.0f;
+							p -= 2.0f * currentAxis;
 							a->setPosition(p);
 						}
 
@@ -435,7 +437,6 @@ void EntityManager::resolveSpherePlaneCollision(Sphere* obj1, Plane* obj2)
 		auto mag = glm::length(*v);
 
 		*v = *v - norm * reflected;
-		*v = *v + glm::vec3(0.0, 0.5, 0.1);
 	}
 }
 

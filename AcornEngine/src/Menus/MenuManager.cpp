@@ -13,6 +13,11 @@ void MenuManager::init(const EventCallbackFn& f, glm::mat4 view, glm::vec3 pos)
 	callback = f;
 	factory = new MenuFactory(callback);
 	updateCam(view, pos);
+	axisLoc = 0;
+	axes.insert(std::pair(0, X_AXIS));
+	axes.insert(std::pair(1, Y_AXIS));
+	axes.insert(std::pair(2, Z_AXIS));
+	currentAxis = axes[axisLoc];
 }
 
 MenuManager* MenuManager::instance()
@@ -92,6 +97,15 @@ bool MenuManager::handleEvent(Event& e)
 				if (!open)
 				{
 					menus[0]->buttons[togglePos+1]->onClick();
+					return true;
+				}
+
+			}
+			case Key::O: {
+
+				if (!open)
+				{
+					currentAxis = axes[++axisLoc % 3];
 					return true;
 				}
 

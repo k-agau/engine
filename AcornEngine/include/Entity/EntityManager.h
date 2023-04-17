@@ -5,7 +5,6 @@
 #include "Entity/EntityFactory.h"
 #include <random>
 #include <vector>
-
 class EntityManager
 {
 private:
@@ -32,6 +31,7 @@ public:
 	EntityManager(const EntityManager&) = delete;
 	EntityManager& operator= (const EntityManager&) = delete;
 	static EntityManager* instance();
+	glm::vec3 currentAxis;
 
 	std::vector<Entity*> worldObjects;
 	std::vector<std::pair<unsigned int, unsigned int>> sphereDimensions;
@@ -52,6 +52,8 @@ public:
 	glm::mat4 updateView();
 	bool updateWorld(ENTITY_TYPE Target, Event& e);
 	void worldStep();
+	//void Pause();
+	//void Resume();
 	int color = 0;
 	//Get
 	const std::vector<Entity*> getWorldEntities() const;

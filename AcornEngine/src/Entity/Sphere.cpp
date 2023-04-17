@@ -1,16 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-// Sphere.cpp
-// ==========
-// Sphere for OpenGL with (radius, sectors, stacks)
-// The min number of sectors is 3 and the min number of stacks are 2.
-// The default up axis is +Z axis. You can change the up axis with setUpAxis():
-// X=1, Y=2, Z=3.
-//
-//  AUTHOR: Song Ho Ahn (song.ahn@gmail.com)
-// CREATED: 2017-11-01
-// UPDATED: 2023-03-11
-///////////////////////////////////////////////////////////////////////////////
-
 #ifdef _WIN32
 #include <windows.h>    // include windows.h to avoid thousands of compile errors even though this class is not depending on Windows
 #endif
@@ -29,21 +16,17 @@
 
 
 
-// constants //////////////////////////////////////////////////////////////////
+// constants
 const int MIN_SECTOR_COUNT = 3;
 const int MIN_STACK_COUNT  = 2;
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// ctor
-///////////////////////////////////////////////////////////////////////////////
 Sphere::Sphere(float radius, int sectors, int stacks, bool smooth, int up, bool _applyPhysics, bool _applyCollision) : interleavedStride(32),
     EntityImpl(ENTITY_TYPE::SPHERE_HIGH, "sphere", glm::vec3(0,0,0))
 {
     set(radius, sectors, stacks, smooth, up);
 
-    rotation = glm::vec3(1, 1, 1);
+    rotation = glm::mat4(1.0f);
+    rot = 0.0;
     scale = glm::vec3(1, 1, 1);
     transform = getTransform();
 
@@ -57,7 +40,7 @@ Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, E
 {
     set(1.0f, sectors, stacks, true, 3);
 
-    rotation = glm::vec3(1, 1, 1);
+    rotation = glm::mat4(1.0f);
     scale = glm::vec3(1, 1, 1);
     transform = getTransform();
 
@@ -65,11 +48,6 @@ Sphere::Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, E
     applyCollision = _applyCollision;
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// setters
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::set(float radius, int sectors, int stacks, bool smooth, int up)
 { 
     if(radius > 0)
@@ -130,11 +108,6 @@ void Sphere::setUpAxis(int up)
     this->upAxis = up;
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// flip the face normals to opposite directions
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::reverseNormals()
 {
     std::size_t i, j;
@@ -162,11 +135,6 @@ void Sphere::reverseNormals()
     }
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// print itself
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::printSelf() const
 {
     std::cout << "===== Sphere =====\n"
@@ -188,9 +156,6 @@ void Sphere::printSelf() const
         << "Indcies: " << getIndices() << std::endl;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// dealloc vectors
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::clearArrays()
 {
     std::vector<float>().swap(vertices);
@@ -200,14 +165,6 @@ void Sphere::clearArrays()
     std::vector<unsigned int>().swap(lineIndices);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// build vertices of sphere with smooth shading using parametric equation
-// x = r * cos(u) * cos(v)
-// y = r * cos(u) * sin(v)
-// z = r * sin(u)
-// where u: stack(latitude) angle (-90 <= u <= 90)
-//       v: sector(longitude) angle (0 <= v <= 360)
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::buildVerticesSmooth()
 {
     const float PI = acos(-1.0f);
@@ -296,12 +253,6 @@ void Sphere::buildVerticesSmooth()
         changeUpAxis(3, this->upAxis);
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// generate vertices with flat shading
-// each triangle is independent (no shared vertices)
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::buildVerticesFlat()
 {
     const float PI = acos(-1.0f);
@@ -469,11 +420,6 @@ void Sphere::buildVerticesFlat()
 }
 
 
-
-///////////////////////////////////////////////////////////////////////////////
-// generate interleaved vertices: V/N/T
-// stride must be 32 bytes
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::buildInterleavedVertices()
 {
     std::vector<float>().swap(interleavedVertices);
@@ -495,12 +441,6 @@ void Sphere::buildInterleavedVertices()
     }
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// transform vertex/normal (x,y,z) coords
-// assume from/to values are validated: 1~3 and from != to
-///////////////////////////////////////////////////////////////////////////////
 void Sphere::changeUpAxis(int from, int to)
 {
     // initial transform matrix cols
@@ -668,8 +608,15 @@ std::vector<float> Sphere::computeFaceNormal(float x1, float y1, float z1,  // v
 
 glm::mat4 Sphere::getTransform() 
 {
-    glm::mat4 rot = glm::toMat4(glm::quat(rotation));
-
     return glm::translate(glm::mat4(1.0f), position)
+        * rotation
         * glm::scale(glm::mat4(1.0f), scale);
+}
+
+void Sphere::rotate(float degrees) {
+
+    rot += degrees;
+    rotation = glm::rotate(rotation, glm::radians(degrees), currentAxis);
+    getTransform();
+
 }

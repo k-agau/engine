@@ -22,7 +22,7 @@ public:
 	glm::mat4 rotate(float degrees);
 	float rot;
 	glm::mat4 transform;
-	glm::vec3 rotation;
+	glm::mat4 rotation;
 	glm::vec3 getPosition() { return position; };
 	void setPosition(glm::vec3 p) { position = p; transform = getTransform(); }
 private:

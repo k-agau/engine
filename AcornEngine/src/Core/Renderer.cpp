@@ -51,7 +51,7 @@ void Renderer::initGeom()
 	initSphere();
 	initEntityColors();
 
-	entityManager->addCubeToWorld(glm::vec3(5.0, 5.0, 0.0));
+	entityManager->addSphereToWorld(glm::vec3(5.0, 5.0, 0.0), SPHERE_HIGH);
 	float i = -12.5f;
 	for (auto color : entityColors) 
 	{
@@ -64,25 +64,14 @@ void Renderer::initGeom()
 	
 	menuManager->createEntityMenu(1);
 	//entityManager->addPlaneToWorld(glm::vec3(0.0, 0.0, 0.0));
-	L = entityManager->addCubeToWorld(glm::vec3(10.0, 5.0, 0.0));
+	L = entityManager->addCubeToWorld(glm::vec3(0.0, 5.0, 0.0));
 	L->content()->setColor(WHITE);
 
-
-
-	
-//
-//	
-//	entityManager->addCubeToWorld(glm::vec3(0, 0, 0));
-//	entityManager->addCubeToWorld(glm::vec3(10.0, 20.0, 0.0));
-//	entityManager->addSphereToWorld(glm::vec3(5.0, 0.0, 0.0), SPHERE_MID);
-//
-
 	Entity* tmp = entityManager->addPlaneToWorld(glm::vec3(0, -1.0, 0.0));
-	//tmp->rotate(glm::vec3(-0.97f, 0.5f, 0.0f));
-	//auto transform = &tmp->content()->getTransform();
-	//*transform = glm::rotate(tmp->content()->getTransform(), 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	//tmp->content()->setApplyCollision(true);
-
+	tmp->content()->setColor(BLACK);
+	tmp = entityManager->addPlaneToWorld(glm::vec3(0.0, 11.0, 0.0));
+	tmp->content()->setColor(BLUE);
+	tmp->content()->setApplyCollision(false);
 }
 
 void Renderer::Update()
@@ -100,8 +89,8 @@ void Renderer::Update()
 	glm::vec3 C = entityManager->camera->GetPosition();
 
 	//light dem
-	L->content()->getPosition()[0] = 1.0f + sin(glfwGetTime()) * 2.0f;
-	L->content()->getPosition()[2] = -10.0f + sin(glfwGetTime()) * 10.0;
+	L->content()->getPosition()[0] = cos(glfwGetTime()) * 10.0f;
+	L->content()->getPosition()[2] = sin(glfwGetTime()) * 10.0;
 
 	//necessary gpu updates
 	glUniformMatrix4fv(projectionShaderLoc, 1, GL_FALSE, glm::value_ptr(P));
@@ -176,6 +165,7 @@ void Renderer::renderWorld(Layer* layer)
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glUniform1i(isBackMenuLoc, 1);
+		entityManager->currentAxis = menuManager->currentAxis;
 
 		for (auto m : menuManager->menus)
 		{

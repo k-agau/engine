@@ -17,7 +17,9 @@ public:
 	~MenuManager();
 	MenuManager(const MenuManager&) = delete;
 	MenuManager& operator= (const MenuManager&) = delete;
-
+	glm::vec3 currentAxis;
+	std::unordered_map<int, glm::vec3> axes;
+	int axisLoc;
 	EventCallbackFn callback;
 
 	std::vector<Menu*> menus;

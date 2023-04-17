@@ -21,6 +21,7 @@ public:
 	glm::vec3 getNormal();
 
 	glm::mat4 getTransform() override;
+	void setTransform(glm::mat4x4 t) { transform = t; };
 	glm::mat4 getRotation();
 
 	COLORS color;
@@ -33,10 +34,13 @@ public:
 	glm::mat4 rotation;
 	glm::vec3 scale;
 
-	float xScale = 10.0;
-	float yScale = 10.0;
-	float noScale = 10.0;
+	float xScale = 20.0;
+	float yScale = 20.0;
+	float noScale = 20.0;
 	bool isMenu = false;
+
+	void setPosition(glm::vec3 p) { position = p; transform = getTransform(); }
+
 private:
 	glm::vec3 normal;
 };

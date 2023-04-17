@@ -33,6 +33,10 @@ enum COLORS {
 
 };
 
+static glm::vec3 X_AXIS = glm::vec3(1.0f, 0.0f, 0.0f);
+static glm::vec3 Y_AXIS = glm::vec3(0.0f, 1.0f, 0.0f);
+static glm::vec3 Z_AXIS = glm::vec3(0.0f, 0.0f, 1.0f);
+
 class EntityImpl
 {
 protected:
@@ -74,6 +78,7 @@ public:
 	virtual void	   setPostion(glm::vec3 pos) { position = pos; }
 
 	//Object Settings
+	void setForce(glm::vec3 f) { force = f; };
 	inline void setApplyPhysics(bool apply) { applyPhysics = apply; };
 	inline void setApplyCollision(bool apply) { applyCollision = apply; };
 	inline void setID(unsigned int newID) { ID = newID; }
@@ -82,6 +87,8 @@ public:
 	inline void setColor(COLORS c) { color = c; }
 	inline bool getApplyPhysics() { return applyPhysics; };
 	inline void setVelocity(glm::vec3 newVel) { velocity = newVel; }
+
+	glm::vec3 currentAxis;
 
 };
 

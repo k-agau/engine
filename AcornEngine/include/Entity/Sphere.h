@@ -1,15 +1,6 @@
-///////////////////////////////////////////////////////////////////////////////
-// Sphere.h
-// ========
-// Sphere for OpenGL with (radius, sectors, stacks)
-// The min number of sectors is 3 and the min number of stacks are 2.
-// The default up axis is +Z axis. You can change the up axis with setUpAxis():
-// X=1, Y=2, Z=3.
-//
-//  AUTHOR: Song Ho Ahn (song.ahn@gmail.com)
-// CREATED: 2017-11-01
-// UPDATED: 2023-03-11
-///////////////////////////////////////////////////////////////////////////////
+
+// Sphere.h, Sphere.cpp
+// Code adapted from Song Ho Ahn into AcornEngine's architecture. 
 
 #ifndef GEOMETRY_SPHERE_H
 #define GEOMETRY_SPHERE_H
@@ -19,12 +10,22 @@ static int MAX_VERTEX_COUNT = 30603;
 
 #include "Entity.h"
 #include <vector>
+#include "glm/glm.hpp"
 
 class Sphere : public EntityImpl
 {
 public:
 
     glm::mat4 getTransform() override;
+    void setTransform(glm::mat4x4 t) { transform = t; };
+    void setPosition(glm::vec3 p) { position = p; transform = getTransform(); }
+    void rotate(float degrees);
+    glm::vec3 scale;
+    float rot;
+    glm::mat4 transform;
+    glm::mat4 rotation;
+
+
     // ctor/dtor
     Sphere(float radius=1.0f, int sectorCount=36, int stackCount=18, bool smooth=true, int up=3, bool _applyPhysics = false, bool _applyCollision = false);
     Sphere(std::string _debugName, glm::vec3 pos, int sectors, int stacks, ENTITY_TYPE res, bool _applyPhysics = true, bool _applyCollision = true);
@@ -108,9 +109,6 @@ private:
     // interleaved
     std::vector<float> interleavedVertices;
     int interleavedStride;                  // # of bytes to hop to the next vertex (should be 32 bytes)
-    glm::mat4 transform;
-    glm::vec3 rotation;
-    glm::vec3 scale;
 };
 
 #endif
