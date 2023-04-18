@@ -37,7 +37,7 @@ public:
 	}
 	bool open = false;
 	int togglePos = 0;
-	int currentID = 1;
+	int currentID;
 
 	//Menu* createHomeMenu();
 	//Menu* createEditorMenu();

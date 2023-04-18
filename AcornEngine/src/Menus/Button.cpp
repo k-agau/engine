@@ -14,6 +14,11 @@ Button::Button(const EventCallbackFn& f,Event* e, glm::mat4 t, glm::vec3 pos) :
 	area->transform = glm::scale(area->transform, scale);
 }
 
+Button::~Button()
+{
+	area->~Plane();
+}
+
 void Button::onClick()
 {
 	callback(*m_event);
@@ -35,7 +40,8 @@ ColorButton::ColorButton(const EventCallbackFn& f, Event* e, COLORS bColor, COLO
 	Button(f,e,t,pos), 
 	baseColor(bColor),
 	highlightColor(hColor), 
-	currentColor(bColor)
+	currentColor(bColor),
+	isHovered(false)
 {
 
 }
@@ -54,9 +60,11 @@ void ColorButton::onSelect()
 void ColorButton::onHover()
 {
 	currentColor = highlightColor;
+	isHovered = true;
 }
 
 void ColorButton::onUnhover()
 {
 	currentColor = baseColor;
+	isHovered = false;
 }

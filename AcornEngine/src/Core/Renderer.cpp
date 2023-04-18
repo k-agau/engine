@@ -51,11 +51,11 @@ void Renderer::initGeom()
 	initSphere();
 	initEntityColors();
 
-	entityManager->addSphereToWorld(glm::vec3(5.0, 5.0, 0.0), SPHERE_HIGH);
+	entityManager->addSphereToWorld(glm::vec3(5.0, 5.0, 0.0), SPHERE_LOW);
 	float i = -12.5f;
 	for (auto color : entityColors) 
 	{
-		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_HIGH);
+		auto e = entityManager->addSphereToWorld(glm::vec3(i, 0, -20), SPHERE_LOW);
 		e->content()->setColor(color.first);
 		e->content()->setApplyPhysics(false);
 		i += 5;
@@ -135,6 +135,15 @@ void Renderer::renderWorld(Layer* layer)
 			//get transform
 			M = e->content()->getTransform();
 
+			if (menuManager->currentID == e->content()->getID() && !menuManager->open)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
+			else
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
+
 			//update uniforms
 			glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
 			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
@@ -204,9 +213,12 @@ void Renderer::renderWorld(Layer* layer)
 				*/
 
 				ColorButton* a = (ColorButton*)b;
-
-					b->updateButton(mousePos.x, mousePos.y);
+				//if (entityManager->test)
+				//{
+					b->updateButton(menuManager->lastX, menuManager->lastY);
 					entityManager->test = false;
+				//}
+
 			
 				//update uniforms
 				glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));

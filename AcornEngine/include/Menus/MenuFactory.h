@@ -4,6 +4,8 @@
 #include <functional>
 #include <unordered_map>
 
+static float WIDTH = 800.0f;
+static float HEIGHT = 600.0f;
 
 class MenuFactory {
 	

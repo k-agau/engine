@@ -52,8 +52,8 @@ public:
 	glm::mat4 updateView();
 	bool updateWorld(ENTITY_TYPE Target, Event& e);
 	void worldStep();
-	//void Pause();
-	//void Resume();
+	void Pause();
+	void Resume();
 	int color = 0;
 	//Get
 	const std::vector<Entity*> getWorldEntities() const;

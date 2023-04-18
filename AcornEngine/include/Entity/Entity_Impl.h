@@ -45,6 +45,7 @@ protected:
 	int ID = -1;
 	bool applyPhysics   = false;
 	bool applyCollision = false;
+	bool affectedByPause = false;
 
 	COLORS color = RED;
 	float  mass  = 50.0f;
@@ -76,10 +77,11 @@ public:
 	virtual float	   getMass()	 const { return mass; };
 	virtual bool	   getApplyCollision() const { return applyCollision; };
 	virtual void	   setPostion(glm::vec3 pos) { position = pos; }
-
+	virtual bool	   getaffectedByPause() { return affectedByPause; }
 	//Object Settings
 	void setForce(glm::vec3 f) { force = f; };
 	inline void setApplyPhysics(bool apply) { applyPhysics = apply; };
+	inline void setAffectedByPause(bool p) { affectedByPause = p; }
 	inline void setApplyCollision(bool apply) { applyCollision = apply; };
 	inline void setID(unsigned int newID) { ID = newID; }
 	inline int	 getID() { return ID; }

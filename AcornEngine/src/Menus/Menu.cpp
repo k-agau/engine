@@ -16,5 +16,14 @@ Menu::~Menu()
 {
 	open = false;
 	area->~Plane();
+	for (auto i : buttons)
+	{
+		i->~Button();
+	}
 
+}
+
+void Menu::setID(int id)
+{
+	for (auto i : buttons) { static_cast<EntityEvent*>(i->m_event)->uid = id; }
 }

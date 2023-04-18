@@ -18,6 +18,7 @@ void MenuManager::init(const EventCallbackFn& f, glm::mat4 view, glm::vec3 pos)
 	axes.insert(std::pair(1, Y_AXIS));
 	axes.insert(std::pair(2, Z_AXIS));
 	currentAxis = axes[axisLoc];
+	currentID = 4;
 }
 
 MenuManager* MenuManager::instance()
@@ -83,7 +84,7 @@ bool MenuManager::handleEvent(Event& e)
 				}
 
 			}
-			case Key::RightBracket: {
+			case Key::LeftBracket: {
 
 				if (!open)
 				{
@@ -92,7 +93,7 @@ bool MenuManager::handleEvent(Event& e)
 				}
 
 			}
-			case Key::LeftBracket: {
+			case Key::RightBracket: {
 
 				if (!open)
 				{
@@ -110,6 +111,26 @@ bool MenuManager::handleEvent(Event& e)
 				}
 
 			}
+			case Key::Comma: {
+
+				if (!open)
+				{
+					--currentID;
+					menus[0]->setID(currentID);
+					return true;
+				}
+
+			}
+			case Key::Period: {
+
+				if (!open)
+				{
+					++currentID;
+					menus[0]->setID(currentID);
+					return true;
+				}
+
+			}
 			}
 		}
 	}
@@ -123,6 +144,28 @@ bool MenuManager::handleEvent(Event& e)
 			if (!open)
 			{
 				updateMousePositions(myE->GetX(), myE->GetY());
+
+				return true;
+			}
+
+		}
+	}
+	else if (et == EventType::MousePressed)
+	{
+
+		MouseButtonPressedEvent* myE = dynamic_cast<MouseButtonPressedEvent*>(&e);
+
+		if (myE)
+		{
+			if (!open)
+			{
+				for (auto b : menus[0]->buttons)
+				{
+					if (static_cast<ColorButton*>(b)->isBeingHovered())
+					{
+						b->onClick();
+					}
+				}
 
 				return true;
 			}

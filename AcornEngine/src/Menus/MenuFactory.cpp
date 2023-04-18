@@ -27,77 +27,61 @@ void MenuFactory::init()
 
 Menu* MenuFactory::makeEntityMenu(int id) 
 {
-
-	float X_OFFSET = 2.4;
+	
+	float centerX = WIDTH  / 2.0f;
+	float centerY = HEIGHT / 2.0f;
 	float y_off = 0.0;
+	float x_screen_off = 131;
+	float y_screen_off = 109;
+	float button_width = 25.0f;
 
-	ScaleEvent* newEvent = new ScaleEvent(4, INC);
+	ScaleEvent* newEvent = new ScaleEvent(id, INC);
 	Menu* m = new Menu(menuV, BLUE, menuP);
 	glm::vec3 menuF = glm::normalize(glm::vec3(menuV[2]));
 	Button* b = nullptr;
-
+	int j = 0;
 	for (int i = 1; i < 7; ++i)
 	{
 		if (i % 2)
 		{
-			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-1)%3](4, INC)), WHITE, GREEN, menuV, menuP);
+			//create button
+			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-1)%3](id, DEC)), WHITE, BLACK, menuV, menuP);
 			m->addButton(b);
 			b->setTransform(glm::translate(b->getTransform(), glm::vec3(2.6f, 3.8f + y_off, -11.9f)));
+
+			//caclulate bounds in screen space
+			b->x = centerX + 151;
+			b->y = 300 - 218 + y_screen_off*j;
+			b->yLower = b->y - button_width;
+			b->yUpper = b->y + button_width;
+			b->xLower = b->x - button_width;
+			b->xUpper = b->x + button_width;
 		}
 		else
 		{
-			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-2)%3](4, DEC)), WHITE, GREEN, menuV, menuP);
+			//create button
+			b = (Button*)new ColorButton(cb, (buttonEventMap[(i-2)%3](id, INC)), WHITE, BLACK, menuV, menuP);
 			m->addButton(b);
 			b->setTransform(glm::translate(b->getTransform(), glm::vec3(4.8f, 3.8f + y_off, -11.9f)));
-			y_off -= 2.0;
+
+			//caclulate bounds in screen space
+			b->x = 400 + 151 + x_screen_off;
+			b->y = 300 - 218 + y_screen_off * j;
+			b->yLower = b->y - button_width;
+			b->yUpper = b->y + button_width;
+			b->xLower = b->x - button_width;
+			b->xUpper = b->x + button_width;
+
+			y_off -= 2.0;  ++j;
 		}
 	}
-
-	
-
-
-	/*/glm::vec3 buttonPos = glm::project(glm::vec3(menuP[0], menuP[1], 0.0), b->getTransform(),
-		glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f), 
-		glm::vec4(0.0, 0.0, 800.0f, 600.0f));
-	buttonPos[0] = (2.0f * buttonPos[0]) / 600.0f - 1.0f;
-	buttonPos[1] = 1.0f - (2.0f * buttonPos[1]) / 800.0f;
-	b->xLower = buttonPos[0] - 0.05;
-	b->xUpper = buttonPos[0] + 0.2;
-	b->yUpper = buttonPos[1] + 0.05;
-	b->yLower = buttonPos[1] - 0.2;
-
-	ScaleEvent* newEvent1 = new ScaleEvent(4, DEC);
-	b = (Button*)new ColorButton(cb, newEvent1, BLUE, GREEN, menuV, menuP);
-	
-	m->addButton(b);
-	buttonPos = glm::project(glm::vec3(menuP[0], menuP[1], 0.0), b->getTransform(),
-		glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f),
-		glm::vec4(0.0, 0.0, 800.0f, 600.0f));
-
-	buttonPos[0] = ((2.0f * buttonPos[0]) / 600.0f - 1.0f) + 0.35;
-	buttonPos[1] = 1.0f - (2.0f * buttonPos[1]) / 800.0f;
-	b->xLower = buttonPos[0] - 0.05;
-	b->xUpper = buttonPos[0] + 0.2;
-	b->yUpper = buttonPos[1] + 0.05;
-	b->yLower = buttonPos[1] - 0.2;
-
-	ScaleEvent* newEvent2 = new ScaleEvent(4, DEC);
-	b = (Button*)new ColorButton(cb, newEvent2, BLUE, GREEN, menuV, menuP);
-	b->setTransform(glm::translate(b->getTransform(), glm::vec3(5.15f, -1.0f, -11.9f)));
-	m->addButton(b);
-	buttonPos = glm::project(glm::vec3(menuP[0], menuP[1], 0.0), b->getTransform(),
-		glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f),
-		glm::vec4(0.0, 0.0, 800.0f, 600.0f));
-
-	buttonPos[0] = ((2.0f * buttonPos[0]) / 600.0f - 1.0f) + 0.35;
-	buttonPos[1] = 1.0f - (2.0f * buttonPos[1]) / 800.0f;
-	b->xLower = buttonPos[0] - 0.05;
-	b->xUpper = buttonPos[0] + 0.2;
-	b->yUpper = buttonPos[1] + 0.05;
-	b->yLower = buttonPos[1] - 0.2;*/
-
-
-
 	return m;
 
 }
+/*
+551, 75  682, 75
+551, 191 682, 191
+
+dx: 131 dy: 116
+
+*/

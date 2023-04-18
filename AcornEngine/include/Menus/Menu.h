@@ -40,4 +40,5 @@ public:
 	std::vector<Button*>* getButtons() { return &buttons; };
 	glm::mat4 getTransform() { return area->transform; };
 	void setTransform(glm::mat4 t) { area->transform = t; };
+	void setID(int id);
 };

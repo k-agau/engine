@@ -127,7 +127,8 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 				case Key::B:{
 
 						auto tmp = addSphereToWorld(glm::vec3(randomUint8_t(), randomUint8_t(), 0), SPHERE_HIGH); return true;
-						tmp->content()->setApplyCollision(true);
+						tmp->content()->setApplyCollision(true); 
+						tmp->content()->setAffectedByPause(true);
 				}
 				case Key::L: collideSphere = !collideSphere; return true;
 				}
@@ -469,6 +470,17 @@ void EntityManager::resolveSphereSphereCollision(Sphere* obj1, Sphere* obj2)
 		obj1->setVelocity(nv1); // Set new velocity for sphere 1
 		obj2->setVelocity(nv2); // Set new velocity for sphere 2
 
+	}
+}
+
+void EntityManager::Pause()
+{
+	for (auto i : worldObjects)
+	{
+		//if (i->content()->getaffectedByPause())
+		//{
+		//	i
+		//}
 	}
 }
 
