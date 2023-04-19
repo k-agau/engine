@@ -127,6 +127,7 @@ bool MenuManager::handleEvent(Event& e)
 				{
 					++currentID;
 					menus[0]->setID(currentID);
+					
 					return true;
 				}
 
@@ -164,6 +165,7 @@ bool MenuManager::handleEvent(Event& e)
 					if (static_cast<ColorButton*>(b)->isBeingHovered())
 					{
 						b->onClick();
+						break;
 					}
 				}
 
@@ -173,6 +175,15 @@ bool MenuManager::handleEvent(Event& e)
 		}
 	}
 
-
 	return false;
+}
+
+void MenuManager::updateMenuTransform(Menu* m)
+{
+	//auto m = menus[0];
+	//m->setTransform();
+	//for (auto b : m->buttons)
+	//{
+
+	//}
 }

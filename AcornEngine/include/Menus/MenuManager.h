@@ -30,6 +30,7 @@ public:
 	void init(const EventCallbackFn& f, glm::mat4 view, glm::vec3 pos);
 	void updateCam(glm::mat4 view, glm::vec3 pos);
 	float lastX, lastY;
+	void updateMenuTransform(Menu* m);
 
 	bool handleEvent(Event& e);
 	void updateMousePositions(float xpos, float ypos) {

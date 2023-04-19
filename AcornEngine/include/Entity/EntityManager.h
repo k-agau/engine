@@ -25,6 +25,7 @@ private:
 	glm::vec3 projectUonV(const glm::vec3& u, const glm::vec3 v);
 	glm::vec3 getNormal(const glm::vec3& u);
 	bool collideSphere;
+	glm::mat4 view;
 public:
 
 	~EntityManager();
@@ -32,6 +33,8 @@ public:
 	EntityManager& operator= (const EntityManager&) = delete;
 	static EntityManager* instance();
 	glm::vec3 currentAxis;
+	int currentEntity;
+	bool focused;
 
 	std::vector<Entity*> worldObjects;
 	std::vector<std::pair<unsigned int, unsigned int>> sphereDimensions;
@@ -57,6 +60,7 @@ public:
 	int color = 0;
 	//Get
 	const std::vector<Entity*> getWorldEntities() const;
+	glm::mat4 getView() { return view; };
 
 	//Demo Helpers
 	uint8_t randomUint8_t();

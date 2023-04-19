@@ -28,6 +28,7 @@ public:
 	ColorButton* makeColorButton(const EventCallbackFn& f, Event* e, COLORS b, COLORS h, glm::mat4 t, glm::vec3 pos);
 	Menu* makeEntityMenu(int id);
 
+
 	EventCallbackFn cb;		//callbacks
 	//Menu* makeHomeMenu();
 	//Menu* makeEditorMenu();

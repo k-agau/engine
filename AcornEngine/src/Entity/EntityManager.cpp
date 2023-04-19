@@ -15,7 +15,9 @@ EntityManager::EntityManager() {
 	sphereDimensions.push_back(std::pair(30, 30)); //Mid  Dimensional Sphere
 	sphereDimensions.push_back(std::pair(70, 70)); //High Dimensional Sphere
 	collideSphere = false;
+	focused = false;
 	currentAxis = X_AXIS;
+	view = updateView();
 }
 
 Entity* EntityManager::addCubeToWorld(glm::vec3 WorldCoords)
@@ -75,9 +77,13 @@ void EntityManager::removeEntity(int id)
 
 glm::mat4 EntityManager::updateView()
 {
-	return camera->LookAt(camera->GetPosition() + camera->GetFront());
-}
+	if (!focused)
+	{
+		view = camera->LookAt(camera->GetPosition() + camera->GetFront());
 
+	}
+	return view;
+}
 const std::vector<Entity*> EntityManager::getWorldEntities() const 
 {
 
@@ -131,6 +137,23 @@ bool EntityManager::updateWorld(ENTITY_TYPE Target, Event& e)
 						tmp->content()->setAffectedByPause(true);
 				}
 				case Key::L: collideSphere = !collideSphere; return true;
+				case Key::N:
+				{
+					if (!focused)
+					{
+						for (auto i : worldObjects)
+						{
+							if (i->content()->getID() == currentEntity)
+							{
+								view = camera->LookAt(i->content()->getPosition());
+								focused = true;
+							}
+						}
+					}
+					else { focused = false; }
+
+				}
+
 				}
 
 			}

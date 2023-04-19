@@ -125,7 +125,8 @@ void Renderer::renderWorld(Layer* layer)
 
 		for (auto& e : entityManager->getWorldEntities())
 		{
-			ENTITY_TYPE entityType = e->content()->type;
+			EntityImpl* entity = e->content();
+			ENTITY_TYPE entityType = entity->type;
 
 			//intalize approporiate data objects
 			glBindVertexArray(typeProperties[entityType][VAO_IDX]);
@@ -135,7 +136,7 @@ void Renderer::renderWorld(Layer* layer)
 			//get transform
 			M = e->content()->getTransform();
 
-			if (menuManager->currentID == e->content()->getID() && !menuManager->open)
+			if (menuManager->currentID == entity->getID() && !menuManager->open)
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
@@ -146,13 +147,12 @@ void Renderer::renderWorld(Layer* layer)
 
 			//update uniforms
 			glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
-			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[e->content()->getColor()]));
+			glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[entity->getColor()]));
 
 			//draw
 			if (isSphere(entityType))
 			{
-				Sphere* s = (Sphere*)e->content();
-				glDrawElements(GL_TRIANGLES, s->getIndexCount(), GL_UNSIGNED_INT, (void*)0);
+				glDrawElements(GL_TRIANGLES, static_cast<Sphere*>(entity)->getIndexCount(), GL_UNSIGNED_INT, (void*)0);
 			}
 			else
 			{
@@ -175,6 +175,7 @@ void Renderer::renderWorld(Layer* layer)
 		glEnableVertexAttribArray(1);
 		glUniform1i(isBackMenuLoc, 1);
 		entityManager->currentAxis = menuManager->currentAxis;
+		entityManager->currentEntity = menuManager->currentID;
 
 		for (auto m : menuManager->menus)
 		{
@@ -192,47 +193,16 @@ void Renderer::renderWorld(Layer* layer)
 			{
 				M = b->getTransform();
 
-				glm::mat4 tmp = M * V * P;
-				float x = (2.0f * menuManager->lastX) / 800.0f - 1.0f;
-				float y = 1.0f - (2.0f * menuManager->lastY) / 600.0f;
-				float z = 1.0f;
-				glm::vec3 mousePos = glm::vec3(x, y, z);
-				glm::vec3 O = glm::vec3(menuManager->lastX, menuManager->lastY, 0.0f);
-				//glm::vec3 mousePos = glm::project(O,M, P, glm::vec4(0.0f,0.0f,800.0f,600.0f));
-				//glm::vec3 O = glm::vec3(tmp[3][0], tmp[3][1], tmp[3][2
-				/*
-				for (int i = 0; i < 4; ++i)
-				{
-					for (int j = 0; j < 4; ++j)
-					{
-						std::cout << tmp[i][j] << ", ";
-					}
-					std::cout<< std::endl;
-				}
-				std::cout << std::endl;
-				*/
-
 				ColorButton* a = (ColorButton*)b;
-				//if (entityManager->test)
-				//{
-					b->updateButton(menuManager->lastX, menuManager->lastY);
-					entityManager->test = false;
-				//}
+				b->updateButton(menuManager->lastX, menuManager->lastY);
+				entityManager->test = false;
 
 			
 				//update uniforms
 				glUniformMatrix4fv(modelShaderLoc, 1, GL_FALSE, glm::value_ptr(M));
 				glUniform3fv(colorShaderLoc, 1, glm::value_ptr(entityColors[a->getCurrentColor()]));
-/*
-			if (entityType == ENTITY_TYPE::PLANE)
-			{
-				 Plane* tmp = (Plane*)e->content();
-				//M = tmp->rotate();
-			}
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-		}*/
-
+				//draw
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 			}
 		}
