@@ -21,6 +21,7 @@ public:
 	std::unordered_map<int, glm::vec3> axes;
 	int axisLoc;
 	EventCallbackFn callback;
+	bool focus;
 
 	std::vector<Menu*> menus;
 	glm::mat4 camV;
@@ -29,8 +30,8 @@ public:
 	static MenuManager* instance();
 	void init(const EventCallbackFn& f, glm::mat4 view, glm::vec3 pos);
 	void updateCam(glm::mat4 view, glm::vec3 pos);
+	void updateMenuPos();
 	float lastX, lastY;
-	void updateMenuTransform(Menu* m);
 
 	bool handleEvent(Event& e);
 	void updateMousePositions(float xpos, float ypos) {

@@ -84,7 +84,17 @@ void Renderer::Update()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Update views
-	V = entityManager->updateView();
+	if (menuManager->focus)
+	{
+		V = entityManager->camera->LookAt(
+			entityManager->getEntity(menuManager->currentID)
+			->content()->getPosition());
+	}
+	else
+	{
+		V = entityManager->updateView();
+	}
+	
 	menuManager->updateCam(V, entityManager->camera->GetPosition());
 	glm::vec3 C = entityManager->camera->GetPosition();
 
@@ -169,7 +179,7 @@ void Renderer::renderWorld(Layer* layer)
 	}
 	else
 	{
-
+		menuManager->updateMenuPos();
 		glBindVertexArray(typeProperties[ENTITY_TYPE::PLANE][VAO_IDX]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -299,15 +309,6 @@ void Renderer::initPlane()
 {
 	float plane[] = {
 
-
-	//-1.0,-1.0,0.0, 0.0f,  0.0f, -1.0f,
-	//-1.0,1.0,0.0, 0.0f,  0.0f, -1.0f,
-	//1.0,-1.0,0.0, 0.0f,  0.0f, -1.0f,
-
-	//1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
-	//	-1.0,1.0,0.0, 0.0f,  0.0f, 1.0f,
-	//1.0,-1.0,0.0, 0.0f,  0.0f, 1.0f,
-	// 
 	//verticies					  //normals
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
 	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, 1.0f,
@@ -324,24 +325,6 @@ void Renderer::initPlane()
 
 
 	};
-
-	//float planeColors[] =
-	//{
-
-	//	1.0,0.0,0.0,
-	//	0.0,1.0,0.0,
-	//	0.0,0.0,1.0,
-	//	0.0,1.0,1.0,
-
-	//};
-
-	//unsigned int planeElements[] =
-	//{
-
-	//	0,1,2,
-	//	1,2,3,
-
-	//};
 
 	int planeLoc = (int)ENTITY_TYPE::PLANE;
 

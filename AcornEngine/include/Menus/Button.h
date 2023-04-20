@@ -22,7 +22,6 @@ protected:
 	virtual void onUnhover() = 0;
 	virtual void onSelect() = 0;
 	 
-	Plane* area;
 	glm::vec3 scale;
 
 	void scaleBackground(glm::vec3 s) { scale = s; }
@@ -32,6 +31,7 @@ protected:
 	float timer = 0.0f;
 
 public:
+	Plane* area;
 	Event* m_event;
 };
 

@@ -75,13 +75,19 @@ void EntityManager::removeEntity(int id)
 	std::cout << "ENTITY_MANAGER::ENTITY WAS NOT FOUND AND ERASED" << std::endl;
 }
 
+Entity* EntityManager::getEntity(int id)
+{
+	for (auto i : worldObjects)
+	{
+		if (i->content()->getID() == id) { return i; }
+	}
+}
+
 glm::mat4 EntityManager::updateView()
 {
-	if (!focused)
-	{
-		view = camera->LookAt(camera->GetPosition() + camera->GetFront());
 
-	}
+	view = camera->LookAt(camera->GetPosition() + camera->GetFront());
+
 	return view;
 }
 const std::vector<Entity*> EntityManager::getWorldEntities() const 

@@ -24,7 +24,6 @@ private:
 
 protected:
 	
-	Plane* area;
 	uint8_t cols = 1;
 	uint8_t rows = 1;
 
@@ -41,4 +40,5 @@ public:
 	glm::mat4 getTransform() { return area->transform; };
 	void setTransform(glm::mat4 t) { area->transform = t; };
 	void setID(int id);
+	Plane* area;
 };

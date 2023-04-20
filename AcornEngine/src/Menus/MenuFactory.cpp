@@ -37,7 +37,6 @@ Menu* MenuFactory::makeEntityMenu(int id)
 
 	ScaleEvent* newEvent = new ScaleEvent(id, INC);
 	Menu* m = new Menu(menuV, BLUE, menuP);
-	glm::vec3 menuF = glm::normalize(glm::vec3(menuV[2]));
 	Button* b = nullptr;
 	int j = 0;
 	for (int i = 1; i < 7; ++i)

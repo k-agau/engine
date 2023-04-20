@@ -37,7 +37,63 @@ void MenuManager::updateCam( glm::mat4 view, glm::vec3 pos )
 	//view = glm::translate(view, pos);
 	view = glm::inverse(view);
 	view[3][0] = pos[0];  view[3][1] = pos[1]; view[3][2] = pos[2];
+	camV = view; camP = pos;
 	factory->updateFactoryCam(view, pos);
+}
+
+void MenuManager::updateMenuPos()
+{
+	if(!open)
+	{
+		float centerX = WIDTH / 2.0f;
+		float centerY = HEIGHT / 2.0f;
+		float y_off = 0.0;
+		float x_screen_off = 131;
+		float y_screen_off = 70;
+		float button_width = 20.0f;
+
+		auto m = menus[0];
+		m->area->setPosition(camP);
+		m->area->transform = camV;
+		m->area->transform = glm::translate(m->area->transform, glm::vec3(0.22, 0.0, 0.0));
+		m->area->transform = glm::scale(m->area->transform, m->area->scale);
+		int i = 1; int j = 0;
+		for (auto b : m->buttons)
+		{
+			b->area->setPosition(camP);
+			b->area->setTransform(camV);
+			b->area->setTransform(glm::scale(b->getTransform(), glm::vec3(0.006,0.006,0.01)));
+			if (i % 2)
+			{
+
+				b->setTransform(glm::translate(b->getTransform(), glm::vec3(8.3f, 3.8f + y_off, -11.9f)));
+
+				//caclulate bounds in screen space
+				b->x = centerX + 300;
+				b->y = 300 - 140 + y_screen_off * j;
+				b->yLower = b->y - button_width;
+				b->yUpper = b->y + button_width;
+				b->xLower = b->x - button_width;
+				b->xUpper = b->x + button_width;
+			}
+			else
+			{
+				b->setTransform(glm::translate(b->getTransform(), glm::vec3(10.0f, 3.8f + y_off, -11.9f)));
+
+				//caclulate bounds in screen space
+				b->x = 400 + 225 + x_screen_off;
+				b->y = 300 - 140 + y_screen_off * j;
+				b->yLower = b->y - button_width;
+				b->yUpper = b->y + button_width;
+				b->xLower = b->x - button_width;
+				b->xUpper = b->x + button_width;
+
+				y_off -= 2.0;  ++j;
+			}
+			++i;
+		}
+	}
+	
 }
 
 Menu* MenuManager::createEntityMenu(int id)
@@ -60,6 +116,17 @@ bool MenuManager::handleEvent(Event& e)
 		{
 			switch (myE->getKeyCode())
 			{
+			case Key::N: {
+				if (!open)
+				{
+					focus = !focus;
+					menus[0]->~Menu();
+					menus.clear();
+					createEntityMenu(currentID);
+					return true;
+				}
+
+			}
 			case Key::M: {
 
 				if (open)
@@ -71,6 +138,7 @@ bool MenuManager::handleEvent(Event& e)
 					menus[0]->~Menu();
 					menus.clear();
 					open = !open;
+					focus = false;
 				}
 				return true;
 				
@@ -146,7 +214,7 @@ bool MenuManager::handleEvent(Event& e)
 			{
 				updateMousePositions(myE->GetX(), myE->GetY());
 
-				return true;
+				return false;
 			}
 
 		}
@@ -169,21 +237,11 @@ bool MenuManager::handleEvent(Event& e)
 					}
 				}
 
-				return true;
+				return false;
 			}
 
 		}
 	}
 
 	return false;
-}
-
-void MenuManager::updateMenuTransform(Menu* m)
-{
-	//auto m = menus[0];
-	//m->setTransform();
-	//for (auto b : m->buttons)
-	//{
-
-	//}
 }

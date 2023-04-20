@@ -50,6 +50,7 @@ public:
 	Entity* addPlaneToWorld(glm::vec3 WorldCoords);
 	Entity* addSphereToWorld(glm::vec3 WorldCoords, ENTITY_TYPE res);
 	void removeEntity(int id);
+	Entity* getEntity(int id);
 
 	//Update Functions
 	glm::mat4 updateView();
